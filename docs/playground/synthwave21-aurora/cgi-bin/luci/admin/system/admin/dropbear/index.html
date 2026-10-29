@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-darkmode="true">
+	<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"synthwave21-aurora"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+		<meta charset="utf-8">
+		<title>SSH Access - OpenWrt</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="theme-color" content="#0c0020">
+		<meta name="color-scheme" content="dark">
+		
+		<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/synthwave21-aurora/main.css?v=1.0.4-1" data-luci-shell>
+		
+		<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/synthwave21-aurora/css/theme.css?v=1.0.4-1" data-luci-shell>
+		<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/synthwave21-aurora/images/logo.svg?v=1.0.4-1" sizes="any" type="image/svg+xml">
+		<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/synthwave21-aurora/images/favicon.png" sizes="32x32">
+		<link rel="apple-touch-icon" href="/openwrt-21.02-themes/playground/luci-static/synthwave21-aurora/images/favicon.png">
+		<script src="/openwrt-21.02-themes/playground/translations-en.js"></script>
+		<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js"></script>
+	</head>
+
+	<body class="lang_en" data-page="admin-system-admin-dropbear" data-nav-type="mega-menu" data-asset-version="1.0.4-1" data-nav-stamp="mega-menu:en:root:1.0.4-1">
+		
+		
+		<header>
+			<div class="header-content">
+				<div class="navigation-controls">
+					<button class="navigation-toggle" id="navigation-toggle" type="button" title="Navigation" aria-label="Navigation" aria-controls="mobile-menu-overlay" aria-expanded="false">
+						<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<line class="navigation-toggle-line navigation-toggle-line-top" x1="2.5" y1="5" x2="17.5" y2="5"/>
+							<line class="navigation-toggle-line navigation-toggle-line-middle" x1="2.5" y1="10" x2="17.5" y2="10"/>
+							<line class="navigation-toggle-line navigation-toggle-line-bottom" x1="2.5" y1="15" x2="17.5" y2="15"/>
+						</svg>
+					</button>
+				</div>
+				<a class="brand" href="/">OpenWrt</a>
+				<ul class="nav" id="topmenu" style="display:none"></ul>
+				
+				<button class="cmdk-trigger" id="cmdk-trigger" type="button" aria-label="Navigation"></button>
+				<div id="indicators" class="pull-right"></div>
+			</div>
+		
+			<div class="desktop-menu-container">
+				<div class="desktop-menu-sheet"><div class="desktop-menu-canvas"></div></div>
+				<div class="desktop-menu-board" aria-hidden="true"><span class="board-label">Device</span>
+					<span class="board-line board-line-host" title="OpenWrt"><span class="board-text">OpenWrt</span></span>
+					
+					<span class="board-line board-line-model" title="GL.iNet GL-MT6000"><span class="board-text">GL.iNet GL-MT6000</span></span>
+					
+					
+					<span class="board-line board-line-firmware" title="OpenWrt 21.02.7 r16847-f8282da11e"><span class="board-text">OpenWrt 21.02.7 r16847-f8282da11e</span></span>
+					
+					
+					<span class="board-line board-line-kernel" title="5.4.211"><span class="board-text">5.4.211</span></span>
+					
+				</div>
+			</div>
+		</header>
+
+		<div class="desktop-menu-overlay"></div>
+		
+
+		
+		<script>
+			
+			/* paint the menu cached by menu-synthwave21-aurora.js on its last render, inert until the module renders over it */
+			(() => {
+				try {
+					const body = document.body, cache = JSON.parse(sessionStorage.getItem('aurora.nav'));
+					const luci = Object.values(JSON.parse(sessionStorage.getItem('luci-session-store')) ?? {})[0];
+					if (!luci?.menu || cache?.[0] !== body.dataset.navStamp) return;
+					for (const id in cache[1]) {
+						const el = document.getElementById(id);
+						el.innerHTML = cache[1][id];
+						el.style.display = '';
+						el.dataset.restored = '';
+						el.inert = true;
+					}
+					
+				} catch (e) {}
+			})();
+		</script>
+
+		<div class="mobile-menu-overlay" id="mobile-menu-overlay">
+			<nav class="mobile-nav" aria-label="Navigation">
+				<div class="mobile-nav-body">
+					<div class="mobile-nav-label">Navigation</div>
+					<ul class="mobile-nav-list" id="mobile-nav-list">
+					</ul>
+				</div>
+				<div class="mobile-nav-footer">
+					<div class="mobile-nav-footer-action" id="mobile-nav-footer-action"></div>
+					
+				</div>
+			</nav>
+		</div>
+
+		<div id="maincontent" tabindex="-1"><noscript>
+				<div class="alert-message warning">
+					<h4>JavaScript required!</h4>
+					<p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+				</div>
+			</noscript>
+
+			<div id="tabmenu" style="display:none"></div>
+		
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/synthwave21-aurora","documentroot":"\/www","pathinfo":"\/admin\/system\/admin\/dropbear","apply_display":1.5,"requestpath":["admin","system","admin","dropbear"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/synthwave21-aurora\/cgi-bin\/luci","dispatchpath":["admin","system","admin","dropbear"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"view","path":"system\/dropbear"},"order":2,"readonly":false,"depends":{"acl":["luci-mod-system-ssh"],"fs":{"\/usr\/sbin\/dropbear":"executable"}},"title":"SSH Access"},"pollinterval":5});
+</script>
+
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+	<script type="text/javascript">
+		L.require('ui').then(function(ui) {
+			ui.instantiateView('system/dropbear');
+		});
+	</script>
+</div>
+
+
+		
+			<footer>
+				<span>
+					Powered by
+					<a href="https://github.com/openwrt/luci" target="_blank" rel="noreferrer">LuCI openwrt-21.02 branch (git-23.093.57360-e98243e)</a>
+					/  OpenWrt 21.02.7 r16847-f8282da11e
+					/ <a href="https://github.com/eamonxg/luci-theme-aurora" target="_blank" rel="noreferrer">Synthwave on Aurora</a> (21.02 port)
+				</span>
+				<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+				
+			</footer>
+		</div>
+		<script>L.require('menu-synthwave21-aurora')</script>
+		<script src="/openwrt-21.02-themes/playground/luci-static/synthwave21-aurora/custom-entry.js?v=1.0.4-1" defer></script>
+		
+	<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

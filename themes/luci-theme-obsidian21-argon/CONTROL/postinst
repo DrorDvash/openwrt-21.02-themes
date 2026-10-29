@@ -1,0 +1,7 @@
+#!/bin/sh
+# Register the theme only; never touch luci.main.mediaurlbase.
+[ -n "${IPKG_INSTROOT}" ] && exit 0
+uci set luci.themes.Obsidian21_argon=/luci-static/obsidian21-argon
+uci commit luci
+rm -rf /tmp/luci-*
+exit 0

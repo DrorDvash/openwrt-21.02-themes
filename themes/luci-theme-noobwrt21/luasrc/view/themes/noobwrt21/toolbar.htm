@@ -1,0 +1,152 @@
+<%#
+ NoobWRT, OpenWrt 21.02 port (luci-theme-noobwrt21): the quick-access toolbar. Lua translation
+ of luci-theme-noobwrt 1.1.7 toolbar.ut (nooblk-98, Apache-2.0). Its styles are the theme's
+ css/25 layer. Port changes: a fixed list of 21.02 pages instead of /etc/config/noobwrt, each
+ shown only when LuCI's menu has the page (installed, allowed); no timed dark mode (needs that config);
+ the light/dark button switches dark.css through its media attribute (no fetch).
+-%>
+<%
+	local items = {
+		{ "admin/status/overview", "Overview", "home.png" },
+		{ "admin/network/network", "Interfaces", "network.png" },
+		{ "admin/network/wireless", "Wireless", "wifi.png" },
+		{ "admin/network/firewall", "Firewall", "firewall.png" },
+		{ "admin/status/logs", "System Log", "info.png" },
+		{ "admin/services/ttyd", "Terminal", "terminal.png" },
+		{ "admin/system/system", "System", "settings.png" },
+	}
+-%>
+<div class="toolbar-wrapper" id="toolbar-wrapper">
+	<button class="toolbar-pull-tab" id="toolbar-pull-tab" type="button" aria-label="<%:Toggle toolbar%>" title="<%:Toggle toolbar%>">
+		<svg viewBox="0 0 10 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<polyline points="7,2 2,8 7,14"></polyline>
+		</svg>
+	</button>
+
+	<div class="toolbar-container">
+		<button class="toolbar-item theme-toggle" id="theme-toggle" type="button" title="<%:Light / dark%>" aria-label="<%:Light / dark%>">
+			<svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+				<circle cx="12" cy="12" r="5"></circle>
+				<line x1="12" y1="1" x2="12" y2="3"></line>
+				<line x1="12" y1="21" x2="12" y2="23"></line>
+				<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+				<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+				<line x1="1" y1="12" x2="3" y2="12"></line>
+				<line x1="21" y1="12" x2="23" y2="12"></line>
+				<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+				<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+			</svg>
+			<svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;" aria-hidden="true">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</button>
+
+		<div class="toolbar-menu" id="toolbar-menu">
+			<% for _, it in ipairs(items) do %>
+			<a href="<%=url(it[1])%>" class="toolbar-item" title="<%=translate(it[2])%>" data-path="<%=it[1]%>" style="display:none">
+				<img src="<%=media%>/navbar/<%=it[3]%>" alt="<%=translate(it[2])%>">
+			</a>
+			<% end %>
+		</div>
+	</div>
+</div>
+<button class="noob-menu-fab" id="noob-menu-fab" type="button" aria-label="<%:Menu%>" title="<%:Menu%>" aria-controls="mainmenu" aria-expanded="false">
+	<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+		<line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line>
+	</svg>
+</button>
+
+<script type="text/javascript">//<![CDATA[
+(function() {
+	var KEY = 'noobwrt21.scheme';
+	var root = document.documentElement;
+	var link = document.getElementById('dark-theme-style');
+	var themeToggle = document.getElementById('theme-toggle');
+	var sunIcon = themeToggle.querySelector('.sun-icon');
+	var moonIcon = themeToggle.querySelector('.moon-icon');
+	var toolbarWrapper = document.getElementById('toolbar-wrapper');
+	var pullTab = document.getElementById('toolbar-pull-tab');
+	var scheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+	function saved() {
+		try { return localStorage.getItem(KEY); } catch (e) { return null; }
+	}
+
+	function show(dark) {
+		root.setAttribute('data-darkmode', dark ? 'true' : 'false');
+		document.body.classList.toggle('dark-theme', dark);
+		sunIcon.style.display  = dark ? 'none'  : 'block';
+		moonIcon.style.display = dark ? 'block' : 'none';
+	}
+
+	/* no choice saved: follow the browser, also when it switches while the page is open */
+	scheme.addEventListener('change', function(e) {
+		if (!saved())
+			show(e.matches);
+	});
+	show(root.getAttribute('data-darkmode') === 'true');
+
+	themeToggle.addEventListener('click', function(e) {
+		e.preventDefault();
+		var dark = root.getAttribute('data-darkmode') !== 'true';
+		link.media = dark ? 'all' : 'not all';
+		try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch (e) {}
+		show(dark);
+	});
+
+	/* show the pages LuCI's menu has (the menu script loads it anyway; it is cached) */
+	L.require('ui').then(function(ui) { return ui.menu.load(); }).then(function(tree) {
+		document.querySelectorAll('#toolbar-menu a[data-path]').forEach(function(a) {
+			var n = tree;
+			a.getAttribute('data-path').split('/').forEach(function(p) { n = n && n.children && n.children[p]; });
+			if (n && n.satisfied !== false)
+				a.style.display = '';
+		});
+	});
+
+	/* ---- Toolbar slide hide / show ---- */
+	function applyToolbarState(hidden) {
+		toolbarWrapper.classList.toggle('hidden', hidden);
+		toolbarWrapper.classList.remove('peek');
+		pullTab.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+		document.body.classList.toggle('toolbar-hidden', hidden);
+	}
+
+	/* no choice saved: shown on wider screens, only its tab on phones (it would cover content) */
+	var state = null;
+	try { state = localStorage.getItem('noobwrt21.toolbar'); } catch (e) {}
+	applyToolbarState(state ? state === 'hidden' : window.matchMedia('(max-width: 768px)').matches);
+
+	/* click the tab: hide / show for good */
+	pullTab.addEventListener('click', function(e) {
+		e.preventDefault();
+		var hidden = !toolbarWrapper.classList.contains('hidden');
+		applyToolbarState(hidden);
+		try { localStorage.setItem('noobwrt21.toolbar', hidden ? 'hidden' : 'visible'); } catch (e) {}
+	});
+
+	/* hover while hidden: slide in for a peek, back out on leave */
+	var peekTimeout = null;
+	toolbarWrapper.addEventListener('mouseenter', function() {
+		clearTimeout(peekTimeout);
+		if (toolbarWrapper.classList.contains('hidden'))
+			toolbarWrapper.classList.add('peek');
+	});
+	toolbarWrapper.addEventListener('mouseleave', function() {
+		if (toolbarWrapper.classList.contains('hidden'))
+			peekTimeout = setTimeout(function() { toolbarWrapper.classList.remove('peek'); }, 200);
+	});
+})();
+/* phones: the floating button stands in for the header's hamburger (the header is hidden) */
+(function() {
+	var fab = document.getElementById('noob-menu-fab'), side = document.getElementById('mainmenu');
+	if (!fab) return;
+	fab.addEventListener('click', function() {
+		var burger = document.querySelector('a.showSide');
+		if (burger) burger.click();
+		fab.setAttribute('aria-expanded', side && side.classList.contains('active') ? 'true' : 'false');
+	});
+	var mask = document.querySelector('.darkMask');
+	if (mask) mask.addEventListener('click', function() { fab.setAttribute('aria-expanded', 'false'); });
+})();
+//]]></script>

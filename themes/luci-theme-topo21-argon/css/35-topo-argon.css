@@ -1,0 +1,30 @@
+
+/* Topo on Argon: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-dnsmasq div.cbi-button-add:not(:hover):not(:focus) { color: #ffffff !important; } /* was #1f3a4d: 1.66 -> 7.14:1 */
+#cbi-dhcp-dnsmasq th { color: #5c6b70 !important; } /* was #5f6f74: 4.39 -> 4.65:1 */
+#wifi_assoclist_table th { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+.cbi-dropdown label { color: #636363 !important; } /* was #808080: 3.03 -> 4.61:1 */
+.cbi-section th { color: #5c6b70 !important; } /* was #5f6f74: 4.39 -> 4.65:1 */
+.cbi-section th.cbi-section-actions { color: #5c6b70 !important; } /* was #5f6f74: 4.39 -> 4.65:1 */
+.cbi-section th.hide-xs { color: #5c6b70 !important; } /* was #5f6f74: 4.39 -> 4.65:1 */
+.cbi-section-descr em { color: #5c6b70 !important; } /* was #5f6f74: 4.39 -> 4.65:1 */
+.cbi-section-table-titles th.cbi-section-table-cell { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+.cbi-section-table-titles th.col-1.size { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+.cbi-section-table-titles th.col-10 { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+.cbi-section-table-titles th.col-2 { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+.cbi-section-table-titles th.col-2.version { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+.mobile-hide a { color: #57656a !important; } /* was #5d6c71: 4.19 -> 4.64:1 */
+.mobile-hide a.luci-link { color: #57656a !important; } /* was #5d6c71: 4.19 -> 4.64:1 */
+.table th { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+a.food { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+a.menu { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+a.menu.active { color: #cad1d3 !important; } /* was #5d6c71: 1.31 -> 4.61:1 */
+div.cbi-map-descr { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+div.cbi-section-descr { color: #5c6b70 !important; } /* was #5f6f74: 4.39 -> 4.65:1 */
+footer a { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+footer a.luci-link { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+label.cbi-value-title { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+th.hide-xs { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+/* AUTO-CONTRAST END */

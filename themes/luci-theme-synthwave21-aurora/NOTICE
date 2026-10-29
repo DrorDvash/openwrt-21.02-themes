@@ -1,0 +1,13 @@
+luci-theme-synthwave21-aurora - "Synthwave on Aurora (21.02 port)"
+
+Layout, main.css, login.css, menu script and template markup from luci-theme-aurora
+1.4.0 by eamonxg, https://github.com/eamonxg/luci-theme-aurora (Apache-2.0),
+itself derived from luci-theme-bootstrap (OpenWrt LuCI project, Apache-2.0).
+Colours and content styling from luci-theme-synthwave by vistrocity,
+https://github.com/vistrocity/openwrt-luci-themes (Apache-2.0).
+
+Port changes (2026, Dror Dvash): ucode templates rewritten as OpenWrt 21.02 Lua
+templates; /etc/config/aurora settings, uci token overrides, page patches, floating
+toolbar, web manifest, Lato web font and the same-document router removed;
+theme colours mapped onto Aurora design tokens; 21.02 widget fixes;
+phone fix for "-- custom --" dropdown entries.

@@ -1,0 +1,18 @@
+
+/* Terminal on Aurora: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+.modal.cbi-modal button:not(:hover):not(:focus) { color: #0b8c2b !important; } /* was #021a08: 1.13 -> 4.69:1 */
+.table.cbi-section-table button.cbi-button-neutral.down:not(:hover):not(:focus) { color: #0b8c2b !important; } /* was #021a08: 1.11 -> 4.62:1 */
+.table.cbi-section-table button.cbi-button-neutral.enable-disable:not(:hover):not(:focus) { color: #0b8c2b !important; } /* was #021a08: 1.11 -> 4.62:1 */
+.table.cbi-section-table button.cbi-button-neutral.reconnect:not(:hover):not(:focus) { color: #0b8c2b !important; } /* was #021a08: 1.11 -> 4.62:1 */
+.table.cbi-section-table button.cbi-button-neutral:not(:hover):not(:focus) { color: #0b8c2b !important; } /* was #021a08: 1.11 -> 4.62:1 */
+.table.cbi-section-table button.drag-handle:not(:hover):not(:focus) { color: #0b8e2c !important; } /* was #021a08: 1.09 -> 4.65:1 */
+.zonebadge em { color: #040404 !important; } /* was #111111: 4.24 -> 4.60:1 */
+.zonebadge strong { background: #a7706f !important; } /* was #8a5554 under #111111: 3.15 -> 4.67:1 */
+.zonebadge.cbi-tooltip-container strong { background: #a86f6e !important; } /* was #744746 under #111111: 2.46 -> 4.64:1 */
+.zonebadge.zonebadge-empty strong { color: #111111 !important; } /* was #1fa84a: 1.30 -> 4.67:1 */
+button.cbi-button-neutral:not(:hover):not(:focus) { color: #0b8c2b !important; } /* was #021a08: 1.12 -> 4.67:1 */
+button.login-submit:not(:hover):not(:focus) { background: #1a8635 !important; } /* was #25bd4b under #ffffff: 2.48 -> 4.66:1 */
+span.ifacebadge { color: #767676 !important; } /* was #111111: 1.11 -> 4.62:1 */
+/* AUTO-CONTRAST END */

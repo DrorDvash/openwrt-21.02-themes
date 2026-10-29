@@ -1,0 +1,27 @@
+
+/* Retro on Argon: theme-specific fixes */
+
+/* hand fixes (Argon layout) */
+/* the teal desktop carries black text at 4.40:1; #008383 is visually the same teal and gives
+   black 4.57:1 and white 4.59:1 (as in the top-menu port) */
+:root, :root[data-darkmode="false"], :root[data-darkmode="true"] { --r-desktop: #008383; }
+/* abbreviations inside the blue section bars keep the bar's white heading text */
+h3 abbr { color: inherit !important; }
+
+/* the blue section bars: white on #0f79bf (4.66:1), as on Aurora */
+h3 { color: #fff !important; background: #0f79bf !important; }
+/* the footer sits on the teal desktop: black (4.57:1), like the desktop's other text */
+footer, footer a { color: #000 !important; }
+
+/* Table headers as on Retro's own layout: Windows grey with black text (replacing auto fixes
+   that made them near-black with grey text) */
+html body #maincontent th, html body #maincontent .th { background: #c0c0c0 !important; color: #000 !important; }
+html body #maincontent th abbr { color: inherit !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+.cbi-dropdown label { color: #757575 !important; } /* was #808080: 3.95 -> 4.61:1 */
+.cbi-map-descr abbr { background: #009a9a !important; } /* was #008383 under #000080: 3.49 -> 4.64:1 */
+a.food { color: #757575 !important; } /* was #808080: 3.95 -> 4.61:1 */
+a.menu { color: #757575 !important; } /* was #808080: 3.95 -> 4.61:1 */
+a.menu.active { color: #8b8b8b !important; } /* was #757575: 3.47 -> 4.70:1 */
+/* AUTO-CONTRAST END */

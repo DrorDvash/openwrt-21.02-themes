@@ -1,0 +1,17 @@
+
+/* 8-bit on Argon: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-host button.cbi-button-add:not(:hover):not(:focus) { color: #111111 !important; } /* was #f2ecff: 1.36 -> 12.01:1 */
+#cbi-firewall-redirect button.cbi-button-add:not(:hover):not(:focus) { color: #111111 !important; } /* was #f2ecff: 1.36 -> 12.01:1 */
+#cbi-firewall-zone button.cbi-button-add:not(:hover):not(:focus) { color: #111111 !important; } /* was #f2ecff: 1.36 -> 12.01:1 */
+#cbi-network-interface button.cbi-button-add:not(:hover):not(:focus) { color: #111111 !important; } /* was #f2ecff: 1.36 -> 12.01:1 */
+#cbi-wireless-wifi-device button.cbi-button-add:not(:hover):not(:focus) { color: #111111 !important; } /* was #f2ecff: 1.36 -> 12.01:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { background: #d21a28 !important; } /* was #e63946 under #f2ecff: 3.62 -> 4.65:1 */
+.cbi-page-actions.control-group button.cbi-button-save:not(:hover):not(:focus) { color: #111111 !important; } /* was #f2ecff: 1.36 -> 12.01:1 */
+.modal.cbi-modal button.cbi-button-positive:not(:hover):not(:focus) { color: #111111 !important; } /* was #f2ecff: 1.36 -> 12.01:1 */
+.table button.cbi-button-negative:not(:hover):not(:focus) { background: #d21a28 !important; } /* was #e63946 under #f2ecff: 3.62 -> 4.65:1 */
+.table.cbi-section-table button.cbi-button-negative.remove:not(:hover):not(:focus) { background: #d21a28 !important; } /* was #e63946 under #f2ecff: 3.62 -> 4.65:1 */
+.table.cbi-section-table button.cbi-button-remove:not(:hover):not(:focus) { background: #d21a28 !important; } /* was #e63946 under #f2ecff: 3.62 -> 4.65:1 */
+button.cbi-button-positive:not(:hover):not(:focus) { color: #111111 !important; } /* was #f2ecff: 1.36 -> 12.01:1 */
+/* AUTO-CONTRAST END */

@@ -1,0 +1,18 @@
+luci-theme-edge21 - "Edge (21.02 port)"
+
+Stylesheet from luci-theme-edge by Kiddin' (kiddin9) and GaryPang,
+https://github.com/kiddin9/luci-theme-edge. The repository has no LICENSE file; its
+Makefile (PKG_LICENSE:=Apache-2.0) and file headers state the Apache License 2.0.
+Edge derives from luci-theme-argon by jerrykuku and luci-theme-material by Lutty Yang
+(both Apache-2.0); its header credits the Argon Dashboard design by Creative Tim.
+Layout, templates, menu script, icon font and jQuery copy from luci-theme-argon 2.3.1
+by jerrykuku, https://github.com/jerrykuku/luci-theme-argon (Apache-2.0).
+
+Port changes (2026, Dror Dvash): Edge's stylesheet put on the Argon 2.3.1 templates
+(Edge's own templates not used: they fetched Unsplash photos with curl on the router
+and played remote login audio); the embedded Google Sans font removed (not
+redistributable; system fonts instead); login photos, script.js, waves.css and logo
+image removed; a dark palette of the port's own (Edge is light only upstream) with
+a light/dark button, following the browser until one is picked; reduced-motion
+support, 21.02 widget fixes, phone fix for
+"-- custom --" dropdown entries.

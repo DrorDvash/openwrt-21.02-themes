@@ -1,0 +1,22 @@
+<%#
+ @TITLE@ theme, OpenWrt 21.02 port (luci-theme-@ID@).
+ Copyright 2008 Steven Barth <steven@midlink.org>
+ Copyright 2008 Jo-Philipp Wich <jow@openwrt.org>
+ Copyright 2012 David Menting <david@nut-bolt.nl>
+ Licensed to the public under the Apache License 2.0.
+-%>
+
+		<% if not blank_page then %>
+		<%   local ver = require "luci.version" %>
+		</div>
+		<footer>
+			<span>
+				<a href="https://github.com/openwrt/luci">Powered by <%= ver.luciname %> (<%= ver.luciversion %>)</a> / <%= ver.distversion %>
+			</span>
+			<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+		</footer>
+<!--@FOOTER_EXTRA@-->
+		<script type="text/javascript">L.require('menu-@ID@')</script>
+		<% end %>
+	</body>
+</html>

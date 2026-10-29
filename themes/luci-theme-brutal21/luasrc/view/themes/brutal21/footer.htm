@@ -1,0 +1,22 @@
+<%#
+ Brutal theme, OpenWrt 21.02 port (luci-theme-brutal21).
+ Copyright 2008 Steven Barth <steven@midlink.org>
+ Copyright 2008 Jo-Philipp Wich <jow@openwrt.org>
+ Copyright 2012 David Menting <david@nut-bolt.nl>
+ Licensed to the public under the Apache License 2.0.
+-%>
+
+		<% if not blank_page then %>
+		<%   local ver = require "luci.version" %>
+		</div>
+		<footer>
+			<span>
+				<a href="https://github.com/openwrt/luci">Powered by <%= ver.luciname %> (<%= ver.luciversion %>)</a> / <%= ver.distversion %>
+			</span>
+			<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+		</footer>
+		<script type="text/javascript">(function(){var e=document.getElementById('hdr-clock');if(!e)return;function p(n){return (n<10?'0':'')+n}function t(){var d=new Date();e.textContent='LOCAL '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())}t();setInterval(t,1000)})();</script>
+		<script type="text/javascript">L.require('menu-brutal21')</script>
+		<% end %>
+	</body>
+</html>

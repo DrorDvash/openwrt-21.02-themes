@@ -1,0 +1,65 @@
+
+/* ==========================================================================
+ * Rack-specific 21.02 port fixes
+ * ========================================================================== */
+
+/* monospace "MENU" button, like the rest of the rack labels */
+.p21-burger { font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+/* Upstream numbers sections per .cbi-map; 21.02 renders many pages (e.g. the
+   status overview) as one map per section, so number them per page: 1U, 2U, ... */
+#maincontent { counter-reset: rackunit; }
+.cbi-map { counter-reset: none; }
+
+/* --- WCAG AA: red text/hover. Upstream #e5484d text is 3.9:1 on the faceplate,
+       white on #e5484d is 3.9:1; keep #e5484d for borders only. ---------------- */
+
+:root,
+:root[data-darkmode="false"],
+:root[data-darkmode="true"] {
+	--t-err-ink: #f26b6f;
+	--t-err-fill: #c42b30;
+}
+
+.cbi-button-negative,
+.cbi-section-remove .cbi-button,
+.cbi-button-remove,
+.cbi-button-reset { --on-color: var(--t-err-ink); }
+
+.cbi-button-negative:hover,
+.cbi-section-remove .cbi-button:hover,
+.cbi-button-remove:hover,
+.cbi-button-reset:hover {
+	--on-color: #fff;
+	background: var(--t-err-fill);
+	border-color: var(--t-err-fill);
+}
+
+/* Nested sections inside modals keep a flat look: the modal already is the faceplate. */
+.modal .cbi-section {
+	padding: 0;
+	border: 0;
+	background: none;
+	box-shadow: none;
+}
+
+.modal .cbi-section > h3::before { display: none; }
+
+/* Phones: narrower mounting rails (16px instead of 30px) and smaller screws */
+@media (max-width: 720px) {
+	.cbi-section {
+		padding: 12px 20px 8px;
+		background:
+			radial-gradient(circle at 8px 12px, #0a0c0e 0 1.5px, #6b7580 2px 3.5px, transparent 4px),
+			radial-gradient(circle at calc(100% - 8px) 12px, #0a0c0e 0 1.5px, #6b7580 2px 3.5px, transparent 4px),
+			radial-gradient(circle at 8px calc(100% - 12px), #0a0c0e 0 1.5px, #6b7580 2px 3.5px, transparent 4px),
+			radial-gradient(circle at calc(100% - 8px) calc(100% - 12px), #0a0c0e 0 1.5px, #6b7580 2px 3.5px, transparent 4px),
+			linear-gradient(90deg, #2b323a 0, #353d46 2px, #2b323a 16px, transparent 16px,
+				transparent calc(100% - 16px), #2b323a calc(100% - 16px), #353d46 calc(100% - 2px), #2b323a 100%),
+			linear-gradient(180deg, #20262c, #181c21);
+	}
+
+	.cbi-section .cbi-section,
+	.cbi-value > .cbi-section,
+	.modal .cbi-section { padding: 0; background: none; }
+}

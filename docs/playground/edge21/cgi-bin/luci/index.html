@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"login","theme":"edge21"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+	<meta charset="utf-8">
+	<title>
+		OpenWrt - Overview
+		- LuCI</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="full-screen" content="yes">
+	<meta name="x5-page-mode" content="app">
+	<meta name="browsermode" content="application">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="msapplication-TileColor" content="#5a8dee">
+	<meta name="application-name" content="OpenWrt - LuCI">
+	<meta name="apple-mobile-web-app-title" content="OpenWrt - LuCI">
+	<link rel="apple-touch-icon" sizes="144x144" href="/openwrt-21.02-themes/playground/luci-static/edge21/icon/apple-icon-144x144.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/openwrt-21.02-themes/playground/luci-static/edge21/icon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/openwrt-21.02-themes/playground/luci-static/edge21/icon/favicon-32x32.png">
+	<meta name="msapplication-TileColor" content="#5a8dee">
+	<meta name="theme-color" content="#5a8dee">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/edge21/css/cascade.css?v=1.0.4-1">
+	<style title="text/css">
+		
+			@media (prefers-color-scheme: dark) {
+				/*! edge21: LuCI theme for OpenWrt 21.02, Apache-2.0. See NOTICE. */
+:root{color-scheme:dark;--e-bg:#12151c;--e-side:#161a22;--e-card:#1b2029;--e-raise:#232936;--e-line:#2f3644;--e-text:#e4e8ef;--e-dim:#a9b1bf;--e-head:#f1f3f8;--e-link:#8fb0ff}html,body,.main,.main-right,#maincontent,.main>.loading{background-color:var(--e-bg)!important;color:var(--e-text)}body,.cbi-map-descr,.cbi-section-descr,.cbi-value-description,label.cbi-value-title,.cbi-value-title,p,div,td,th,li,span,h4,h5{color:var(--e-text)}h1,h2,h3,legend,.cbi-section>h3,.cbi-map>h2{color:var(--e-head)!important;background-color:var(--e-card)!important;border-color:var(--e-line)!important}.cbi-value-description,.cbi-map-descr,.cbi-section-descr,small,.cbi-section-table-descr{color:var(--e-dim)!important}a:not(.btn):not(.cbi-button),a.luci-link,.cbi-value-field a:not(.btn),footer a,.tabs>li>a,.cbi-tabmenu>li>a{color:var(--e-link)!important}strong,em,b{color:var(--e-head)}var,var *{color:#9cc2ff!important}code,pre{background:var(--e-raise)!important;color:var(--e-text)!important}.main-left,.main>.main-left,.main-left .sidenav-header{background-color:var(--e-side)!important;border-color:var(--e-line)!important}.main-left .nav li a,.main-left a.menu,.main-left a.food{color:#c5ccd8!important}.main-left .nav li a:hover,.main-left .nav li.slide .slide-menu li a:hover,.main-left a.food:hover{background-color:var(--e-raise)!important;color:#fff!important}.main-left .nav li.slide .slide-menu,.main-left .nav li.slide .slide-menu li{background:transparent!important}.main-left .nav li.slide .slide-menu li a.active,.main-left a.food.active{color:#fff!important}.main-left .brand,header .brand{color:#8fb0ff!important}header,.main-right>header,header.bg-primary{background-color:var(--e-bg)!important}header::after{background-color:var(--e-bg)!important}.cbi-section,.cbi-map>.cbi-section,.cbi-section-node,.cbi-tabcontainer,.cbi-map,fieldset,.cbi-map>.cbi-section .cbi-value,div>.table>.tr,table>tbody>tr,.table,.cbi-section-table,.network-status-table .ifacebox,.ifacebox,.ifacebox-body{background-color:var(--e-card)!important;color:var(--e-text);border-color:var(--e-line)!important}.cbi-section,.cbi-map>.cbi-section{box-shadow:0 1px 3px rgba(0,0,0,.4)!important}.cbi-rowstyle-1,.cbi-section-table-row,.table .tr:nth-child(2n),.cbi-section .cbi-section-node:nth-of-type(2n){background-color:var(--e-raise)!important}.cbi-rowstyle-2{background-color:var(--e-card)!important}.table .th,.cbi-section-table-titles .th,.cbi-section-table-titles th,.tr.table-titles .th,thead th{background-color:#202633!important;color:var(--e-dim)!important;border-color:var(--e-line)!important}.table .td,.table .th,td,th,.cbi-value,.cbi-section-table .tr{border-color:var(--e-line)!important}.table .tr[style*="background"],.cbi-section-table-row[style*="background"]{background-color:var(--e-raise)!important}.table .tr:hover,.cbi-section-table-row:hover{background-color:#283043!important}ul.tabs,.tabmenu .tabs,#tabmenu .tabs,ul.cbi-tabmenu,.tabs>li,.cbi-tabmenu>li{background-color:var(--e-card)!important;border-color:var(--e-line)!important}.tabs>li>a,.cbi-tabmenu>li>a{color:var(--e-dim)!important}.tabs>li.active,.cbi-tabmenu>li.cbi-tab{background-color:#26314a!important}.tabs>li.active>a,.cbi-tabmenu>li.cbi-tab>a{color:#fff!important}input,select,textarea,.cbi-input-text,.cbi-input-password,.cbi-input-select,.cbi-dropdown,.cbi-dropdown:not(.btn):not(.cbi-button),.cbi-dynlist>.item,.cbi-filebrowser{background-color:#11141a!important;background-image:none!important;color:var(--e-text)!important;border-color:#3a4253!important}input::placeholder,textarea::placeholder{color:#8a93a3!important}.cbi-dropdown>ul,.cbi-dropdown[open]>ul.dropdown,.cbi-dropdown>ul.preview,.dropdown-menu{background-color:var(--e-raise)!important;color:var(--e-text)!important;border-color:#3a4253!important}.cbi-dropdown>ul>li,.cbi-dropdown[open]>ul.dropdown>li{color:var(--e-text)!important;border-color:var(--e-line)!important}.cbi-dropdown[open]>ul.dropdown>li[selected],.cbi-dropdown[open]>ul.dropdown>li.focus{background-color:#2c3a5c!important}.cbi-dropdown>ul>li[placeholder],.cbi-dropdown>ul>li[unselectable]{color:#9aa3b2!important}input[type="checkbox"],input[type="radio"]{accent-color:#5a8dee}input:disabled,select:disabled,.cbi-input-text:disabled{background-color:#1a1e26!important;color:#8a93a3!important}.cbi-input-invalid,.cbi-value-error input{border-color:#ff6b6b!important;color:#ffb3b3!important}.ifacebadge,.zonebadge-empty,.network-status-table .ifacebox-body .ifacebadge,.cbi-tooltip{background-color:var(--e-raise)!important;color:var(--e-text)!important;border-color:#3a4253!important}.cbi-progressbar{background-color:#11141a!important;border-color:#3a4253!important}.cbi-progressbar::after{color:var(--e-text)!important}.modal,#modal_overlay .modal{background-color:var(--e-card)!important;color:var(--e-text)!important;border-color:var(--e-line)!important}#modal_overlay{background-color:rgba(0,0,0,.75)!important}.alert-message,.cbi-section-error{background-color:#3a2a18!important;color:#ffd9a8!important;border-color:#6b4a1e!important}.alert-message.error,.alert-message.danger,.cbi-section-error{background-color:#3a1c22!important;color:#ffc2cb!important}.alert-message.notice,.alert-message.info{background-color:#182a44!important;color:#c6dcff!important}.alert-message.success{background-color:#16331f!important;color:#bfeccc!important}.uci-change-list ins,.uci-change-legend-label ins{background-color:#16331f!important;color:#bfeccc!important}.uci-change-list del,.uci-change-legend-label del{background-color:#3a1c22!important;color:#ffc2cb!important}#indicators span[data-indicator="poll-status"]{background-color:#3a2e1a!important;color:#ffd9a8!important}footer,footer a,.footer,.footer a{color:var(--e-dim)!important}.main-right>hr{opacity:.6}.zonebadge:not(.zonebadge-empty),.zonebadge:not(.zonebadge-empty)>*,.ifacebox-head,.ifacebox-head *{color:#111!important}html body #tabmenu a,html body .cbi-tabmenu>li>a,html body .tabs>li>a{color:#8fb0ff!important}html body .cbi-tabmenu.mode a,html body a[style*="color"]{color:#ff8a8f!important}html body .tabs>li.active>a,html body .cbi-tabmenu>li.cbi-tab>a,html body a.menu.active{color:#fff!important}html body var,html body .table var{color:#9cc2ff!important}html body a.luci-link,html body footer a,html body .mobile-hide a{color:#8fb0ff!important}html body .mobile-hide div,html body footer div{color:var(--e-dim)!important}html body abbr,html body abbr[title]{color:var(--e-dim)!important}html body .table.cbi-section-table .td,html body .table.cbi-section-table td,html body .cbi-section-table .td.cbi-value-field{background-color:transparent!important}html body .controls,html body .controls>div,html body #maincontent .controls label{background-color:var(--e-card)!important;color:var(--e-text)!important}html body .cbi-dropdown.btn>ul,html body .cbi-dropdown.cbi-button>ul,html body .cbi-dropdown.btn>ul>li{background-color:var(--e-raise)!important;color:var(--e-text)!important}html body .cbi-dropdown:not(.btn)>ul>li{color:var(--e-text)!important}html body .cbi-dropdown>ul>li[placeholder]{color:#fff!important}html body #cbi-firewall-redirect var,html body #maincontent var{color:#9cc2ff!important}html body .mobile-hide a.luci-link,html body footer a.luci-link,html body footer a{color:#8fb0ff!important}
+
+			}
+		</style>
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/edge21/css/theme.css?v=1.0.4-1">
+	<link rel="shortcut icon" href="/openwrt-21.02-themes/playground/luci-static/edge21/favicon.png">
+	<script src="/openwrt-21.02-themes/playground/luci-static/edge21/js/jquery.min.js?v=3.5.1"></script>
+
+</head>
+
+<body>
+
+
+
+<!-- Login Page Start -->
+<div class="login-page">
+	
+	<!-- Image Background Start -->
+	<div class="main-bg" id="main-bg"></div>
+	<!-- Image Background End -->
+	
+	<!-- Login Container Start -->
+	<div class="login-container">
+		<div class="login-form">
+			<!-- Logo Start -->
+			<a class="brand" href="/"><img src="/openwrt-21.02-themes/playground/luci-static/edge21/logo.svg" class="icon">
+				<span class="brand-text">OpenWrt</span>
+			</a>
+			<!-- Logo End -->
+			<!-- Login Form Start -->
+			<form class="form-login" method="post" action="/openwrt-21.02-themes/playground/edge21/cgi-bin/luci/"><div class="input-container">
+					<div class="input-group user-icon">
+						<input class="cbi-input-user" id="cbi-input-user" type="text" name="luci_username" value="root" />
+						<label class="border" for="cbi-input-user"></label>
+					</div>
+					<div class="input-group pass-icon">
+						<input class="cbi-input-password" id="cbi-input-password" type="password" name="luci_password" />
+						<label class="border" for="cbi-input-password"></label>
+					</div>
+				</div>
+				<div>
+					<input type="submit" value="Login" class="cbi-button cbi-button-apply" />
+				</div>
+			</form>
+			<!-- Login Form End -->
+			<script type="text/javascript">//<![CDATA[
+				var input = document.getElementsByName('luci_password')[0];
+				if (input)
+					input.focus();
+			//]]></script>
+
+</div>
+<footer>
+	<div>
+		<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank">Powered by LuCI openwrt-21.02 branch (git-23.093.57360-e98243e)</a> /
+						<a href="https://github.com/jerrykuku/luci-theme-argon" target="_blank">Edge on ArgonTheme 2.3.1 (21.02 port)</a> /
+						OpenWrt 21.02.7 r16847-f8282da11e
+	</div>
+</footer>
+</div>
+</div>
+<script>
+	// thanks for Jo-Philipp Wich <jow@openwrt.org>
+	var luciLocation = [];
+	var winHeight = $(window).height();
+	$(window).resize(function () {
+		var winWidth = $(window).width()
+		if(winWidth < 600){
+			var newHeight = $(this).height();
+			var keyboradHeight = newHeight - winHeight;
+			$(".ftc").css("bottom", keyboradHeight + 30);
+		}
+	})
+</script>
+<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+

@@ -1,0 +1,69 @@
+
+/* ==========================================================================
+ * Aurora reskin tokens (tools/baselines/aurora-template/31-aurora-tokens.css,
+ * used by every "<theme>21-aurora" variant): the theme's --t-* tokens drive
+ * Aurora's design tokens; themes without them fall back to the bootstrap colours
+ * their block sets (derived in 15-bootstrap-vars.css), as in the other layouts.
+ * :root[data-darkmode] outranks Aurora's [data-darkmode=true] blocks, so one set
+ * serves both modes.
+ * ========================================================================== */
+
+:root,
+:root[data-darkmode="false"],
+:root[data-darkmode="true"] {
+	--p21-head: var(--t-head, var(--p21-card));
+	--p21-on: var(--t-on, #fff);
+	--p21-bg: var(--t-bg, var(--background-color-low));
+	--p21-card: var(--t-card, var(--background-color-high));
+	--p21-ink: var(--t-ink, var(--text-color-highest));
+	--p21-dim: var(--t-dim, var(--text-color-high));
+	--p21-rule: var(--t-rule, var(--border-color-medium));
+	--p21-hover: var(--t-hover, var(--background-color-medium));
+	--p21-accent: var(--t-accent, var(--primary-color-high));
+	--p21-accent2: var(--t-accent2, var(--primary-color-low));
+
+	--bg: var(--p21-bg);
+	--surface: var(--p21-card);
+	--surface-sunken: var(--p21-hover);
+	--surface-overlay: var(--p21-bg);
+	--control-bg: var(--p21-bg);
+	--mega-menu-bg: var(--p21-bg);
+	--text: var(--p21-ink);
+	--text-muted: var(--p21-dim);
+	--text-subtle: var(--p21-dim);
+	--hairline: var(--p21-rule);
+	--brand: var(--p21-accent);
+	--link: var(--p21-accent);
+	--on-brand: var(--p21-on);
+	--brand-hover: color-mix(in srgb, var(--p21-accent) 82%, var(--p21-ink));
+	--brand-subtle: color-mix(in srgb, var(--p21-accent) 14%, transparent);
+	--brand-subtle-hover: color-mix(in srgb, var(--p21-accent) 24%, transparent);
+	--hover-faint: var(--p21-hover);
+	--focus-ring: color-mix(in srgb, var(--p21-accent2) 60%, transparent);
+	--progress-start: var(--p21-accent2);
+	--progress-end: var(--p21-accent);
+}
+
+/* the theme paints the page (its html/body background rules); Aurora's surfaces sit on it */
+html body { color: var(--p21-ink); }
+
+/* the menus, dialogs and open lists float over content: keep them opaque even when the
+   theme's colours are translucent (glass), or form text shows through them. The theme
+   colour is painted over a solid base of the same lightness. */
+:root:not([data-darkmode="true"]) { --p21-solid: #fff; }
+:root[data-darkmode="true"] { --p21-solid: #121418; }
+html:root :is(.desktop-menu-sheet, .mobile-menu-overlay, .modal, .cbi-dropdown[open] > ul.dropdown) {
+	background: linear-gradient(var(--p21-bg), var(--p21-bg)), var(--p21-solid);
+}
+
+/* Buttons: the theme blocks (written for 25.12 bootstrap) colour button text through
+   --on-color and their own backgrounds; Aurora paints filled buttons with
+   color: var(--on-brand), which left dark text on the theme's dark outline buttons. */
+html:root :is(.btn, .cbi-button, input[type="button"], input[type="submit"], input[type="reset"]) {
+	color: var(--on-color, var(--on-brand));
+}
+
+/* Progress bars: Aurora centres the label inside a 14px bar; theme blocks draw thinner
+   bars that clip it, so the label sits above the bar (as in 21.02 bootstrap) */
+.cbi-progressbar { overflow: visible; margin-top: 1.5em; }
+.cbi-progressbar::before { top: auto; bottom: calc(100% + 3px); translate: -50% 0; color: var(--p21-ink); }

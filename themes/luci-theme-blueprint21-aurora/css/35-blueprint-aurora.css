@@ -1,0 +1,13 @@
+
+/* Blueprint on Aurora: theme-specific fixes */
+
+/* hand fix: Aurora paints the login button in the theme's primary colour, which is white
+   in Blueprint; its text is Blueprint's navy for white buttons (--on-primary-color) */
+html:root button.login-submit { color: #0b3566 !important; }
+
+/* hand fix: the red outline buttons (Reset, Kill, Terminate): #ff8f8f is 4.4:1 on the blueprint
+   blue, one step lighter is 4.9:1 */
+html:root :is(.cbi-button-negative, .cbi-section-remove .cbi-button, .cbi-button-remove, .cbi-button-reset):not(:hover):not(:focus) { color: #ff9e9e !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+/* AUTO-CONTRAST END */

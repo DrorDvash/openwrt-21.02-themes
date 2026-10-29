@@ -1,0 +1,52 @@
+
+/* Synthwave on Aurora: theme-specific fixes */
+
+/* hand fixes (Aurora layout): on Status > Routes the headings between the pink tables sit on
+   the pink; give them the theme's night backing */
+[data-page="admin-status-routes"] #maincontent h3 { background-color: #12061f; padding: .2em .5em; }
+[data-page="admin-status-routes"] #maincontent h3 abbr { color: inherit !important; }
+
+/* hand fix: zone badges carry 21.02's pastel zone colours (some translucent over the dark
+   page): black text */
+html:root .zonebadge[style], html:root .zonebadge[style] * { color: #000 !important; text-shadow: none !important; }
+/* the striped "no zone" badge (REJECT) is see-through on the pink table cells: white (5.4:1) */
+html:root .zonebadge-empty, html:root .zonebadge-empty * { color: #fff !important; }
+/* the auto rule below darkens the cyan login button: white text on it (4.6:1) */
+html:root button.login-submit { color: #fff !important; }
+
+/* Tables and footer as on Synthwave's own layout (these replace auto fixes that painted every
+   cell pink and boxed the footer links): tables on a solid dark background, since the page fades
+   to hot pink at the bottom; the footer on a dark backdrop */
+html body #maincontent .table { background-color: #1a0633 !important; }
+html body #maincontent .table .td, html body #maincontent .table td { background-color: transparent !important; }
+html body #maincontent .table .tr:hover .td { background-color: rgba(255, 46, 151, .12) !important; }
+html body footer { background: rgba(20, 4, 40, .9) !important; box-shadow: 0 0 0 8px rgba(20, 4, 40, .9) !important; border-radius: 4px; }   /* (a shadow, not padding: no layout change) */
+html body footer *, html body footer span { background: transparent !important; color: #e2d4ff !important; }
+html body footer a { color: #4ff5ff !important; }
+html body .login-footer p, html body .login-footer span { color: #e2d4ff !important; }
+html body .login-footer a { color: #4ff5ff !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#wifi_assoclist_table em { color: #f5ebff !important; } /* was #b56bff: 1.66 -> 4.64:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { background: #410e51 !important; } /* was #5a1370 under #ff4d6d: 3.71 -> 4.65:1 */
+.cbi-page-actions.control-group button.cbi-button-save:not(:hover):not(:focus) { background: #da1d90 !important; } /* was #e32e9c under #ffffff: 4.09 -> 4.61:1 */
+.cbi-page-actions.control-group button.cbi-button-save:not(:hover):not(:focus) { color: #ffffff !important; } /* was #111111: 1.18 -> 10.75:1 */
+.table button.cbi-button-action:not(:hover):not(:focus) { background: #a5287c !important; } /* was #af2a84 under #00f0ff: 4.28 -> 4.67:1 */
+.table button.cbi-button-negative:not(:hover):not(:focus) { background: #4c0b34 !important; } /* was #a1176e under #ff4d6d: 2.28 -> 4.65:1 */
+.table.assoclist em { color: #f5ebff !important; } /* was #b56bff: 1.66 -> 4.64:1 */
+.table.cbi-section-table button.cbi-button-action:not(:hover):not(:focus) { color: #ffffff !important; } /* was #14002e: 2.99 -> 6.57:1 */
+.table.cbi-section-table button.cbi-button-add:not(:hover):not(:focus) { color: #f4e9ff !important; } /* was #d9b3ff: 3.05 -> 4.63:1 */
+.table.cbi-section-table button.cbi-button-edit:not(:hover):not(:focus) { color: #9cf9ff !important; } /* was #00f0ff: 3.95 -> 4.61:1 */
+.table.cbi-section-table button.cbi-button-neutral.down:not(:hover):not(:focus) { color: #f9f3ff !important; } /* was #f3e9ff: 4.32 -> 4.65:1 */
+.table.cbi-section-table button.cbi-button-neutral.enable-disable:not(:hover):not(:focus) { color: #f9f3ff !important; } /* was #f3e9ff: 4.32 -> 4.65:1 */
+.table.cbi-section-table button.cbi-button-neutral.reconnect:not(:hover):not(:focus) { color: #f9f3ff !important; } /* was #f3e9ff: 4.32 -> 4.65:1 */
+.table.cbi-section-table button.cbi-button-neutral:not(:hover):not(:focus) { color: #f9f3ff !important; } /* was #f3e9ff: 4.32 -> 4.65:1 */
+.table.cbi-section-table button.cbi-button-remove:not(:hover):not(:focus) { color: #fff0f3 !important; } /* was #ff4d6d: 1.60 -> 4.64:1 */
+.table.cbi-section-table button.drag-handle:not(:hover):not(:focus) { color: #f9f3ff !important; } /* was #f3e9ff: 4.32 -> 4.65:1 */
+.table.cbi-section-table em { color: #f5ebff !important; } /* was #b56bff: 1.66 -> 4.64:1 */
+.table.cbi-section-table span { color: #f5ebff !important; } /* was #b56bff: 1.66 -> 4.64:1 */
+.table.cbi-section-table var { color: #b3fbff !important; } /* was #00f0ff: 3.80 -> 4.63:1 */
+.table.lases em { color: #f5ebff !important; } /* was #b56bff: 1.66 -> 4.64:1 */
+.table.leases6 em { color: #f5ebff !important; } /* was #b56bff: 1.66 -> 4.64:1 */
+button.login-submit:not(:hover):not(:focus) { background: #00828a !important; } /* was #00f0ff under #ffffff: 1.41 -> 4.61:1 */
+/* AUTO-CONTRAST END */

@@ -1,0 +1,54 @@
+<%#
+ NoobWRT, OpenWrt 21.02 port (luci-theme-@ID@). Lua translation of luci-theme-noobwrt
+ @NWVER@ header_login.ut (nooblk-98, Apache-2.0; derived from luci-theme-argon by jerrykuku).
+ The login page follows the browser's colour scheme, or the toolbar's saved choice.
+-%>
+<%
+	local util = require "luci.util"
+	local http = require "luci.http"
+	local disp = require "luci.dispatcher"
+	local ver = require "luci.version"
+
+	local boardinfo = util.ubus("system", "board") or {}
+	local hostname = striptags(boardinfo.hostname or "?")
+	local node = disp.context.dispatched
+	local lang = luci.i18n.context.lang
+
+	http.prepare_content("text/html; charset=UTF-8")
+-%>
+<!DOCTYPE html>
+<html lang="<%=lang%>">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%=striptags(hostname .. ((node and node.title) and " - " .. translate(node.title) or ""))%> - LuCI</title>
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="format-detection" content="telephone=no, email=no">
+	<meta name="theme-color" content="@THEMECOLOR@">
+	<link rel="icon" type="image/png" sizes="32x32" href="<%=media%>/icon/favicon-32x32.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="<%=media%>/icon/apple-icon-144x144.png">
+	<link rel="stylesheet" href="<%=media%>/css/cascade.css?v=@VERSION@">
+	<link rel="stylesheet" href="<%=media%>/css/dark.css?v=@VERSION@" id="dark-theme-style" media="(prefers-color-scheme: dark)">
+	<link rel="stylesheet" href="<%=media%>/css/theme.css?v=@VERSION@">
+	<script>
+		(function () {
+			var s = null;
+			try { s = localStorage.getItem('@ID@.scheme'); } catch (e) {}
+			if (s === 'dark' || s === 'light')
+				document.getElementById('dark-theme-style').media = (s === 'dark') ? 'all' : 'not all';
+			var dark = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+			document.documentElement.setAttribute('data-darkmode', dark ? 'true' : 'false');
+		})();
+	</script>
+	<% if node and node.css then %>
+	<link rel="stylesheet" href="<%=resource%>/<%=node.css%>">
+	<% end -%>
+	<% if css then %>
+	<style title="text/css">
+		<%=css %>
+	</style>
+	<% end -%>
+</head>
+
+<body>

@@ -1,0 +1,14 @@
+luci-theme-uniwrt21 - "UniWRT (21.02 port)"
+
+Port of UniWRT Portal (luci-theme-uniwrt) 2.0.38 by ox1d3x3,
+https://github.com/ox1d3x3/uniwrt-luci (Apache-2.0). Stylesheets, menu and status bar
+scripts and the UniWRT logo are UniWRT's.
+
+Port changes (2026, Dror Dvash): ucode templates rewritten as OpenWrt 21.02 Lua
+templates; /etc/config/uniwrt and the settings page removed (defaults fixed); the
+uci-defaults script that activated the theme removed; status bar and Overview
+dashboard folded into the menu script, the dashboard shown on top of Status >
+Overview; CPU chip and card show the load average (21.02 does not let the browser
+read /proc/cpuinfo); light colours darkened for WCAG AA; dark.css linked instead of inlined;
+reduced-motion support, 21.02 widget fixes, phone fix for "-- custom --" dropdown
+entries.

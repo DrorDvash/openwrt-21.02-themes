@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LuCI 21.02 Themes</title>
+<meta name="description" content="53 LuCI themes for OpenWrt 21.02 (GL.iNet Flint 2 / GL-MT6000 and other 21.02 firmware): five ported themes and 16 reskins on three layouts. Live playground.">
+<style>
+:root { --bg:#f5f6f9; --card:#fff; --ink:#151821; --dim:#5b6472; --line:#e1e4ea; --acc:#2f6fe4; --acc-ink:#fff; --chip:#eceff4; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0d0f14; --card:#151821; --ink:#eef0f5; --dim:#a3abb9; --line:#262b36; --acc:#5b93ff; --acc-ink:#0b1220; --chip:#20242f; } }
+:root[data-theme="dark"] { --bg:#0d0f14; --card:#151821; --ink:#eef0f5; --dim:#a3abb9; --line:#262b36; --acc:#5b93ff; --acc-ink:#0b1220; --chip:#20242f; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+a { color:var(--acc); }
+.wrap { max-width:1180px; margin:0 auto; padding:0 16px; }
+.hero { padding:56px 0 24px; display:grid; gap:28px; }
+.hero h1 { font-size:clamp(32px,5vw,54px); line-height:1.08; letter-spacing:-.02em; margin:0; }
+.hero p { font-size:19px; color:var(--dim); max-width:46rem; margin:0; }
+.cta { display:flex; flex-wrap:wrap; gap:10px; }
+.btn,.ghost { display:inline-flex; align-items:center; min-height:40px; padding:8px 16px; border-radius:10px; font-weight:600; text-decoration:none; }
+.btn { background:var(--acc); color:var(--acc-ink); }
+.ghost { background:var(--chip); color:var(--ink); }
+.hero img { width:100%; height:auto; border-radius:16px; display:block; }
+h2 { font-size:28px; margin:56px 0 6px; }
+.lead { color:var(--dim); margin:0 0 20px; max-width:50rem; }
+.grid { display:grid; gap:22px; grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr)); }
+.theme { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; }
+.theme header { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 14px; margin-bottom:12px; }
+.theme h3 { margin:0; font-size:21px; }
+.theme header p { margin:0; color:var(--dim); font-size:14px; }
+.shot { margin:0; border-radius:10px; overflow:hidden; background:var(--chip); }
+.shot img { width:100%; height:auto; display:block; }
+.row { display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px; margin-top:12px; }
+.row .btn,.row .ghost { min-height:36px; padding:6px 12px; font-size:14px; }
+.size { color:var(--dim); font-size:13px; margin-left:auto; }
+.seg,.tabs { display:inline-flex; background:var(--chip); border-radius:10px; padding:3px; gap:2px; }
+.seg button,.tabs button { border:0; background:none; color:var(--ink); font:inherit; font-size:14px; padding:5px 12px; border-radius:8px; cursor:pointer; min-height:30px; }
+.seg button[aria-pressed="true"],.tabs button[aria-selected="true"] { background:var(--card); box-shadow:0 1px 3px rgba(0,0,0,.18); font-weight:600; }
+button:focus-visible,a:focus-visible { outline:2px solid var(--acc); outline-offset:2px; }
+button.ghost { border:0; font:inherit; cursor:pointer; }
+.zoom { display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; }
+dialog.viewer { position:fixed; inset:0; width:auto; height:auto; max-width:none; max-height:none; margin:0; padding:0; border:0; overflow:hidden; background:#0b0d12; color:#eef0f5; }
+dialog.viewer::backdrop { background:rgba(0,0,0,.6); }
+.viewer .bar { position:absolute; top:0; left:0; right:0; display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; padding:12px 16px; }
+.viewer .bar b { font-size:17px; margin-right:auto; }
+.viewer .seg { background:#20242f; } .viewer .seg button { color:#eef0f5; } .viewer .seg button[aria-pressed="true"] { background:#3a4152; }
+.viewer .x,.viewer .nav { border:0; background:#20242f; color:#eef0f5; border-radius:10px; min-width:40px; height:40px; font-size:20px; cursor:pointer; }
+.viewer .stage { position:absolute; inset:64px 16px 16px; display:flex; align-items:center; justify-content:center; gap:12px; }
+.viewer .stage img { max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+.viewer .nav { flex:none; }
+@media (max-width:600px) { .viewer .stage { inset:112px 8px 8px; } .viewer .nav { display:none; } }
+pre { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; overflow:auto; font-size:14px; }
+ul.facts { padding-left:1.2em; color:var(--dim); } ul.facts b { color:var(--ink); }
+table { border-collapse:collapse; width:100%; background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:15px; }
+td,th { text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { font-size:13px; color:var(--dim); font-weight:600; }
+footer { color:var(--dim); font-size:14px; padding:40px 0 60px; }
+@media (max-width:600px) { .hero { padding-top:32px; } .size { margin-left:0; width:100%; } td,th { padding:8px 10px; } table { font-size:14px; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior:auto !important; } }
+</style></head>
+<body><div class="wrap">
+<section class="hero">
+  <div><h1>LuCI themes for OpenWrt&nbsp;21.02</h1></div>
+  <p>53 theme packages for routers still on LuCI 21.02, such as the GL.iNet Flint 2 (GL-MT6000) with GL firmware 4.x: five complete themes ported from newer OpenWrt, and 16 reskins on three layouts. Every one is tested on desktop and phone, light and dark.</p>
+  <div class="cta"><a class="btn" href="/openwrt-21.02-themes/playground/">Try the live playground</a><a class="ghost" href="https://github.com/DrorDvash/openwrt-21.02-themes/releases/latest">Download</a><a class="ghost" href="#credits">Credits</a></div>
+  <img src="img/uniwrt21-dark.webp" width="1600" height="900" alt="UniWRT theme, Status page on a monitor and a phone">
+</section>
+
+<h2 id="ported">Ported themes</h2>
+<p class="lead">Complete themes from newer OpenWrt releases, rewritten for 21.02's Lua templates, each with its own look.</p>
+<div class="grid">
+<article class="theme" id="alpha21"><header><h3>Alpha</h3><p>Port of <a href="https://github.com/derisamedia/luci-theme-alpha">derisamedia/luci-theme-alpha</a> by derisamedia</p></header><figure class="shot" data-id="alpha21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/alpha21-light.webp" alt="Alpha : Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/alpha21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-alpha21 · 60 KB</span></div></article>
+<article class="theme" id="aurora21"><header><h3>Aurora</h3><p>Port of <a href="https://github.com/eamonxg/luci-theme-aurora">eamonxg/luci-theme-aurora</a> by eamonxg</p></header><figure class="shot" data-id="aurora21" data-modes="light dark"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/aurora21-light.webp" alt="Aurora : Status page on a monitor and a phone"></button></figure><div class="row"><div class="seg" role="group" aria-label="Colour scheme"><button type="button" aria-pressed="true" data-mode="light">Light</button><button type="button" aria-pressed="false" data-mode="dark">Dark</button></div><a class="btn" href="/openwrt-21.02-themes/playground/aurora21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-aurora21 · 70 KB</span></div></article>
+<article class="theme" id="edge21"><header><h3>Edge</h3><p>Port of <a href="https://github.com/kiddin9/luci-theme-edge">kiddin9/luci-theme-edge</a> by kiddin9 and GaryPang</p></header><figure class="shot" data-id="edge21" data-modes="light dark"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/edge21-light.webp" alt="Edge : Status page on a monitor and a phone"></button></figure><div class="row"><div class="seg" role="group" aria-label="Colour scheme"><button type="button" aria-pressed="true" data-mode="light">Light</button><button type="button" aria-pressed="false" data-mode="dark">Dark</button></div><a class="btn" href="/openwrt-21.02-themes/playground/edge21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-edge21 · 149 KB</span></div></article>
+<article class="theme" id="noobwrt21"><header><h3>NoobWRT</h3><p>Port of <a href="https://github.com/nooblk-98/luci-theme-noobwrt">nooblk-98/luci-theme-noobwrt</a> by nooblk-98</p></header><figure class="shot" data-id="noobwrt21" data-modes="light dark"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/noobwrt21-light.webp" alt="NoobWRT : Status page on a monitor and a phone"></button></figure><div class="row"><div class="seg" role="group" aria-label="Colour scheme"><button type="button" aria-pressed="true" data-mode="light">Light</button><button type="button" aria-pressed="false" data-mode="dark">Dark</button></div><a class="btn" href="/openwrt-21.02-themes/playground/noobwrt21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-noobwrt21 · 122 KB</span></div></article>
+<article class="theme" id="uniwrt21"><header><h3>UniWRT</h3><p>Port of <a href="https://github.com/ox1d3x3/uniwrt-luci">ox1d3x3/uniwrt-luci</a> by ox1d3x3</p></header><figure class="shot" data-id="uniwrt21" data-modes="light dark"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/uniwrt21-light.webp" alt="UniWRT : Status page on a monitor and a phone"></button></figure><div class="row"><div class="seg" role="group" aria-label="Colour scheme"><button type="button" aria-pressed="true" data-mode="light">Light</button><button type="button" aria-pressed="false" data-mode="dark">Dark</button></div><a class="btn" href="/openwrt-21.02-themes/playground/uniwrt21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-uniwrt21 · 32 KB</span></div></article>
+</div>
+
+<h2 id="reskins">Reskins on three layouts</h2>
+<p class="lead">Each colour design comes on three layouts: 21.02's own Bootstrap (top menu), Argon (sidebar, the layout GL firmware ships) and Aurora (top bar with a mega menu). Pick a layout on each card.</p>
+<div class="grid">
+<article class="theme skin" id="pixel21"><header><h3>8-bit</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="pixel21" data-modes="light" data-size="25 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="pixel21-argon" data-modes="light" data-size="136 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="pixel21-aurora" data-modes="light" data-size="49 KB">Aurora</button></div></header><figure class="shot" data-id="pixel21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/pixel21-light.webp" alt="8-bit Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/pixel21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-pixel21 · 25 KB</span></div></article>
+<article class="theme skin" id="aquarium21"><header><h3>Aquarium</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="aquarium21" data-modes="light" data-size="27 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="aquarium21-argon" data-modes="light" data-size="138 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="aquarium21-aurora" data-modes="light" data-size="51 KB">Aurora</button></div></header><figure class="shot" data-id="aquarium21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/aquarium21-light.webp" alt="Aquarium Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/aquarium21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-aquarium21 · 27 KB</span></div></article>
+<article class="theme skin" id="blueprint21"><header><h3>Blueprint</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="blueprint21" data-modes="light" data-size="28 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="blueprint21-argon" data-modes="light" data-size="139 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="blueprint21-aurora" data-modes="light" data-size="52 KB">Aurora</button></div></header><figure class="shot" data-id="blueprint21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/blueprint21-light.webp" alt="Blueprint Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/blueprint21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-blueprint21 · 28 KB</span></div></article>
+<article class="theme skin" id="circadian21"><header><h3>Circadian</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="circadian21" data-modes="light" data-size="28 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="circadian21-argon" data-modes="light" data-size="137 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="circadian21-aurora" data-modes="light" data-size="50 KB">Aurora</button></div></header><figure class="shot" data-id="circadian21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/circadian21-light.webp" alt="Circadian Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/circadian21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-circadian21 · 28 KB</span></div></article>
+<article class="theme skin" id="glass21"><header><h3>Glass</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="glass21" data-modes="light" data-size="28 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="glass21-argon" data-modes="light" data-size="138 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="glass21-aurora" data-modes="light" data-size="52 KB">Aurora</button></div></header><figure class="shot" data-id="glass21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/glass21-light.webp" alt="Glass Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/glass21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-glass21 · 28 KB</span></div></article>
+<article class="theme skin" id="mission21"><header><h3>Mission Control</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="mission21" data-modes="light" data-size="28 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="mission21-argon" data-modes="light" data-size="139 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="mission21-aurora" data-modes="light" data-size="52 KB">Aurora</button></div></header><figure class="shot" data-id="mission21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/mission21-light.webp" alt="Mission Control Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/mission21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-mission21 · 28 KB</span></div></article>
+<article class="theme skin" id="brutal21"><header><h3>Neobrutalism</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="brutal21" data-modes="light" data-size="25 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="brutal21-argon" data-modes="light" data-size="136 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="brutal21-aurora" data-modes="light" data-size="49 KB">Aurora</button></div></header><figure class="shot" data-id="brutal21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/brutal21-light.webp" alt="Neobrutalism Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/brutal21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-brutal21 · 25 KB</span></div></article>
+<article class="theme skin" id="obsidian21"><header><h3>Obsidian</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="obsidian21" data-modes="light" data-size="27 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="obsidian21-argon" data-modes="light" data-size="138 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="obsidian21-aurora" data-modes="light" data-size="51 KB">Aurora</button></div></header><figure class="shot" data-id="obsidian21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/obsidian21-light.webp" alt="Obsidian Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/obsidian21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-obsidian21 · 27 KB</span></div></article>
+<article class="theme skin" id="paper21"><header><h3>Paper</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="paper21" data-modes="light" data-size="25 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="paper21-argon" data-modes="light" data-size="136 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="paper21-aurora" data-modes="light" data-size="49 KB">Aurora</button></div></header><figure class="shot" data-id="paper21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/paper21-light.webp" alt="Paper Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/paper21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-paper21 · 25 KB</span></div></article>
+<article class="theme skin" id="rack21"><header><h3>Rack</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="rack21" data-modes="light" data-size="26 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="rack21-argon" data-modes="light" data-size="136 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="rack21-aurora" data-modes="light" data-size="49 KB">Aurora</button></div></header><figure class="shot" data-id="rack21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/rack21-light.webp" alt="Rack Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/rack21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-rack21 · 26 KB</span></div></article>
+<article class="theme skin" id="retro21"><header><h3>Retro</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="retro21" data-modes="light" data-size="25 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="retro21-argon" data-modes="light" data-size="136 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="retro21-aurora" data-modes="light" data-size="49 KB">Aurora</button></div></header><figure class="shot" data-id="retro21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/retro21-light.webp" alt="Retro Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/retro21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-retro21 · 25 KB</span></div></article>
+<article class="theme skin" id="sumie21"><header><h3>Sumi-e</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="sumie21" data-modes="light" data-size="27 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="sumie21-argon" data-modes="light" data-size="138 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="sumie21-aurora" data-modes="light" data-size="51 KB">Aurora</button></div></header><figure class="shot" data-id="sumie21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/sumie21-light.webp" alt="Sumi-e Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/sumie21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-sumie21 · 27 KB</span></div></article>
+<article class="theme skin" id="synthwave21"><header><h3>Synthwave</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="synthwave21" data-modes="light" data-size="28 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="synthwave21-argon" data-modes="light" data-size="139 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="synthwave21-aurora" data-modes="light" data-size="51 KB">Aurora</button></div></header><figure class="shot" data-id="synthwave21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/synthwave21-light.webp" alt="Synthwave Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/synthwave21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-synthwave21 · 28 KB</span></div></article>
+<article class="theme skin" id="teletext21"><header><h3>Teletext</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="teletext21" data-modes="light" data-size="25 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="teletext21-argon" data-modes="light" data-size="136 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="teletext21-aurora" data-modes="light" data-size="48 KB">Aurora</button></div></header><figure class="shot" data-id="teletext21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/teletext21-light.webp" alt="Teletext Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/teletext21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-teletext21 · 25 KB</span></div></article>
+<article class="theme skin" id="terminal21"><header><h3>Terminal</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="terminal21" data-modes="light" data-size="26 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="terminal21-argon" data-modes="light" data-size="137 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="terminal21-aurora" data-modes="light" data-size="49 KB">Aurora</button></div></header><figure class="shot" data-id="terminal21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/terminal21-light.webp" alt="Terminal Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/terminal21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-terminal21 · 26 KB</span></div></article>
+<article class="theme skin" id="topo21"><header><h3>Topo</h3><div class="tabs" role="tablist" aria-label="Layout"><button type="button" role="tab" aria-selected="true" data-id="topo21" data-modes="light" data-size="30 KB">Bootstrap</button><button type="button" role="tab" aria-selected="false" data-id="topo21-argon" data-modes="light" data-size="140 KB">Argon</button><button type="button" role="tab" aria-selected="false" data-id="topo21-aurora" data-modes="light" data-size="53 KB">Aurora</button></div></header><figure class="shot" data-id="topo21" data-modes="light"><button type="button" class="zoom" data-view="combo" aria-label="Enlarge"><img loading="lazy" width="1600" height="900" src="img/topo21-light.webp" alt="Topo Bootstrap: Status page on a monitor and a phone"></button></figure><div class="row"><a class="btn" href="/openwrt-21.02-themes/playground/topo21/cgi-bin/luci/">Open in playground</a><button type="button" class="ghost" data-view="login">Login page</button><span class="size">luci-theme-topo21 · 30 KB</span></div></article>
+</div>
+
+<h2 id="install">Install</h2>
+<p class="lead">Download the packages you want (or the zip with all of them), copy them to the router and install them with opkg. Then choose the theme under System → System → Language and Style.</p>
+<pre>scp -O luci-theme-*.ipk root@192.168.8.1:/tmp/
+ssh root@192.168.8.1 'opkg install /tmp/luci-theme-*.ipk'</pre>
+<ul class="facts">
+  <li><b>Installing never changes your current theme.</b> Removing one brings LuCI's default back if it was active.</li>
+  <li><b>Nothing else is touched:</b> a package only adds its own files.</li>
+  <li><b>Nothing from the internet:</b> fonts and images are in the package (25 to 150 KB each).</li>
+  <li>Tested on a GL.iNet Flint 2 (GL-MT6000) with GL firmware 4.x and on OpenWrt 21.02.7.</li>
+</ul>
+
+<h2 id="credits">Credits</h2>
+<p class="lead">These are ports. The designs belong to their authors; every package keeps its upstream licence and a NOTICE that says what was changed. Ported, tested and maintained for LuCI 21.02 by <a href="https://github.com/DrorDvash">Dror Dvash</a>.</p>
+<table><tr><th>Theme</th><th>Author</th><th>Upstream</th></tr><tr><td>Alpha</td><td>derisamedia</td><td><a href="https://github.com/derisamedia/luci-theme-alpha">derisamedia/luci-theme-alpha</a></td></tr><tr><td>Aurora</td><td>eamonxg</td><td><a href="https://github.com/eamonxg/luci-theme-aurora">eamonxg/luci-theme-aurora</a></td></tr><tr><td>Edge</td><td>kiddin9 and GaryPang</td><td><a href="https://github.com/kiddin9/luci-theme-edge">kiddin9/luci-theme-edge</a></td></tr><tr><td>NoobWRT</td><td>nooblk-98</td><td><a href="https://github.com/nooblk-98/luci-theme-noobwrt">nooblk-98/luci-theme-noobwrt</a></td></tr><tr><td>UniWRT</td><td>ox1d3x3</td><td><a href="https://github.com/ox1d3x3/uniwrt-luci">ox1d3x3/uniwrt-luci</a></td></tr><tr><td>The 16 reskins</td><td>vistrocity</td><td><a href="https://github.com/vistrocity/openwrt-luci-themes">vistrocity/openwrt-luci-themes</a></td></tr><tr><td>Bootstrap layout</td><td>OpenWrt LuCI</td><td><a href="https://github.com/openwrt/luci">openwrt/luci</a></td></tr><tr><td>Argon layout</td><td>jerrykuku</td><td><a href="https://github.com/jerrykuku/luci-theme-argon">jerrykuku/luci-theme-argon</a></td></tr><tr><td>Aurora layout</td><td>eamonxg</td><td><a href="https://github.com/eamonxg/luci-theme-aurora">eamonxg/luci-theme-aurora</a></td></tr></table>
+
+<footer>The playground runs LuCI's own pages with answers recorded from an offline test router: the device, clients and numbers are made up, and nothing is saved.</footer>
+</div>
+<dialog class="viewer" aria-label="Screenshot viewer">
+  <div class="bar"><b></b>
+    <div class="seg views" role="group" aria-label="View">
+      <button type="button" data-v="combo">Monitor + phone</button><button type="button" data-v="desk">Desktop</button><button type="button" data-v="phone">Phone</button><button type="button" data-v="login">Login</button>
+    </div>
+    <div class="seg modes" role="group" aria-label="Colour scheme"><button type="button" data-m="light">Light</button><button type="button" data-m="dark">Dark</button></div>
+    <button type="button" class="x" aria-label="Close">×</button>
+  </div>
+  <div class="stage"><button type="button" class="nav prev" aria-label="Previous theme">‹</button><img alt=""><button type="button" class="nav next" aria-label="Next theme">›</button></div>
+</dialog>
+<script>
+(function () {
+  function show(card, id, mode) {
+    var fig = card.querySelector('.shot'), img = fig.querySelector('img');
+    fig.dataset.id = id;
+    img.src = 'img/' + id + '-' + mode + '.webp';
+    card.querySelector('.row .btn').href = '/openwrt-21.02-themes/playground/' + id + '/cgi-bin/luci/';
+  }
+  document.querySelectorAll('.theme').forEach(function (card) {
+    var mode = 'light';
+    function seg() {
+      var row = card.querySelector('.row'), s = row.querySelector('.seg'), modes = card.querySelector('.shot').dataset.modes.split(' ');
+      if (s) s.hidden = modes.length < 2;
+      if (modes.indexOf(mode) < 0) mode = 'light';
+      if (s) s.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.mode == mode ? 'true' : 'false'); });
+    }
+    card.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) return;
+      if (b.dataset.mode) {
+        mode = b.dataset.mode;
+        show(card, card.querySelector('.shot').dataset.id, mode);
+      } else if (b.getAttribute('role') == 'tab') {
+        card.querySelectorAll('[role=tab]').forEach(function (t) { t.setAttribute('aria-selected', t === b ? 'true' : 'false'); });
+        var fig = card.querySelector('.shot');
+        fig.dataset.modes = b.dataset.modes;
+        if (fig.dataset.modes.split(' ').indexOf(mode) < 0) mode = 'light';
+        show(card, b.dataset.id, mode);
+        card.querySelector('.size').textContent = 'luci-theme-' + b.dataset.id + ' · ' + b.dataset.size;
+      }
+      seg();
+    });
+    if (!card.querySelector('.seg') && card.querySelector('[role=tab][data-modes="light dark"]')) {
+      var s = document.createElement('div');
+      s.className = 'seg'; s.setAttribute('role', 'group'); s.setAttribute('aria-label', 'Colour scheme');
+      s.innerHTML = '<button type="button" aria-pressed="true" data-mode="light">Light</button><button type="button" aria-pressed="false" data-mode="dark">Dark</button>';
+      card.querySelector('.row').prepend(s);
+    }
+    seg();
+  });
+
+  /* the viewer: any card's picture, bigger; views, light/dark, previous/next card */
+  var dlg = document.querySelector('dialog.viewer'), img = dlg.querySelector('.stage img'),
+      cards = [].slice.call(document.querySelectorAll('.theme')), st = {};
+  function src() {
+    var f = st.v == 'combo' ? '' : '-' + st.v;
+    return 'img/' + st.id + f + (st.v == 'login' ? '' : '-' + st.m) + '.webp';
+  }
+  function paint() {
+    var card = cards[st.i], fig = card.querySelector('.shot'), modes = fig.dataset.modes.split(' ');
+    st.id = fig.dataset.id;
+    if (modes.indexOf(st.m) < 0) st.m = 'light';
+    var tab = card.querySelector('[role=tab][aria-selected=true]');
+    dlg.querySelector('.bar b').textContent = card.querySelector('h3').textContent + (tab ? ' · ' + tab.textContent : '');
+    dlg.querySelectorAll('.views button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v == st.v ? 'true' : 'false'); });
+    var ms = dlg.querySelector('.modes');
+    ms.hidden = modes.length < 2 || st.v == 'login';
+    ms.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.m == st.m ? 'true' : 'false'); });
+    img.src = src();
+    img.alt = dlg.querySelector('.bar b').textContent + ': ' + {combo: 'monitor and phone', desk: 'desktop', phone: 'phone', login: 'login page'}[st.v];
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('.theme [data-view]');
+    if (!b) return;
+    var card = b.closest('.theme'), on = card.querySelector('.seg:not(.views) [aria-pressed=true]');
+    st = {i: cards.indexOf(card), v: b.dataset.view, m: on ? on.dataset.mode : 'light'};
+    paint();
+    dlg.showModal();
+  });
+  dlg.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button');
+    if (!b) { if (ev.target === dlg || ev.target.classList.contains('stage')) dlg.close(); return; }
+    if (b.dataset.v) st.v = b.dataset.v;
+    else if (b.dataset.m) st.m = b.dataset.m;
+    else if (b.classList.contains('x')) return dlg.close();
+    else if (b.classList.contains('prev')) st.i = (st.i + cards.length - 1) % cards.length;
+    else if (b.classList.contains('next')) st.i = (st.i + 1) % cards.length;
+    paint();
+  });
+  dlg.addEventListener('keydown', function (ev) {
+    if (ev.key == 'ArrowLeft' || ev.key == 'ArrowRight') {
+      st.i = (st.i + (ev.key == 'ArrowLeft' ? cards.length - 1 : 1)) % cards.length;
+      paint();
+    }
+  });
+})();
+</script>
+</body></html>

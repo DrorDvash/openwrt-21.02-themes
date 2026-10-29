@@ -1,0 +1,12 @@
+
+/* Terminal on Argon: theme-specific fixes */
+
+/* hand fix (Argon layout): inactive tabs sit on the black page, the active one on its own
+   fill; the auto rules oscillated between the two. Inactive: the theme's dim green. */
+.cbi-tabmenu > li:not(.cbi-tab):not(.active):not([data-tab-active="true"]) > a { color: var(--p21-dim) !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-dnsmasq div.cbi-button-add:not(:hover):not(:focus) { color: #111111 !important; } /* was #33ff66: 1.00 -> 6.99:1 */
+.cbi-tabmenu a { color: #111111 !important; } /* was #33ff66: 1.85 -> 4.99:1 */
+.cbi-tabmenu.mode a { color: #111111 !important; } /* was #33ff66: 1.85 -> 7.61:1 */
+/* AUTO-CONTRAST END */

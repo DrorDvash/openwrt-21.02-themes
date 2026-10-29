@@ -1,0 +1,264 @@
+'use strict';
+'require baseclass';
+'require ui';
+
+/*
+ * 21.02 port menu (shared by the *21 theme ports).
+ * Same rendering as the OpenWrt 21.02 menu-bootstrap.js, plus a phone
+ * hamburger: below 720px the top menu collapses behind a "MENU" button and
+ * submenus open as an accordion on tap instead of on hover.
+ */
+
+return baseclass.extend({
+	__init__: function() {
+		ui.menu.load().then(L.bind(this.render, this));
+		this.initCustomEntry();
+	},
+
+	/*
+	 * "-- custom --" entries of dropdowns (e.g. Port Forward > Source IP).
+	 * LuCI 21.02 only adds the typed value on a keydown with keyCode 13 and
+	 * drops it on blur. Phone keyboards often report Enter as keyCode 229 or
+	 * just close (blur), so the value never gets added. Without touching
+	 * LuCI's ui.js this adds an explicit "+" button, maps the Android 229
+	 * Enter to a real Enter, and on touch screens keeps the typed value when
+	 * the keyboard is closed. All paths go through LuCI's own Enter handler,
+	 * so its validation still applies. Desktop keyboard behaviour is unchanged.
+	 */
+	initCustomEntry: function() {
+		var coarse = window.matchMedia('(pointer: coarse)'),
+		    sel = '.cbi-dropdown input.create-item-input';
+
+		/* LuCI only reports invalid values in a hover tooltip, which phones never show */
+		var showError = function(input) {
+			var li = input.parentNode,
+			    msg = li.querySelector('.p21-create-error');
+
+			if (!msg) {
+				msg = E('div', { 'class': 'p21-create-error', 'role': 'alert' });
+				li.appendChild(msg);
+				input.addEventListener('input', function() { msg.textContent = ''; });
+			}
+
+			msg.textContent = input.getAttribute('data-tooltip') || _('Invalid value');
+		};
+
+		var commit = function(input) {
+			if (!input.value.trim())
+				return;
+
+			if (input.classList.contains('cbi-input-invalid'))
+				return showError(input);
+
+			var ev = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true });
+			Object.defineProperty(ev, 'keyCode', { value: 13 });
+			Object.defineProperty(ev, 'which', { value: 13 });
+			input.dispatchEvent(ev);
+		};
+
+		document.addEventListener('focusin', function(ev) {
+			var input = ev.target;
+
+			if (!input.matches || !input.matches(sel) || input.parentNode.querySelector('.p21-create-add'))
+				return;
+
+			var btn = E('button', {
+				'type': 'button',
+				'class': 'btn cbi-button cbi-button-add p21-create-add',
+				'title': _('Add'),
+				'aria-label': _('Add')
+			}, [ '+' ]);
+
+			/* keep the focus (and the phone keyboard) in the input */
+			btn.addEventListener('mousedown', function(e) { e.preventDefault(); });
+			btn.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				commit(input);
+			});
+
+			input.parentNode.classList.add('p21-create-li');
+			input.parentNode.insertBefore(btn, input.nextSibling);
+
+			/* the button makes the row taller: keep it whole inside the open list, which is
+			   usually scrolled to its end here (else the input slides down out of view) */
+			var ul = input.parentNode.parentNode;
+			if (ul && ul.classList.contains('dropdown')) {
+				var gap = input.parentNode.getBoundingClientRect().bottom - ul.getBoundingClientRect().bottom;
+				if (gap > 0)
+					ul.scrollTop += Math.ceil(gap) + 1;
+			}
+		});
+
+		document.addEventListener('keydown', function(ev) {
+			if (!ev.target.matches || !ev.target.matches(sel) || ev.key != 'Enter')
+				return;
+
+			if (ev.keyCode == 229) {
+				ev.preventDefault();
+				commit(ev.target);
+			}
+			else if (ev.isTrusted && ev.target.classList.contains('cbi-input-invalid')) {
+				showError(ev.target);
+			}
+		}, true);
+
+		document.addEventListener('focusout', function(ev) {
+			if (coarse.matches && ev.target.matches && ev.target.matches(sel))
+				commit(ev.target);
+		});
+	},
+
+	render: function(tree) {
+		var node = tree,
+		    url = '';
+
+		this.renderModeMenu(tree);
+
+		if (L.env.dispatchpath.length >= 3) {
+			for (var i = 0; i < 3 && node; i++) {
+				node = node.children[L.env.dispatchpath[i]];
+				url = url + (url ? '/' : '') + L.env.dispatchpath[i];
+			}
+
+			if (node)
+				this.renderTabMenu(node, url);
+		}
+
+		this.renderBurger();
+	},
+
+	renderTabMenu: function(tree, url, level) {
+		var container = document.querySelector('#tabmenu'),
+		    ul = E('ul', { 'class': 'tabs' }),
+		    children = ui.menu.getChildren(tree),
+		    activeNode = null;
+
+		for (var i = 0; i < children.length; i++) {
+			var isActive = (L.env.dispatchpath[3 + (level || 0)] == children[i].name),
+			    activeClass = isActive ? ' active' : '',
+			    className = 'tabmenu-item-%s %s'.format(children[i].name, activeClass);
+
+			ul.appendChild(E('li', { 'class': className }, [
+				E('a', { 'href': L.url(url, children[i].name) }, [ _(children[i].title) ] )]));
+
+			if (isActive)
+				activeNode = children[i];
+		}
+
+		if (ul.children.length == 0)
+			return E([]);
+
+		container.appendChild(ul);
+		container.style.display = '';
+
+		if (activeNode)
+			this.renderTabMenu(activeNode, url + '/' + activeNode.name, (level || 0) + 1);
+
+		return ul;
+	},
+
+	renderMainMenu: function(tree, url, level) {
+		var ul = level ? E('ul', { 'class': 'dropdown-menu' }) : document.querySelector('#topmenu'),
+		    children = ui.menu.getChildren(tree);
+
+		if (children.length == 0 || level > 1)
+			return E([]);
+
+		for (var i = 0; i < children.length; i++) {
+			var submenu = this.renderMainMenu(children[i], url + '/' + children[i].name, (level || 0) + 1),
+			    subclass = (!level && submenu.firstElementChild) ? 'dropdown' : null,
+			    linkclass = (!level && submenu.firstElementChild) ? 'menu' : null,
+			    linkurl = submenu.firstElementChild ? '#' : L.url(url, children[i].name);
+
+			var li = E('li', { 'class': subclass }, [
+				E('a', { 'class': linkclass, 'href': linkurl }, [ _(children[i].title) ]),
+				submenu
+			]);
+
+			ul.appendChild(li);
+		}
+
+		ul.style.display = '';
+
+		return ul;
+	},
+
+	renderModeMenu: function(tree) {
+		var ul = document.querySelector('#modemenu'),
+		    children = ui.menu.getChildren(tree);
+
+		for (var i = 0; i < children.length; i++) {
+			var isActive = (L.env.requestpath.length ? children[i].name == L.env.requestpath[0] : i == 0);
+
+			ul.appendChild(E('li', { 'class': isActive ? 'active' : null }, [
+				E('a', { 'href': L.url(children[i].name) }, [ _(children[i].title) ])
+			]));
+
+			if (isActive)
+				this.renderMainMenu(children[i], children[i].name);
+		}
+
+		if (ul.children.length > 1)
+			ul.style.display = '';
+	},
+
+	renderBurger: function() {
+		var header = document.querySelector('header'),
+		    topmenu = document.querySelector('#topmenu');
+
+		if (!header || !topmenu || header.querySelector('.p21-burger'))
+			return;
+
+		var narrow = window.matchMedia('(max-width: 720px)');
+
+		var btn = E('button', {
+			'class': 'p21-burger',
+			'type': 'button',
+			'aria-controls': 'topmenu',
+			'aria-expanded': 'false',
+			'click': function(ev) {
+				var open = !header.classList.contains('p21-open');
+				header.classList.toggle('p21-open', open);
+				btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+				ev.stopPropagation();
+			}
+		}, [ _('Menu') ]);
+
+		header.insertBefore(btn, header.firstChild);
+
+		/* accordion submenus: on narrow screens a tap toggles instead of navigating to '#' */
+		topmenu.addEventListener('click', function(ev) {
+			var a = ev.target.closest('a.menu');
+
+			if (!a || !narrow.matches)
+				return;
+
+			ev.preventDefault();
+
+			var li = a.parentNode,
+			    open = !li.classList.contains('p21-sub-open');
+
+			topmenu.querySelectorAll('li.p21-sub-open').forEach(function(o) {
+				o.classList.remove('p21-sub-open');
+				o.firstElementChild.setAttribute('aria-expanded', 'false');
+			});
+
+			li.classList.toggle('p21-sub-open', open);
+			a.setAttribute('aria-expanded', open ? 'true' : 'false');
+		});
+
+		topmenu.querySelectorAll('a.menu').forEach(function(a) {
+			a.setAttribute('aria-haspopup', 'true');
+			a.setAttribute('aria-expanded', 'false');
+		});
+
+		document.addEventListener('keydown', function(ev) {
+			if (ev.key == 'Escape' && header.classList.contains('p21-open')) {
+				header.classList.remove('p21-open');
+				btn.setAttribute('aria-expanded', 'false');
+				btn.focus();
+			}
+		});
+	}
+});

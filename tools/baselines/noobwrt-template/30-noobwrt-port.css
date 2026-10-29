@@ -1,0 +1,95 @@
+/* ==========================================================================
+ * NoobWRT port layer (tools/baselines/noobwrt-template/30-noobwrt-port.css):
+ * NoobWRT's own frame on 21.02, then the theme-independent 21.02 fixes.
+ * Dark mode: html[data-darkmode="true"] (set before the first paint by the header).
+ * ========================================================================== */
+
+:root {
+	--p21-bg: #f4f5f7;
+	--p21-card: #fff;
+	--p21-ink: #32325d;
+	--p21-dim: #525f7f;
+	--p21-rule: #dee2e6;
+	--p21-hover: #f0f2fb;
+	--p21-accent: var(--primary);
+	--p21-accent2: #4b5fd6;
+	--p21-on: #fff;
+	--p21-head: #fff;
+}
+
+html[data-darkmode="true"] {
+	--p21-bg: #1e1e1e;
+	--p21-card: #252526;
+	--p21-ink: #cccccc;
+	--p21-dim: #a8a8a8;
+	--p21-rule: #3c3c3c;
+	--p21-hover: #2d2d30;
+	--p21-accent: #7c8ff5;
+	--p21-accent2: #97a6f7;
+	--p21-on: #111;
+	--p21-head: #252526;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0s !important;
+		transition-delay: 0s !important;
+		animation-duration: 0s !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* The login picture is not shipped (origin unknown): a sky in the picture's colours instead */
+.login-page .main-bg {
+	background: radial-gradient(ellipse at 22% 78%, rgba(255, 255, 255, .55) 0, rgba(255, 255, 255, 0) 42%),
+		radial-gradient(ellipse at 78% 30%, rgba(122, 140, 245, .55) 0, rgba(122, 140, 245, 0) 55%),
+		radial-gradient(ellipse at 95% 95%, rgba(244, 143, 177, .45) 0, rgba(244, 143, 177, 0) 40%),
+		linear-gradient(160deg, #3cb6cf 0%, #6fc9dc 38%, #a7dbe8 70%, #e9c9d6 100%);
+}
+html[data-darkmode="true"] .login-page .main-bg {
+	background: radial-gradient(ellipse at 78% 30%, rgba(94, 114, 228, .35) 0, rgba(94, 114, 228, 0) 55%),
+		radial-gradient(ellipse at 15% 85%, rgba(60, 182, 207, .25) 0, rgba(60, 182, 207, 0) 45%),
+		linear-gradient(160deg, #0f1b2d 0%, #16233a 50%, #241a33 100%);
+}
+
+/* NoobWRT's base clips #view (overflow:hidden, for its rounded corners). LuCI sizes a list
+   to the scroll container further out, so #view would cut the bottom off Save & Apply's
+   list, and focusing a hovered item would scroll #view itself */
+#view { overflow: visible; }
+
+/* The toolbar floats over the right edge of the page and covered the last column of wide
+   tables (a port forward's Delete button could not be clicked). Room is kept for it: its
+   width while shown, its pull tab while hidden. On phones it starts hidden (toolbar.htm). */
+body.logged-in .main-right > #maincontent { padding-right: 76px; }
+body.logged-in.toolbar-hidden .main-right > #maincontent { padding-right: 24px; }
+@media (max-width: 768px) {
+	body.logged-in .main-right > #maincontent { padding-right: 64px; }
+	body.logged-in.toolbar-hidden .main-right > #maincontent { padding-right: 22px; }
+}
+/* As NoobWRT's own screenshots show it (its 1.1.7 code still draws the bar): no header band,
+   the sidebar carries the logo; on phones a floating button opens the sidebar instead of the
+   header's hamburger, and the cards use the full width */
+body.logged-in .main-right > header { display: none; }
+body.logged-in .main-right > #maincontent { padding-top: 15px; }
+.noob-menu-fab { display: none; }
+@media (max-width: 768px) {
+	.noob-menu-fab {
+		display: flex; align-items: center; justify-content: center;
+		position: fixed; right: 16px; bottom: 16px; z-index: 1000;
+		width: 46px; height: 46px; padding: 0; border-radius: 12px; cursor: pointer;
+		color: var(--primary); background: rgba(255, 255, 255, .95);
+		border: 1px solid rgba(0, 0, 0, .85); box-shadow: 0 4px 14px rgba(0, 0, 0, .15);
+	}
+	.noob-menu-fab svg { width: 22px; height: 22px; }
+	html[data-darkmode="true"] .noob-menu-fab {
+		color: #a49cf0; background: rgba(20, 20, 25, .98); border-color: rgba(255, 255, 255, .85);
+	}
+	body.logged-in.toolbar-hidden .main-right > #maincontent { padding-right: 0; }
+}
+
+/* hidden toolbar: the panel slid off-screen is also hidden from focus and screen readers
+   (after the slide); a hover peek or the tab shows it again */
+.toolbar-wrapper.hidden:not(.peek) .toolbar-container { visibility: hidden; transition: visibility 0s .35s; }

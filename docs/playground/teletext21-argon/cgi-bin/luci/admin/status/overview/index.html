@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-darkmode="true">
+
+<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"teletext21-argon"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+	<meta charset="utf-8">
+	<title>
+		OpenWrt - Overview
+		- LuCI</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="full-screen" content="yes">
+	<meta name="x5-page-mode" content="app">
+	<meta name="browsermode" content="application">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="application-name" content="OpenWrt - LuCI">
+	<meta name="apple-mobile-web-app-title" content="OpenWrt - LuCI">
+	<link rel="apple-touch-icon" sizes="144x144" href="/openwrt-21.02-themes/playground/luci-static/teletext21-argon/icon/apple-icon-144x144.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/openwrt-21.02-themes/playground/luci-static/teletext21-argon/icon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/openwrt-21.02-themes/playground/luci-static/teletext21-argon/icon/favicon-32x32.png">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="theme-color" content="#000000">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/teletext21-argon/css/cascade.css?v=1.0.4-1">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/teletext21-argon/css/theme.css?v=1.0.4-1">
+	<link rel="shortcut icon" href="/openwrt-21.02-themes/playground/luci-static/teletext21-argon/favicon.png">
+	<script src="/openwrt-21.02-themes/playground/translations-en.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/teletext21-argon/js/jquery.min.js?v=3.5.1"></script>
+</head>
+
+<body
+	class="lang_en Overview logged-in"
+	data-page="admin-status-overview">
+
+	<div class="main">
+		<div class="main-left" id="mainmenu" style="display:none">
+			<div class="sidenav-header d-flex align-items-center">
+				<a class="brand" href="#">OpenWrt</a>
+				<div class="ml-auto">
+					<!-- Sidenav toggler -->
+					<div class="sidenav-toggler d-none d-xl-block active" data-action="sidenav-unpin"
+						data-target="#sidenav-main">
+						<div class="sidenav-toggler-inner">
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-right">
+			<header class="bg-primary">
+				<div class="fill">
+					<div class="container">
+						<div class="flex1">
+							<a class="showSide"></a>
+							<a class="brand" href="#">OpenWrt</a>
+						</div>
+						<div class="status" id="indicators"></div>
+					</div>
+				</div>
+			</header>
+			<div class="darkMask"></div>
+			<div id="maincontent">
+				<div class="container"><noscript>
+						<div class="alert-message error">
+							<h4>JavaScript required!</h4>
+							<p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+						</div>
+					</noscript>
+
+					<div id="tabmenu" style="display:none"></div>
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/teletext21-argon","documentroot":"\/www","pathinfo":"\/admin\/status\/overview","apply_display":1.5,"requestpath":["admin","status","overview"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/teletext21-argon\/cgi-bin\/luci","dispatchpath":["admin","status","overview"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"template","path":"admin_status\/index"},"order":1,"readonly":false,"depends":{"acl":["luci-mod-status-index"]},"title":"Overview"},"pollinterval":5});
+</script>
+
+
+<h2 name="content">Status</h2>
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+</div>
+
+<script type="text/javascript">//<![CDATA[
+function progressbar(query, value, max, byte)
+{
+	var pg = document.querySelector(query),
+	    vn = parseInt(value) || 0,
+	    mn = parseInt(max) || 100,
+	    fv = byte ? String.format('%1024.2mB', value) : value,
+	    fm = byte ? String.format('%1024.2mB', max) : max,
+	    pc = Math.floor((100 / mn) * vn);
+
+	if (pg) {
+		pg.firstElementChild.style.width = pc + '%';
+		pg.setAttribute('title', '%s / %s (%d%%)'.format(fv, fm, pc));
+	}
+}
+
+function renderBox(title, active, childs) {
+	childs = childs || [];
+	childs.unshift(L.itemlist(E('span'), [].slice.call(arguments, 3)));
+
+	return E('div', { class: 'ifacebox' }, [
+		E('div', { class: 'ifacebox-head center ' + (active ? 'active' : '') },
+			E('strong', title)),
+		E('div', { class: 'ifacebox-body left' }, childs)
+	]);
+}
+
+function renderBadge(icon, title) {
+	return E('span', { class: 'ifacebadge' }, [
+		E('img', { src: icon, title: title || '' }),
+		L.itemlist(E('span'), [].slice.call(arguments, 2))
+	]);
+}
+
+//]]></script>
+
+<div class="includes" style="display:none"></div>
+
+<script type="text/javascript">
+	L.require('ui').then(function(ui) {
+		ui.instantiateView('status/index');
+	});
+</script>
+
+
+</div>
+<footer class="mobile-hide">
+	<div>
+		<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank">Powered by LuCI openwrt-21.02 branch (git-23.093.57360-e98243e)</a> /
+						<a href="https://github.com/jerrykuku/luci-theme-argon" target="_blank">Teletext on ArgonTheme 2.3.1 (21.02 port)</a> /
+						OpenWrt 21.02.7 r16847-f8282da11e
+		<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+	</div>
+</footer>
+</div>
+</div>
+<script>
+	// thanks for Jo-Philipp Wich <jow@openwrt.org>
+	var luciLocation = ["admin","status","overview"];
+	var winHeight = $(window).height();
+	$(window).resize(function () {
+		var winWidth = $(window).width()
+		if(winWidth < 600){
+			var newHeight = $(this).height();
+			var keyboradHeight = newHeight - winHeight;
+			$(".ftc").css("bottom", keyboradHeight + 30);
+		}
+	})
+</script>
+<script type="text/javascript">L.require('menu-teletext21-argon')</script>
+<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

@@ -1,0 +1,221 @@
+/* luci-theme-noobwrt 1.1.7 toolbar.ut styles (nooblk-98, Apache-2.0), moved out of the template */
+/* ── Toolbar wrapper: sits at right edge, vertically centred ── */
+.toolbar-wrapper {
+	position: fixed;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 999;
+	display: flex;
+	align-items: center;
+	transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hidden state: slide panel off-screen, leaving only the tab visible */
+.toolbar-wrapper.hidden {
+	transform: translateY(-50%) translateX(calc(100% - 20px));
+}
+
+/* Peek state: hover while hidden — slide panel fully in temporarily */
+.toolbar-wrapper.peek {
+	transform: translateY(-50%) translateX(0);
+}
+
+/* ── Pull tab (the ‹ / › chevron strip) ── */
+.toolbar-pull-tab {
+	width: 20px;
+	min-width: 20px;
+	height: 52px;
+	background: rgba(255, 255, 255, 0.95);
+	border: 1px solid rgba(0, 0, 0, 0.85);
+	border-right: none;
+	border-radius: 8px 0 0 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	flex-shrink: 0;
+	overflow: visible;
+	transition: background 0.2s ease, width 0.2s ease;
+	box-shadow: -2px 0 8px rgba(0, 0, 0, 0.12);
+	padding: 0;
+}
+
+.toolbar-pull-tab:hover {
+	background: color-mix(in srgb, var(--primary) 15%, white);
+}
+
+body.dark-theme .toolbar-pull-tab {
+	background: rgba(20, 20, 25, 0.98);
+	border-color: rgba(255, 255, 255, 0.85);
+	box-shadow: -2px 0 10px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-theme .toolbar-pull-tab:hover {
+	background: color-mix(in srgb, var(--dark-primary) 25%, rgba(20, 20, 25, 0.98));
+}
+
+.toolbar-pull-tab svg {
+	width: 12px;
+	height: 12px;
+	stroke: var(--primary);
+	flex-shrink: 0;
+	display: block;
+	transition: transform 0.35s ease, stroke 0.2s ease;
+}
+
+body.dark-theme .toolbar-pull-tab svg {
+	stroke: var(--dark-primary);
+}
+
+/* Hidden → chevron points right (›): rotate 180° */
+.toolbar-wrapper.hidden .toolbar-pull-tab svg {
+	transform: rotate(180deg);
+}
+
+/* ── Main toolbar panel ── */
+.toolbar-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	background: rgba(255, 255, 255, 0.95);
+	padding: 8px;
+	border-radius: 12px 0 0 12px;
+	border: 1px solid rgba(0, 0, 0, 0.85);
+	border-right: none;
+	box-shadow: -2px 0 12px rgba(0, 0, 0, 0.1);
+	transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-theme .toolbar-container {
+	background: rgba(20, 20, 25, 0.98);
+	border-color: rgba(255, 255, 255, 0.85);
+	box-shadow: -2px 0 16px rgba(0, 0, 0, 0.7);
+}
+
+.toolbar-fab {
+	display: none;
+}
+
+.toolbar-menu {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: center;
+}
+
+.toolbar-item {
+	width: 40px;
+	height: 40px;
+	border-radius: 8px;
+	background: transparent;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+	text-decoration: none;
+	padding: 0;
+	overflow: hidden;
+	position: relative;
+}
+
+.toolbar-item img {
+	width: 24px;
+	height: 24px;
+	object-fit: contain;
+	filter: opacity(0.7);
+	transition: filter 0.2s ease;
+}
+
+body.dark-theme .toolbar-item img {
+	filter: opacity(0.8) invert(1);
+}
+
+.toolbar-item:hover {
+	background: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+body.dark-theme .toolbar-item:hover {
+	background: color-mix(in srgb, var(--dark-primary) 30%, transparent);
+}
+
+.toolbar-item:hover img {
+	filter: opacity(1);
+}
+
+body.dark-theme .toolbar-item:hover img {
+	filter: opacity(1) invert(1);
+}
+
+.toolbar-item:active {
+	transform: scale(0.95);
+}
+
+/* Tooltip — appears to the left since panel is on the right edge */
+.toolbar-item:hover::after {
+	content: attr(title);
+	position: absolute;
+	right: 46px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: rgba(0, 0, 0, 0.8);
+	color: white;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-size: 11px;
+	white-space: nowrap;
+	pointer-events: none;
+	z-index: 1000;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+	background: color-mix(in srgb, var(--primary) 15%, transparent);
+	border-radius: 8px;
+	margin-bottom: 4px;
+	transition: background 0.3s ease;
+}
+
+body.dark-theme .theme-toggle {
+	background: color-mix(in srgb, var(--dark-primary) 35%, transparent);
+}
+
+.theme-toggle svg {
+	width: 20px;
+	height: 20px;
+	stroke: var(--primary);
+	transition: transform 0.3s ease, stroke 0.3s ease;
+}
+
+body.dark-theme .theme-toggle svg {
+	stroke: var(--dark-primary);
+}
+
+.theme-toggle:hover svg {
+	transform: rotate(20deg);
+}
+
+@media (max-width: 768px) {
+	.toolbar-container {
+		padding: 6px;
+		gap: 2px;
+	}
+
+	.toolbar-item {
+		width: 36px;
+		height: 36px;
+	}
+
+	.toolbar-item img {
+		width: 20px;
+		height: 20px;
+	}
+
+	.toolbar-pull-tab {
+		height: 40px;
+	}
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-darkmode="true">
+<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"alpha21"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09c">
+
+<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/alpha21/css/cascade.css?v=1.0.4-1">
+
+<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/alpha21/css/theme.css?v=1.0.4-1">
+<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/alpha21/favicon.png">
+<script src="/openwrt-21.02-themes/playground/translations-en.js"></script>
+<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js"></script>
+<title>OpenWrt - Overview - LuCI</title>
+</head>
+
+<body class="lang_en logged-in node-admin-status-overview" data-page="admin-status-overview">
+<header>
+	<div class="fill">
+		<div class="container">
+		<a id="logo" href="/openwrt-21.02-themes/playground/alpha21/cgi-bin/luci/admin/status/overview">
+			<img src="/openwrt-21.02-themes/playground/luci-static/alpha21/brand.png" alt="OpenWrt">
+		</a>
+		<div class="status" id="indicators"></div>
+		<div class="logout">
+			<a href="/openwrt-21.02-themes/playground/alpha21/cgi-bin/luci/admin/logout" data-title="Logout">Logout</a>
+		</div>
+		<div class="showSide" role="button" tabindex="0" aria-label="Menu">
+			<img src="/openwrt-21.02-themes/playground/luci-static/alpha21/gaya/icon/menu_icon.svg" alt="">
+		</div>
+		</div>
+	</div>
+</header>
+<div class="main">
+	<div class="loading"><span><div class="loading-img"></div></span></div>
+	<div class="main-left" id="mainmenu" style="display:none"></div>
+	<div class="main-right">
+		<div class="modemenu-buttons" style="display:none">
+			<ul id="modemenu"></ul>
+		</div>
+		<div class="darkMask"></div>
+		<div id="maincontent">
+			<div class="container"><noscript>
+					<div class="alert-message warning">
+						<h4>JavaScript required!</h4>
+						<p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+					</div>
+				</noscript>
+				<div id="tabmenu" style="display:none"></div>
+
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/alpha21","documentroot":"\/www","pathinfo":"\/admin\/status\/overview","apply_display":1.5,"requestpath":["admin","status","overview"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/alpha21\/cgi-bin\/luci","dispatchpath":["admin","status","overview"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"template","path":"admin_status\/index"},"order":1,"readonly":false,"depends":{"acl":["luci-mod-status-index"]},"title":"Overview"},"pollinterval":5});
+</script>
+
+
+<h2 name="content">Status</h2>
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+</div>
+
+<script type="text/javascript">//<![CDATA[
+function progressbar(query, value, max, byte)
+{
+	var pg = document.querySelector(query),
+	    vn = parseInt(value) || 0,
+	    mn = parseInt(max) || 100,
+	    fv = byte ? String.format('%1024.2mB', value) : value,
+	    fm = byte ? String.format('%1024.2mB', max) : max,
+	    pc = Math.floor((100 / mn) * vn);
+
+	if (pg) {
+		pg.firstElementChild.style.width = pc + '%';
+		pg.setAttribute('title', '%s / %s (%d%%)'.format(fv, fm, pc));
+	}
+}
+
+function renderBox(title, active, childs) {
+	childs = childs || [];
+	childs.unshift(L.itemlist(E('span'), [].slice.call(arguments, 3)));
+
+	return E('div', { class: 'ifacebox' }, [
+		E('div', { class: 'ifacebox-head center ' + (active ? 'active' : '') },
+			E('strong', title)),
+		E('div', { class: 'ifacebox-body left' }, childs)
+	]);
+}
+
+function renderBadge(icon, title) {
+	return E('span', { class: 'ifacebadge' }, [
+		E('img', { src: icon, title: title || '' }),
+		L.itemlist(E('span'), [].slice.call(arguments, 2))
+	]);
+}
+
+//]]></script>
+
+<div class="includes" style="display:none"></div>
+
+<script type="text/javascript">
+	L.require('ui').then(function(ui) {
+		ui.instantiateView('status/index');
+	});
+</script>
+
+
+
+			</div>
+			<footer class="mobile">
+				<a href="https://github.com/derisamedia/luci-theme-alpha" target="_blank" rel="noreferrer"> OpenWrt 21.02.7 r16847-f8282da11e | Alpha OS Theme 3.9.7 (21.02 port)</a>
+			</footer>
+		</div>
+	</div>
+</div>
+<script>L.require('menu-alpha21')</script>
+<script src="/openwrt-21.02-themes/playground/luci-static/alpha21/custom-entry.js?v=1.0.4-1" defer></script>
+
+<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

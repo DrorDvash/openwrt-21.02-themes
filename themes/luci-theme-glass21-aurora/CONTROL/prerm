@@ -1,0 +1,15 @@
+#!/bin/sh
+# Unregister the theme; if it is the active one, fall back to bootstrap.
+# On "prerm upgrade <newversion>" keep registration and the user's choice:
+# the new version's files replace ours and its postinst re-registers.
+[ -n "${IPKG_INSTROOT}" ] && exit 0
+[ "$1" = "upgrade" ] && exit 0
+uci -q delete luci.themes.Glass21_aurora
+case "$(uci -q get luci.main.mediaurlbase)" in
+	/luci-static/glass21-aurora|/luci-static/glass21-aurora/)
+		uci set luci.main.mediaurlbase=/luci-static/bootstrap
+		;;
+esac
+uci commit luci
+rm -rf /tmp/luci-*
+exit 0

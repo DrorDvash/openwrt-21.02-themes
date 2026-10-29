@@ -1,0 +1,6 @@
+
+/* Sumi-e on Argon: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+.cbi-dropdown label { color: #6f6f6f !important; } /* was #808080: 3.62 -> 4.61:1 */
+/* AUTO-CONTRAST END */

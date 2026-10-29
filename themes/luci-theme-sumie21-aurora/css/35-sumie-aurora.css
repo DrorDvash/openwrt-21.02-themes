@@ -1,0 +1,16 @@
+
+/* Sumi-e on Aurora: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#wifi_assoclist_table th { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+.cbi-section th { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+.cbi-section th.cbi-section-actions { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+.cbi-section th.hide-xs { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+.cbi-section-table-titles th.cbi-section-table-cell { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+.cbi-section-table-titles th.col-1.size { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+.cbi-section-table-titles th.col-10 { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+.cbi-section-table-titles th.col-2 { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+.cbi-section-table-titles th.col-2.version { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+.table th { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+th.hide-xs { color: #686359 !important; } /* was #6b665b: 4.42 -> 4.62:1 */
+/* AUTO-CONTRAST END */

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-darkmode="true">
+
+<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"login","theme":"terminal21-argon"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+	<meta charset="utf-8">
+	<title>
+		OpenWrt - Overview
+		- LuCI</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="full-screen" content="yes">
+	<meta name="x5-page-mode" content="app">
+	<meta name="browsermode" content="application">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="msapplication-TileColor" content="#020a04">
+	<meta name="application-name" content="OpenWrt - LuCI">
+	<meta name="apple-mobile-web-app-title" content="OpenWrt - LuCI">
+	<link rel="apple-touch-icon" sizes="144x144" href="/openwrt-21.02-themes/playground/luci-static/terminal21-argon/icon/apple-icon-144x144.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/openwrt-21.02-themes/playground/luci-static/terminal21-argon/icon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/openwrt-21.02-themes/playground/luci-static/terminal21-argon/icon/favicon-32x32.png">
+	<meta name="msapplication-TileColor" content="#020a04">
+	<meta name="theme-color" content="#020a04">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/terminal21-argon/css/cascade.css?v=1.0.4-1">
+	<style title="text/css">
+		
+			
+		</style>
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/terminal21-argon/css/theme.css?v=1.0.4-1">
+	<link rel="shortcut icon" href="/openwrt-21.02-themes/playground/luci-static/terminal21-argon/favicon.png">
+	<script src="/openwrt-21.02-themes/playground/luci-static/terminal21-argon/js/jquery.min.js?v=3.5.1"></script>
+
+</head>
+
+<body>
+
+
+
+<!-- Login Page Start -->
+<div class="login-page">
+	
+	<!-- Image Background Start -->
+	<div class="main-bg" id="main-bg"></div>
+	<!-- Image Background End -->
+	
+	<!-- Login Container Start -->
+	<div class="login-container">
+		<div class="login-form">
+			<!-- Logo Start -->
+			<a class="brand" href="/"><img src="/openwrt-21.02-themes/playground/luci-static/terminal21-argon/logo.svg" class="icon">
+				<span class="brand-text">OpenWrt</span>
+			</a>
+			<!-- Logo End -->
+			<!-- Login Form Start -->
+			<form class="form-login" method="post" action="/openwrt-21.02-themes/playground/terminal21-argon/cgi-bin/luci/"><div class="input-container">
+					<div class="input-group user-icon">
+						<input class="cbi-input-user" id="cbi-input-user" type="text" name="luci_username" value="root" />
+						<label class="border" for="cbi-input-user"></label>
+					</div>
+					<div class="input-group pass-icon">
+						<input class="cbi-input-password" id="cbi-input-password" type="password" name="luci_password" />
+						<label class="border" for="cbi-input-password"></label>
+					</div>
+				</div>
+				<div>
+					<input type="submit" value="Login" class="cbi-button cbi-button-apply" />
+				</div>
+			</form>
+			<!-- Login Form End -->
+			<script type="text/javascript">//<![CDATA[
+				var input = document.getElementsByName('luci_password')[0];
+				if (input)
+					input.focus();
+			//]]></script>
+
+</div>
+<footer>
+	<div>
+		<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank">Powered by LuCI openwrt-21.02 branch (git-23.093.57360-e98243e)</a> /
+						<a href="https://github.com/jerrykuku/luci-theme-argon" target="_blank">Terminal on ArgonTheme 2.3.1 (21.02 port)</a> /
+						OpenWrt 21.02.7 r16847-f8282da11e
+	</div>
+</footer>
+</div>
+</div>
+<script>
+	// thanks for Jo-Philipp Wich <jow@openwrt.org>
+	var luciLocation = [];
+	var winHeight = $(window).height();
+	$(window).resize(function () {
+		var winWidth = $(window).width()
+		if(winWidth < 600){
+			var newHeight = $(this).height();
+			var keyboradHeight = newHeight - winHeight;
+			$(".ftc").css("bottom", keyboradHeight + 30);
+		}
+	})
+</script>
+<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+

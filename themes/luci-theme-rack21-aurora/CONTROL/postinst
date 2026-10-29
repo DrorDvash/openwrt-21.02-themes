@@ -1,0 +1,7 @@
+#!/bin/sh
+# Register the theme only; never touch luci.main.mediaurlbase.
+[ -n "${IPKG_INSTROOT}" ] && exit 0
+uci set luci.themes.Rack21_aurora=/luci-static/rack21-aurora
+uci commit luci
+rm -rf /tmp/luci-*
+exit 0

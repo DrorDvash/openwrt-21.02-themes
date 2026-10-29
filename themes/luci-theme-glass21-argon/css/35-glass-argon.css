@@ -1,0 +1,26 @@
+
+/* Glass on Argon: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#lease6_status_table th { color: #6683d8 !important; } /* was #3054bf: 2.51 -> 4.63:1 */
+#lease_status_table th { color: #6683d8 !important; } /* was #3054bf: 2.51 -> 4.63:1 */
+#wifi_assoclist_table th { color: #6481d8 !important; } /* was #3054bf: 2.57 -> 4.64:1 */
+#wifi_assoclist_table th.hide-xs { color: #5777d5 !important; } /* was #3054bf: 2.91 -> 4.64:1 */
+.cbi-section-table-titles th.cbi-section-table-cell { color: #94a9e4 !important; } /* was #3054bf: 1.62 -> 4.66:1 */
+.cbi-section-table-titles th.col-1.size { color: #5777d5 !important; } /* was #3054bf: 2.91 -> 4.64:1 */
+.cbi-section-table-titles th.col-10 { color: #5777d5 !important; } /* was #3054bf: 2.90 -> 4.61:1 */
+.cbi-section-table-titles th.col-2 { color: #5777d5 !important; } /* was #3054bf: 2.91 -> 4.64:1 */
+.cbi-section-table-titles th.col-2.version { color: #5777d5 !important; } /* was #3054bf: 2.91 -> 4.64:1 */
+.table th { color: #748edc !important; } /* was #3054bf: 2.22 -> 4.69:1 */
+.table.assoclist th { color: #6683d8 !important; } /* was #3054bf: 2.51 -> 4.63:1 */
+.table.assoclist th.hide-xs { color: #6683d8 !important; } /* was #3054bf: 2.51 -> 4.63:1 */
+.table.lases th { color: #6683d8 !important; } /* was #3054bf: 2.51 -> 4.63:1 */
+.table.lases th.cbi-section-actions { color: #6683d8 !important; } /* was #3054bf: 2.51 -> 4.63:1 */
+.table.leases6 th { color: #6683d8 !important; } /* was #3054bf: 2.51 -> 4.63:1 */
+.table.leases6 th.cbi-section-actions { color: #6683d8 !important; } /* was #3054bf: 2.51 -> 4.63:1 */
+a.food { color: #5979d5 !important; } /* was #3054bf: 2.84 -> 4.62:1 */
+a.menu { color: #5979d5 !important; } /* was #3054bf: 2.84 -> 4.62:1 */
+a.menu.active { color: #2c4eae !important; } /* was #5979d5: 2.53 -> 4.60:1 */
+footer a { color: #5979d5 !important; } /* was #3054bf: 2.84 -> 4.62:1 */
+footer a.luci-link { color: #5979d5 !important; } /* was #3054bf: 2.84 -> 4.62:1 */
+/* AUTO-CONTRAST END */

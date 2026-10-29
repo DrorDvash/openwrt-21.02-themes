@@ -1,0 +1,12 @@
+	<%# A theme with css/dark.css (Edge): the pages follow the browser's colour scheme until the top bar's button picks light or dark (saved in this browser). -%>
+	<link rel="stylesheet" id="p21-dark" href="<%=media%>/css/dark.css?v=@VERSION@" media="(prefers-color-scheme: dark)">
+	<script>
+	(function() {
+		var s; try { s = localStorage.getItem('@ID@.scheme'); } catch (e) {}
+		var mode = (s == 'light' || s == 'dark') ? s : 'auto', l = document.getElementById('p21-dark');
+		l.media = mode == 'dark' ? 'all' : (mode == 'light' ? 'not all' : '(prefers-color-scheme: dark)');
+		var dark = mode == 'dark' || (mode == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+		document.documentElement.setAttribute('data-darkmode', dark ? 'true' : 'false');
+		document.documentElement.setAttribute('data-scheme', mode);
+	})();
+	</script>

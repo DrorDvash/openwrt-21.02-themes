@@ -1,0 +1,13 @@
+Package: luci-theme-uniwrt21
+Version: 1.0.4-1
+Depends: luci-base
+Source: https://github.com/ox1d3x3/uniwrt-luci
+License: Apache-2.0
+Section: luci
+Maintainer: Dror Dvash <DrorDvash@users.noreply.github.com>
+Architecture: all
+Installed-Size: 0
+Description: UniWRT (21.02 port) - network-controller style theme.
+ Port of uniwrt-luci 2.0.38 (ox1d3x3, Apache-2.0) to OpenWrt 21.02 Lua templates:
+ icon rail, live status chips, light/dark/auto. Registers luci.themes.UniWRT21;
+ it does not change the active theme.

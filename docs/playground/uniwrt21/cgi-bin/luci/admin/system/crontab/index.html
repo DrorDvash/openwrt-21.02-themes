@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-rail="expanded" data-uniwrt-overview="0">
+<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"uniwrt21"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" id="u-meta-color" content="#131416">
+  <title>OpenWrt - Scheduled Tasks - LuCI</title>
+  <link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/uniwrt21/img/uniwrt-logo.svg?v=1.0.4-1" type="image/svg+xml">
+  <link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/uniwrt21/css/cascade.css?v=1.0.4-1">
+  <link rel="stylesheet" id="u-dark" href="/openwrt-21.02-themes/playground/luci-static/uniwrt21/css/dark.css?v=1.0.4-1" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/uniwrt21/css/theme.css?v=1.0.4-1">
+  <script>
+  /* Resolve theme before paint to avoid a flash: the choice stored by the top bar's
+     button, otherwise auto (the browser's colour scheme). */
+  (function(){
+    var s; try{ s=localStorage.getItem('uniwrt21-theme'); }catch(e){}
+    var mode=(s==='light'||s==='dark')?s:'auto';
+    var d=document.getElementById('u-dark');
+    var m=document.getElementById('u-meta-color');
+    function isDark(){ return mode==='dark'||(mode==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches); }
+    if(d){ d.media = mode==='dark' ? 'all' : (mode==='light' ? 'not all' : '(prefers-color-scheme: dark)'); }
+    document.documentElement.dataset.theme=mode;
+    document.documentElement.dataset.darkmode=isDark()?'true':'false';   /* the shared 21.02 layer's dark marker */
+    if(m) m.content=isDark()?'#131416':'#ffffff';
+    /* restore the persisted rail state BEFORE first paint too, so a locally
+       collapsed rail doesn't flash expanded and shift the layout on load */
+    try{ var r=localStorage.getItem('uniwrt21-rail');
+         if(r==='collapsed'||r==='expanded') document.documentElement.setAttribute('data-rail', r); }catch(e){}
+  })();
+  </script>
+  
+  
+  <script src="/openwrt-21.02-themes/playground/translations-en.js"></script>
+  <script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js"></script>
+</head>
+<body class="lang_en" data-page="admin-system-crontab">
+
+
+<a class="u-skip" href="#maincontent">Skip to main content</a>
+<div class="u-scrim" id="u-scrim"></div>
+
+<aside class="u-rail" id="u-rail">
+  <div class="u-rail-head">
+    <a class="u-brand" href="/openwrt-21.02-themes/playground/uniwrt21/cgi-bin/luci/admin">
+      <img class="u-brand-mark" src="/openwrt-21.02-themes/playground/luci-static/uniwrt21/img/uniwrt-logo.svg?v=1.0.4-1" alt="">
+      <span class="u-brand-text">
+        <span class="u-brand-name">UniWRT</span>
+        <span class="u-brand-host">OpenWrt</span>
+      </span>
+    </a>
+    <button class="u-rail-pin" id="u-rail-pin" type="button" title="Collapse menu" aria-label="Collapse menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+  </div>
+
+  <div class="u-rail-modes" id="u-rail-modes"></div>
+  <nav class="u-rail-nav" id="u-rail-nav"></nav>
+</aside>
+
+<header class="u-top" id="u-top">
+  <button class="u-burger" id="u-burger" type="button" aria-label="Toggle menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+
+  <div class="u-top-title" id="u-top-title"></div>
+
+  <div class="u-top-spacer"></div>
+
+  <div class="u-stats" id="u-stats"></div>
+
+  <div class="u-indicators" id="indicators"></div>
+
+  <button class="u-iconbtn u-theme-toggle" id="u-theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+    <svg class="u-ico-auto"  viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7.25"/><path d="M9 1.75A7.25 7.25 0 019 16.25Z" fill="currentColor" stroke="none"/></svg>
+    <svg class="u-ico-light" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3.4"/><line x1="9" y1="1" x2="9" y2="3"/><line x1="9" y1="15" x2="9" y2="17"/><line x1="2.9" y1="2.9" x2="4.3" y2="4.3"/><line x1="13.7" y1="13.7" x2="15.1" y2="15.1"/><line x1="1" y1="9" x2="3" y2="9"/><line x1="15" y1="9" x2="17" y2="9"/><line x1="2.9" y1="15.1" x2="4.3" y2="13.7"/><line x1="13.7" y1="4.3" x2="15.1" y2="2.9"/></svg>
+    <svg class="u-ico-dark"  viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10A7 7 0 017 1.5 7.5 7.5 0 1015.5 10Z"/></svg>
+  </button>
+
+  <a class="u-iconbtn u-logout" id="u-logout" href="/openwrt-21.02-themes/playground/uniwrt21/cgi-bin/luci/admin/logout" title="Logout" aria-label="Logout">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+  </a>
+</header>
+
+<nav class="u-subnav" id="u-subnav"></nav>
+
+<main class="u-main" id="u-main">
+  <div class="u-content" id="content">
+    <div id="maincontent"><noscript>
+        <div class="alert-message warning">
+          <h4>JavaScript required!</h4>
+          <p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+        </div>
+      </noscript>
+
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/uniwrt21","documentroot":"\/www","pathinfo":"\/admin\/system\/crontab","apply_display":1.5,"requestpath":["admin","system","crontab"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/uniwrt21\/cgi-bin\/luci","dispatchpath":["admin","system","crontab"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"view","path":"system\/crontab"},"order":46,"readonly":false,"depends":{"acl":["luci-mod-system-cron"]},"title":"Scheduled Tasks"},"pollinterval":5});
+</script>
+
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+	<script type="text/javascript">
+		L.require('ui').then(function(ui) {
+			ui.instantiateView('system/crontab');
+		});
+	</script>
+</div>
+
+
+    </div>
+  </div>
+</main>
+
+<footer class="u-footer">
+  <a class="u-credit" href="https://github.com/ox1d3x3/uniwrt-luci" target="_blank" rel="noopener noreferrer">OX1d3x3 X UniWRT V2.0.38 (21.02 port)</a>
+</footer>
+
+<script src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js"></script>
+<script>
+  L.require('menu-uniwrt21');
+
+  if (history.scrollRestoration) history.scrollRestoration = 'manual';
+
+  /* ---- rail open/close (mobile) + collapse/pin (desktop) ---- */
+  (function(){
+    var rail   = document.getElementById('u-rail');
+    var scrim  = document.getElementById('u-scrim');
+    var burger = document.getElementById('u-burger');
+    var pin    = document.getElementById('u-rail-pin');
+    var html   = document.documentElement;
+
+    function openRail(){ if(rail){rail.classList.add('open');} if(scrim){scrim.classList.add('show');} }
+    function closeRail(){ if(rail){rail.classList.remove('open');} if(scrim){scrim.classList.remove('show');} }
+
+    if (burger) burger.addEventListener('click', function(){
+      rail && rail.classList.contains('open') ? closeRail() : openRail();
+    });
+    if (scrim) scrim.addEventListener('click', closeRail);
+
+    if (pin) {
+      var pinLabels = { collapsed: 'Expand menu', expanded: 'Collapse menu' };
+      function syncPinLabel(){
+        var t = pinLabels[html.getAttribute('data-rail') === 'collapsed' ? 'collapsed' : 'expanded'];
+        pin.title = t; pin.setAttribute('aria-label', t);
+      }
+      function setRail(state){
+        html.setAttribute('data-rail', state);
+        try { localStorage.setItem('uniwrt21-rail', state); } catch(e){}
+        syncPinLabel();
+      }
+      syncPinLabel();
+      pin.addEventListener('click', function(){
+        setRail(html.getAttribute('data-rail') === 'collapsed' ? 'expanded' : 'collapsed');
+      });
+      /* Collapsed rail is one big expand control: clicking anything inside it
+         (logo or a category icon) re-expands the full menu instead of
+         navigating. Desktop only — on mobile the rail is an off-canvas
+         overlay driven by the burger. */
+      if (rail) rail.addEventListener('click', function(ev){
+        if (html.getAttribute('data-rail') !== 'collapsed') return;
+        if (!window.matchMedia('(min-width: 921px)').matches) return;
+        /* a category icon: expand AND follow the link, so the page loads with
+           that category's sub-options in the open sidebar */
+        var tab = ev.target && ev.target.closest && ev.target.closest('.u-mode-tab');
+        if (tab) { setRail('expanded'); return; }
+        /* logo / arrow / empty rail: just expand */
+        ev.preventDefault();
+        ev.stopPropagation();
+        setRail('expanded');
+      }, true);
+    }
+  })();
+
+  /* ---- theme toggle: auto -> light -> dark ---- */
+  (function(){
+    var btn = document.getElementById('u-theme-toggle');
+    if (!btn) return;
+    var order = ['auto','light','dark'];
+    var labels = { auto:'Theme: Auto', light:'Theme: Light', dark:'Theme: Dark' };
+    function apply(mode){
+      var d = document.getElementById('u-dark');
+      var m = document.getElementById('u-meta-color');
+      document.documentElement.dataset.theme = mode;
+      if (d) d.media = mode==='dark' ? 'all' : (mode==='light' ? 'not all' : '(prefers-color-scheme: dark)');
+      var dark = mode==='dark' || (mode==='auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.dataset.darkmode = dark ? 'true' : 'false';
+      if (m) m.content = dark ? '#131416' : '#ffffff';
+      btn.title = labels[mode]; btn.setAttribute('aria-label', labels[mode]);
+    }
+    apply(document.documentElement.dataset.theme || 'auto');
+    btn.addEventListener('click', function(){
+      var cur = document.documentElement.dataset.theme || 'auto';
+      var next = order[(order.indexOf(cur)+1) % 3];
+      try { localStorage.setItem('uniwrt21-theme', next); } catch(e){}
+      apply(next);
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
+      if ((document.documentElement.dataset.theme||'auto') !== 'auto') return;
+      var m = document.getElementById('u-meta-color');
+      document.documentElement.dataset.darkmode = e.matches ? 'true' : 'false';
+      if (m) m.content = e.matches ? '#131416' : '#ffffff';
+    });
+  })();
+</script>
+<script src="/openwrt-21.02-themes/playground/luci-static/uniwrt21/custom-entry.js?v=1.0.4-1" defer></script>
+
+
+<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

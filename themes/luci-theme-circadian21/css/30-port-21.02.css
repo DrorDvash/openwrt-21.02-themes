@@ -1,0 +1,267 @@
+
+/* ==========================================================================
+ * 21.02 port layer (theme-agnostic, shared by every *21 port)
+ * Adapts an upstream theme's override block (written for the 25.12 bootstrap
+ * DOM) to the OpenWrt 21.02 LuCI markup: phone hamburger menu, keyboard focus,
+ * readable dropdown lists, AA placeholders, phone layout fixes. Phone rules use
+ * viewport max-width (21.02 mobile.css is gated on max-device-width, which
+ * narrow desktop windows never match).
+ * Colours come from the theme's --t-* tokens when it has them, else from the
+ * bootstrap variables every theme overrides.
+ * ========================================================================== */
+
+:root,
+:root[data-darkmode="false"],
+:root[data-darkmode="true"] {
+	--p21-bg: var(--t-bg, var(--background-color-low));
+	--p21-card: var(--t-card, var(--background-color-high));
+	--p21-ink: var(--t-ink, var(--text-color-highest));
+	--p21-dim: var(--t-dim, var(--text-color-medium));
+	--p21-rule: var(--t-rule, var(--border-color-medium));
+	--p21-hover: var(--t-hover, var(--background-color-medium));
+	--p21-accent: var(--t-accent, var(--primary-color-high));
+	--p21-accent2: var(--t-accent2, var(--primary-color-low));
+}
+
+/* --- Header / main menu ------------------------------------------------------ */
+
+header { align-items: stretch; }
+
+header .brand { float: none; align-self: center; margin-left: 0; padding: 8px 16px 10px; font-weight: 700; }
+
+/* keyboard users can open submenus too */
+.dropdown:focus-within ul.dropdown-menu { left: 0; }
+
+.nav .dropdown-menu { top: 100%; }
+
+.p21-burger {
+	display: none;
+	align-self: center;
+	margin: 0 8px;
+	padding: 6px 10px;
+	min-height: 36px;
+	color: var(--p21-ink);
+	background: transparent;
+	border: 1px solid var(--p21-rule);
+	border-radius: 2px;
+	font-weight: 700;
+	font-size: 13px;
+	line-height: 1;
+	letter-spacing: .08em;
+	cursor: pointer;
+}
+
+.p21-burger::before {
+	content: "";
+	display: inline-block;
+	width: 14px;
+	height: 10px;
+	margin-right: 8px;
+	vertical-align: -1px;
+	background: linear-gradient(currentColor 0 0) 0 0 / 100% 2px no-repeat,
+		linear-gradient(currentColor 0 0) 0 4px / 100% 2px no-repeat,
+		linear-gradient(currentColor 0 0) 0 8px / 100% 2px no-repeat;
+}
+
+.p21-burger[aria-expanded="true"] { color: var(--p21-accent); border-color: var(--p21-accent); }
+
+/* --- Focus states ------------------------------------------------------------- */
+
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.cbi-button:focus-visible,
+.cbi-tabmenu a:focus-visible,
+.tabs a:focus-visible,
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+	outline: 2px solid var(--p21-accent2);
+	outline-offset: 2px;
+}
+
+/* --- 21.02 widgets that 25.12 override blocks do not cover ---------------------- */
+
+/* 21.02 keeps a tinted box behind inactive tabs (on the <li>), on which the
+   25.12 overrides' dim tab text drops below AA: use full ink for inactive tabs. */
+.tabs { border-bottom: 1px solid var(--p21-rule); }
+.tabs > li > a,
+.cbi-tabmenu > li > a { color: var(--p21-ink); }
+.tabs > li.active > a { color: var(--p21-accent); }
+
+/* 21.02 paints opened-list items with --primary-color-medium/-low (themes often
+   set those to two unrelated accents) and dark --on-primary-color text; use a
+   readable tint + accent bar instead. */
+.cbi-dropdown[open] > ul.dropdown > li[selected] {
+	background: var(--p21-hover);
+	background: color-mix(in srgb, var(--p21-accent) 16%, transparent);
+	color: var(--p21-ink);
+}
+
+.cbi-dropdown[open] > ul.dropdown > li.focus {
+	background: var(--p21-hover);
+	color: var(--p21-ink);
+	box-shadow: inset 3px 0 0 var(--p21-accent);
+}
+
+.cbi-dropdown[open] > ul.dropdown > li[selected].focus {
+	background: var(--p21-hover);
+	background: color-mix(in srgb, var(--p21-accent) 28%, transparent);
+	color: var(--p21-ink);
+	box-shadow: inset 3px 0 0 var(--p21-accent);
+}
+
+/* "+" button next to a dropdown's "-- custom --" input (added by the menu JS) */
+/* only while the list is open: closed dropdowns hide every non-selected row */
+.cbi-dropdown[open] > ul.dropdown > li.p21-create-li { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.cbi-dropdown[open] > ul.dropdown > li.p21-create-li > input.create-item-input { flex: 1 1 auto; min-width: 0; width: auto; }
+/* 21.02 shows a clone of the list (ul.preview) while open: hide our additions there */
+.cbi-dropdown:not([open]) .p21-create-add,
+.cbi-dropdown:not([open]) .p21-create-error,
+.cbi-dropdown > ul.preview .p21-create-add,
+.cbi-dropdown > ul.preview .p21-create-error { display: none; }
+.p21-create-add { flex: 0 0 auto; min-width: 36px; min-height: 32px; padding: 0 10px; font-weight: 700; line-height: 1; }
+.p21-create-error:not(:empty) {
+	flex: 1 0 100%;
+	padding: 4px 6px;
+	font-size: 12.5px;
+	white-space: normal;
+	color: var(--p21-err-ink, var(--t-err-ink, var(--error-color-high, #c00)));
+	border-left: 3px solid currentColor;
+}
+
+/* 25.12 bootstrap layout width (21.02 used 940px) */
+.container { max-width: 1180px; }
+
+header,
+footer {
+	padding-left: calc((100% - 1180px) / 2);
+	padding-right: calc((100% - 1180px) / 2);
+}
+
+.cbi-tooltip { background: var(--p21-card); color: var(--p21-ink); border: 1px solid var(--p21-rule); }
+
+/* 21.02 hard-codes #0069d6 for <var> values */
+div.cbi-value var,
+.td.cbi-value-field var { color: var(--p21-accent); }
+
+div.cbi-value var[data-tooltip],
+.td.cbi-value-field var[data-tooltip],
+div.cbi-value var.cbi-tooltip-container,
+.td.cbi-value-field var.cbi-tooltip-container { border-bottom-color: var(--p21-accent); }
+
+/* Placeholders ("any", "-- add MAC --", input hints) at AA: 21.02 uses
+   --text-color-low and 25.12 overrides often dim ::placeholder further. */
+.cbi-dropdown > .more { color: var(--p21-dim); }
+/* placeholders render as <em>: keep the field's own text colour, the italics mark them */
+.cbi-dropdown:not(.btn):not(.cbi-button) > ul > li[placeholder] { color: inherit; }
+::placeholder { color: var(--p21-dim); opacity: 1; }
+
+/* Zone badges and zone-coloured interface heads (21.02 only; 25.12 themes never style
+   them): light themes get the full pastel zone colour, dark themes a translucent tint
+   over their background, so pick the text colour per mode instead of the theme ink. */
+:root:not([data-darkmode="true"]) .zonebadge[style],
+:root:not([data-darkmode="true"]) .ifacebox-head[style] { color: #111; text-shadow: none; }
+:root[data-darkmode="true"] .zonebadge[style],
+:root[data-darkmode="true"] .ifacebox-head[style] { color: #fff; text-shadow: 0 1px 1px rgba(0, 0, 0, .6); }
+.zonebadge[style] > strong,
+.zonebadge[style] > em,
+.zonebadge[style] .cbi-tooltip-container > strong,
+.ifacebox-head[style] * { color: inherit; }
+.zonebadge-empty { color: var(--p21-ink); border-color: var(--p21-dim); }
+:root:not([data-darkmode="true"]) .ifacebox-head:not([style]) { color: #111; }
+
+/* Dark themes: 21.02 paints untinted interface box heads #eee and the realtime
+   graph views an inline white panel (their labels are fill:#eee with a dark
+   shadow, so they read best on a dark scope panel). */
+:root[data-darkmode="true"] .ifacebox-head:not([style]) { background-color: var(--p21-hover); color: var(--p21-ink); }
+
+:root[data-darkmode="true"] #view div[style*="border:1px solid #000;background:#fff"] {
+	background: var(--p21-bg) !important;
+	border-color: var(--p21-rule) !important;
+}
+
+:root[data-darkmode="true"] #view div[style*="border:1px solid #000;background:#fff"] svg line {
+	stroke: var(--p21-rule) !important;
+	stroke-width: 1px !important;
+}
+
+/* 25.12 override blocks kill motion with `*`, which does not match ::before/::after */
+@media (prefers-reduced-motion: reduce) {
+	*::before,
+	*::after { transition: none !important; animation: none !important; }
+}
+
+/* --- Phones and narrow windows ---------------------------------------------- */
+
+@media (max-width: 720px) {
+	.p21-burger { display: inline-block; }
+
+	/* 21.02 mobile.css clips every table cell (overflow: hidden), which cuts the device
+	   tooltip of the interface boxes (Network > Interfaces) when it opens */
+	.table .td:has(.cbi-tooltip-container) { overflow: visible; }
+
+	header { flex-wrap: wrap; padding-left: 0; padding-right: 0; }
+
+	header a.brand { display: block !important; flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px; }
+
+	header #topmenu { display: none !important; }
+
+	header.p21-open #topmenu {
+		display: block !important;
+		order: 10;
+		flex: 1 0 100%;
+		float: none;
+		margin: 0;
+		padding: 4px 0 8px;
+		border-top: 1px solid var(--p21-rule);
+		max-height: calc(100vh - 60px);
+		overflow-y: auto;
+	}
+
+	header.p21-open #topmenu > li { float: none; display: block; }
+
+	header.p21-open #topmenu > li > a { display: block; padding: 10px 16px; line-height: 20px; }
+
+	header.p21-open #topmenu .dropdown-menu {
+		position: static;
+		left: auto;
+		display: none;
+		float: none;
+		max-width: none;
+		min-width: 0;
+		margin: 0 0 4px 16px;
+		box-shadow: none;
+		border-width: 0 0 0 2px;
+		border-color: var(--p21-rule);
+		border-radius: 0;
+	}
+
+	header.p21-open #topmenu .dropdown-menu::before { display: none; }
+
+	header.p21-open #topmenu li.p21-sub-open > .dropdown-menu { display: block; }
+
+	header.p21-open #topmenu .dropdown-menu a { padding: 9px 14px; }
+
+	#indicators { order: 5; }
+
+	/* wide tables scroll inside their own box, never the page */
+	.cbi-section-node, .table-wrapper { max-width: 100%; }
+
+	/* row action buttons (e.g. Status > Processes) wrap instead of overflowing */
+	/* (buttons keep their content width: shrinking them spills labels such as "[ KILL ]") */
+	.table .td.cbi-section-actions > div { flex-wrap: wrap; row-gap: 3px; }
+
+	/* opkg (System > Software) controls: its inline view CSS forces nowrap + 250px labels */
+	#maincontent .controls > * { min-width: 0; max-width: 100%; flex-basis: 100%; white-space: normal; }
+	#maincontent .controls > * > label { min-width: 0; }
+	#maincontent .control-group { display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; max-width: 100%; }
+	#maincontent .control-group > input { flex: 1 1 8em; min-width: 0; width: auto; }
+	#maincontent .control-group > .btn { flex: 0 1 auto; }
+
+	.modal {
+		width: auto;
+		max-width: calc(100vw - 16px);
+		margin: 8px auto;
+		padding: 12px;
+	}
+}

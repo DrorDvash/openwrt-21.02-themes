@@ -1,0 +1,35 @@
+<%#
+ NoobWRT, OpenWrt 21.02 port (luci-theme-@ID@). Lua translation of luci-theme-noobwrt
+ @NWVER@ footer.ut (nooblk-98, Apache-2.0; derived from luci-theme-argon by jerrykuku).
+-%>
+<% local ver = require "luci.version" %>
+				</div>
+				<footer class="mobile-hide">
+					<div class="footer-content">
+						<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank" rel="noreferrer">Powered by <%= ver.luciname %> (<%= ver.luciversion %>)</a>
+						<span class="footer-separator">|</span>
+						<a href="https://github.com/nooblk-98/luci-theme-noobwrt" target="_blank" rel="noreferrer">NoobWrt Theme @NWVER@ (21.02 port)</a>
+						<span class="footer-separator">|</span>
+						<span><%= ver.distname %> <%= ver.distversion %></span>
+						<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+					</div>
+				</footer>
+			</div>
+		</div>
+<% if luci.dispatcher.context.authsession then %>
+<%+themes/@ID@/toolbar%>
+<% end %>
+<script>
+	var luciLocation = <%= luci.http.write_json(luci.dispatcher.context.path) %>;
+	var winHeight = window.innerHeight;
+	window.addEventListener('resize', function () {
+		if (window.innerWidth < 600) {
+			var ftc = document.querySelector('.ftc');
+			if (ftc)
+				ftc.style.bottom = (window.innerHeight - winHeight + 30) + 'px';
+		}
+	});
+</script>
+<script type="text/javascript">L.require('menu-@ID@')</script>
+</body>
+</html>

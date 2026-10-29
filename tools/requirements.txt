@@ -1,0 +1,7 @@
+# tools/port-theme.py and friends (python3 -m pip install -r tools/requirements.txt)
+# build
+rcssmin>=1.1
+rjsmin>=1.2
+Pillow>=10      # alpha21 images
+# tests (also: python3 -m playwright install chromium, or a system chromium)
+playwright>=1.40

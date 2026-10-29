@@ -1,0 +1,54 @@
+
+/* NoobWRT on 21.02: theme-specific fixes (hand rules; tools/contrast-fix.py may add an
+   AUTO-CONTRAST block below). WCAG AA: same hues as NoobWRT, darker or lighter. */
+
+/* light: the accent carries white text and is link text on the grey page (#5e72e4: 4.2:1) */
+:root {
+	--primary: #4558d0;
+	--red: #d6294d;
+	--green: #1d8558;
+}
+.cbi-button-neutral,
+.cbi-button-find, .cbi-button-up, .cbi-button-down,
+.cbi-button[name="zero"], .cbi-button[name="restart"], .modal div[class="btn"] {
+	border-color: #5c6e81;
+	background-color: #5c6e81;
+}
+/* the plain button (Dismiss, Clear, drag handle): grey text on light grey */
+.cbi-button:not([class*="cbi-button-"]), .btn:not([class*="cbi-button-"]):not(.primary):not(.danger),
+.cbi-button.drag-handle { color: #4d5a69; }
+.btn[value="Dismiss"], .cbi-button[value="Terminate"], .cbi-button[value="Disabled"],
+.cbi-button[onclick^="iface_reconnect"], .cbi-button[onclick="handleReset(event)"],
+.cbi-button-neutral[value="Disable"] { color: #212529; }
+html:not([data-darkmode="true"]) footer, html:not([data-darkmode="true"]) footer .footer-separator,
+html:not([data-darkmode="true"]) footer span { color: #5f6872; }
+footer a, footer .luci-link { color: var(--primary); }
+.modal ul li, .cbi-dropdown:not(.btn):not(.cbi-button) > ul > li[placeholder],
+.cbi-dropdown > ul > li[unselectable] { color: #5c6e81; }
+html:not([data-darkmode="true"]) .login-page .login-container .login-form .login-subtitle { color: #646d84; }
+html:not([data-darkmode="true"]) .login-page footer, html:not([data-darkmode="true"]) .login-page footer a { color: #1f2a6b; }
+
+/* dark (NoobWRT's dark.css): its accent #483d8b is text on near-black, olive and orange
+   carry light text */
+html[data-darkmode="true"] abbr { color: #a49cf0 !important; }
+html[data-darkmode="true"] var,
+html[data-darkmode="true"] a:not(.cbi-button):not(.btn):not(.toolbar-item) { color: #a49cf0; }
+html[data-darkmode="true"] header .fill .status span[data-style="active"],
+html[data-darkmode="true"] #xhr_poll_status > .label.success { color: #fff !important; }
+html[data-darkmode="true"] .cbi-button-reset, html[data-darkmode="true"] .cbi-input-remove,
+html[data-darkmode="true"] .cbi-button-remove, html[data-darkmode="true"] .cbi-button-negative,
+html[data-darkmode="true"] .btn[value="Dismiss"], html[data-darkmode="true"] .cbi-button[value="Terminate"],
+html[data-darkmode="true"] .cbi-button[value="Reset"], html[data-darkmode="true"] .cbi-button[value="Kill"],
+html[data-darkmode="true"] .cbi-button[value="Disabled"], html[data-darkmode="true"] .cbi-button-neutral[value="Disable"] {
+	color: #111 !important;
+}
+html[data-darkmode="true"] footer, html[data-darkmode="true"] footer span { color: #a0a0a0; }
+html[data-darkmode="true"] .modal ul li, html[data-darkmode="true"] .cbi-dropdown:not(.btn):not(.cbi-button) > ul > li[placeholder],
+html[data-darkmode="true"] .cbi-dropdown > ul > li[unselectable] { color: #9aa5b1; }
+html[data-darkmode="true"] [data-page="admin-network-network"] .ifacebox-head[style*="--zone-color-rgb"] { color: #fff !important; }
+html[data-darkmode="true"] .alert-message h4, html[data-darkmode="true"] .modal h4 { color: #d4a514; }
+html[data-darkmode="true"] label { color: inherit; }
+/* firewall zone badges keep LuCI's light zone colours: dark text on them */
+html[data-darkmode="true"] .zonebadge > strong, html[data-darkmode="true"] .zonebadge > em { color: #111 !important; }
+html[data-darkmode="true"] .zonebadge > .ifacebadge { color: #ddd; }
+html[data-darkmode="true"] .ifacebadge strong, html[data-darkmode="true"] .network-status-table strong { color: inherit; }

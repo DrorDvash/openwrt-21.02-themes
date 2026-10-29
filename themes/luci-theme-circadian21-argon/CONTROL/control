@@ -1,0 +1,13 @@
+Package: luci-theme-circadian21-argon
+Version: 1.0.4-1
+Depends: luci-base
+Source: https://github.com/vistrocity/openwrt-luci-themes
+License: Apache-2.0
+Section: luci
+Maintainer: Dror Dvash <DrorDvash@users.noreply.github.com>
+Architecture: all
+Installed-Size: 0
+Description: Circadian on Argon (21.02 port) - the Circadian look in the Argon sidebar layout.
+ Layout from luci-theme-argon 2.3.1 (jerrykuku, Apache-2.0), look from luci-theme-circadian
+ (vistrocity/openwrt-luci-themes, Apache-2.0). Registers luci.themes.Circadian21_argon;
+ it does not change the active theme.

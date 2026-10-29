@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-darkmode="true">
+<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"alpha21"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09c">
+
+<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/alpha21/css/cascade.css?v=1.0.4-1">
+
+<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/alpha21/css/theme.css?v=1.0.4-1">
+<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/alpha21/favicon.png">
+<script src="/openwrt-21.02-themes/playground/translations-en.js"></script>
+<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js"></script>
+<title>OpenWrt - Backup / Flash Firmware - LuCI</title>
+</head>
+
+<body class="lang_en logged-in node-admin-system-flash" data-page="admin-system-flash">
+<header>
+	<div class="fill">
+		<div class="container">
+		<a id="logo" href="/openwrt-21.02-themes/playground/alpha21/cgi-bin/luci/admin/status/overview">
+			<img src="/openwrt-21.02-themes/playground/luci-static/alpha21/brand.png" alt="OpenWrt">
+		</a>
+		<div class="status" id="indicators"></div>
+		<div class="logout">
+			<a href="/openwrt-21.02-themes/playground/alpha21/cgi-bin/luci/admin/logout" data-title="Logout">Logout</a>
+		</div>
+		<div class="showSide" role="button" tabindex="0" aria-label="Menu">
+			<img src="/openwrt-21.02-themes/playground/luci-static/alpha21/gaya/icon/menu_icon.svg" alt="">
+		</div>
+		</div>
+	</div>
+</header>
+<div class="main">
+	<div class="loading"><span><div class="loading-img"></div></span></div>
+	<div class="main-left" id="mainmenu" style="display:none"></div>
+	<div class="main-right">
+		<div class="modemenu-buttons" style="display:none">
+			<ul id="modemenu"></ul>
+		</div>
+		<div class="darkMask"></div>
+		<div id="maincontent">
+			<div class="container"><noscript>
+					<div class="alert-message warning">
+						<h4>JavaScript required!</h4>
+						<p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+					</div>
+				</noscript>
+				<div id="tabmenu" style="display:none"></div>
+
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/alpha21","documentroot":"\/www","pathinfo":"\/admin\/system\/flash","apply_display":1.5,"requestpath":["admin","system","flash"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/alpha21\/cgi-bin\/luci","dispatchpath":["admin","system","flash"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"view","path":"system\/flash"},"order":70,"readonly":false,"depends":{"acl":["luci-mod-system-flash"]},"title":"Backup \/ Flash Firmware"},"pollinterval":5});
+</script>
+
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+	<script type="text/javascript">
+		L.require('ui').then(function(ui) {
+			ui.instantiateView('system/flash');
+		});
+	</script>
+</div>
+
+
+
+			</div>
+			<footer class="mobile">
+				<a href="https://github.com/derisamedia/luci-theme-alpha" target="_blank" rel="noreferrer"> OpenWrt 21.02.7 r16847-f8282da11e | Alpha OS Theme 3.9.7 (21.02 port)</a>
+			</footer>
+		</div>
+	</div>
+</div>
+<script>L.require('menu-alpha21')</script>
+<script src="/openwrt-21.02-themes/playground/luci-static/alpha21/custom-entry.js?v=1.0.4-1" defer></script>
+
+<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

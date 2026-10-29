@@ -1,0 +1,13 @@
+Package: luci-theme-retro21
+Version: 1.0.4-1
+Depends: luci-base
+Source: https://github.com/vistrocity/openwrt-luci-themes
+License: Apache-2.0
+Section: luci
+Maintainer: Dror Dvash <DrorDvash@users.noreply.github.com>
+Architecture: all
+Installed-Size: 0
+Description: Retro (21.02 port) - Retro Theme (90s desktop).
+ Port of luci-theme-retro (vistrocity/openwrt-luci-themes, Apache-2.0) to
+ OpenWrt 21.02 Lua templates. Registers itself in luci.themes as Retro21;
+ it does not change the active theme.

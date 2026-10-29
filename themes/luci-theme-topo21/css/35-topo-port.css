@@ -1,0 +1,36 @@
+
+/* Topo-specific 21.02 port fixes (add rules found by tools/qa.py / tools/a11y.py) */
+
+/* hand fix: Save & Apply's open list carried the theme's muted text (3.87:1); list items in
+   the theme's ink */
+html:root .cbi-dropdown[open] > ul.dropdown > li { color: var(--p21-ink); }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-dnsmasq h4 { color: #3d6d8f !important; } /* was #457ba1: 3.83 -> 4.66:1 */
+#cbi-network-interface button.cbi-button-neutral.down:not(:hover):not(:focus) { color: #3d6d8f !important; } /* was #457ba1: 3.83 -> 4.66:1 */
+#cbi-network-interface button.cbi-button-neutral.reconnect:not(:hover):not(:focus) { color: #3d6d8f !important; } /* was #457ba1: 3.83 -> 4.66:1 */
+#cbi-wireless-wifi-device button.cbi-button-neutral.enable-disable:not(:hover):not(:focus) { color: #3d6d8f !important; } /* was #457ba1: 3.83 -> 4.66:1 */
+#cbi-wireless-wifi-device button.cbi-button-neutral:not(:hover):not(:focus) { color: #3d6d8f !important; } /* was #457ba1: 3.83 -> 4.66:1 */
+.cbi-dropdown label { color: #345d7a !important; } /* was #457ba1: 3.01 -> 4.63:1 */
+.cbi-map-descr abbr { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+.cbi-section-descr em { color: #515f63 !important; } /* was #5f6f74: 3.63 -> 4.60:1 */
+.cbi-value-description code { color: #345d7a !important; } /* was #457ba1: 3.01 -> 4.63:1 */
+.cbi-value-title code { color: #345d7a !important; } /* was #457ba1: 3.01 -> 4.63:1 */
+.ifacebadge em { color: #3d6d8f !important; } /* was #457ba1: 3.87 -> 4.70:1 */
+.ifacebadge small { color: #3d6d8f !important; } /* was #457ba1: 3.87 -> 4.70:1 */
+.ifacebadge span { color: #3d6d8f !important; } /* was #457ba1: 3.87 -> 4.70:1 */
+.ifacebadge strong { color: #3d6d8f !important; } /* was #457ba1: 3.87 -> 4.70:1 */
+.modal.cbi-modal button.cbi-button-positive:not(:hover):not(:focus) { color: #f6f2e9 !important; } /* was #e8dfc9: 3.88 -> 4.60:1 */
+.modal.cbi-modal h4 { color: #3d6d8f !important; } /* was #457ba1: 3.87 -> 4.70:1 */
+.modal.login button.cbi-button-positive:not(:hover):not(:focus) { color: #f6f2e9 !important; } /* was #e8dfc9: 3.88 -> 4.60:1 */
+.modal.login h4 { color: #3d6d8f !important; } /* was #457ba1: 3.87 -> 4.70:1 */
+button.cbi-button-neutral:not(:hover):not(:focus) { color: #3a6786 !important; } /* was #457ba1: 3.50 -> 4.65:1 */
+div.cbi-map-descr { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+div.cbi-section-descr { color: #5c6b70 !important; } /* was #5f6f74: 4.40 -> 4.66:1 */
+footer a { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+footer span { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+header a { color: #526065 !important; } /* was #5f6f74: 3.72 -> 4.64:1 */
+header a.menu { color: #526065 !important; } /* was #5f6f74: 3.72 -> 4.64:1 */
+label.cbi-value-title { color: #3d6d8f !important; } /* was #457ba1: 3.83 -> 4.66:1 */
+span.ifacebadge { color: #3d6d8f !important; } /* was #457ba1: 3.87 -> 4.70:1 */
+/* AUTO-CONTRAST END */

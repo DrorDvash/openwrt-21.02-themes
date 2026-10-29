@@ -1,0 +1,26 @@
+
+/* Obsidian on Argon: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#lease6_status_table th { color: #6786a4 !important; } /* was #587592: 3.65 -> 4.61:1 */
+#lease_status_table th { color: #6786a4 !important; } /* was #587592: 3.65 -> 4.61:1 */
+#wifi_assoclist_table th { color: #6180a0 !important; } /* was #587592: 3.95 -> 4.61:1 */
+#wifi_assoclist_table th.hide-xs { color: #6180a0 !important; } /* was #587592: 3.95 -> 4.61:1 */
+.cbi-section-table-titles th.cbi-section-table-cell { color: #6786a4 !important; } /* was #587592: 3.65 -> 4.61:1 */
+.cbi-section-table-titles th.col-1.size { color: #6180a0 !important; } /* was #587592: 3.95 -> 4.61:1 */
+.cbi-section-table-titles th.col-10 { color: #6180a0 !important; } /* was #587592: 3.95 -> 4.61:1 */
+.cbi-section-table-titles th.col-2 { color: #6180a0 !important; } /* was #587592: 3.95 -> 4.61:1 */
+.cbi-section-table-titles th.col-2.version { color: #6180a0 !important; } /* was #587592: 3.95 -> 4.61:1 */
+.table th { color: #6382a1 !important; } /* was #587592: 3.92 -> 4.70:1 */
+.table.assoclist th { color: #6786a4 !important; } /* was #587592: 3.65 -> 4.61:1 */
+.table.assoclist th.hide-xs { color: #6786a4 !important; } /* was #587592: 3.65 -> 4.61:1 */
+.table.lases th { color: #6786a4 !important; } /* was #587592: 3.65 -> 4.61:1 */
+.table.lases th.cbi-section-actions { color: #6786a4 !important; } /* was #587592: 3.65 -> 4.61:1 */
+.table.leases6 th { color: #6786a4 !important; } /* was #587592: 3.65 -> 4.61:1 */
+.table.leases6 th.cbi-section-actions { color: #6786a4 !important; } /* was #587592: 3.65 -> 4.61:1 */
+a.food { color: #6382a1 !important; } /* was #587592: 3.85 -> 4.61:1 */
+a.menu { color: #6382a1 !important; } /* was #587592: 3.85 -> 4.61:1 */
+a.menu.active { color: #3a4e61 !important; } /* was #6382a1: 2.15 -> 4.62:1 */
+footer a { color: #6382a1 !important; } /* was #587592: 3.85 -> 4.61:1 */
+footer a.luci-link { color: #6382a1 !important; } /* was #587592: 3.85 -> 4.61:1 */
+/* AUTO-CONTRAST END */

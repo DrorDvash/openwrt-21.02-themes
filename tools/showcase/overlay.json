@@ -1,0 +1,364 @@
+{
+  "_comment": "Applied by build.py to every recorded answer and page. 'merge': ubus answers deep-merged with these values (the device: model, CPU, kernel, memory...). 'set': whole ubus answers ([status, data]) for what a container cannot give honestly (a radio, mounts). 'http': whole answers for other requests (the kernel log). 'replace': regex -> text over all strings (container names, the docker subnet). build.py also moves the router to 192.168.1.1 and makes DHCP leases of the named clients.",
+  "replace": {
+    "luci21-opt-1\\.luci21opt": "laptop",
+    "luci21-opt-2\\.luci21opt": "phone",
+    "luci21-opt-3\\.luci21opt": "living-room-tv",
+    "luci21-opt-4\\.luci21opt": "nas",
+    "luci21-opt-5\\.luci21opt": "printer",
+    "luci21-opt\\.luci21opt": "desktop",
+    "luci21-opt(-\\d+)?(\\.luci21opt)?": "OpenWrt",
+    "x86/64": "mediatek/filogic",
+    "x86_64": "aarch64_cortex-a53",
+    "testtest123": "playground",
+    "OpenWrt-Test-5G": "OpenWrt-5G",
+    "br-luci21opt": "br-lan"
+  },
+  "merge": {
+    "system.info({})": {
+      "load": [
+        24576,
+        18350,
+        13107
+      ],
+      "uptime": 590556,
+      "memory": {
+        "total": 1031798784,
+        "free": 571473920,
+        "shared": 9416704,
+        "buffered": 12288000,
+        "cached": 86450176,
+        "available": 640851968
+      },
+      "swap": {
+        "total": 0,
+        "free": 0
+      },
+      "root": {
+        "total": 7520256,
+        "free": 7208960,
+        "used": 311296,
+        "avail": 7208960
+      },
+      "tmp": {
+        "total": 503808,
+        "free": 501248,
+        "used": 2560,
+        "avail": 501248
+      }
+    },
+    "luci-rpc.getNetworkDevices({})": {
+      "wlan0": {
+        "devtype": "wlan",
+        "flags": {
+          "broadcast": true,
+          "loopback": false,
+          "multicast": true,
+          "noarp": false,
+          "pointtopoint": false,
+          "promisc": false,
+          "up": true
+        },
+        "ifindex": 9,
+        "ip6addrs": [],
+        "ipaddrs": [],
+        "link": {
+          "carrier": true
+        },
+        "mac": "94:83:C4:A0:00:02",
+        "mtu": 1500,
+        "name": "wlan0",
+        "stats": {
+          "collisions": 0,
+          "multicast": 0,
+          "rx_bytes": 1830216611,
+          "rx_dropped": 0,
+          "rx_errors": 0,
+          "rx_packets": 2224512,
+          "tx_bytes": 5240098817,
+          "tx_dropped": 0,
+          "tx_errors": 0,
+          "tx_packets": 3814057
+        },
+        "type": 1,
+        "up": true,
+        "wireless": true
+      }
+    },
+    "system.board({})": {
+      "model": "GL.iNet GL-MT6000",
+      "board_name": "glinet,gl-mt6000",
+      "system": "ARMv8 Processor rev 4",
+      "kernel": "5.4.211",
+      "hostname": "OpenWrt",
+      "release": {
+        "target": "mediatek/filogic"
+      }
+    },
+    "luci-rpc.getBoardJSON({})": {
+      "model": {
+        "id": "glinet,gl-mt6000",
+        "name": "GL.iNet GL-MT6000"
+      }
+    }
+  },
+  "set": {
+    "luci-rpc.getWirelessDevices({})": [
+      0,
+      {
+        "radio0": {
+          "up": true,
+          "pending": false,
+          "autostart": true,
+          "disabled": false,
+          "retry_setup_failed": false,
+          "config": {
+            "type": "mac80211",
+            "path": "platform/test/radio0",
+            "channel": "36",
+            "band": "5g",
+            "htmode": "HE80",
+            "country": "US"
+          },
+          "iwinfo": {
+            "phy": "phy0",
+            "channel": 36,
+            "frequency": 5180,
+            "txpower": 23,
+            "quality": 0,
+            "quality_max": 70,
+            "hwmodes": [
+              "a",
+              "n",
+              "ac",
+              "ax"
+            ],
+            "htmodes": [
+              "HT20",
+              "HT40",
+              "VHT20",
+              "VHT40",
+              "VHT80",
+              "VHT160",
+              "HE20",
+              "HE40",
+              "HE80",
+              "HE160"
+            ],
+            "hardware": {
+              "id": [
+                5315,
+                30725,
+                5315,
+                30725
+              ],
+              "name": "MediaTek MT7986"
+            }
+          },
+          "interfaces": [
+            {
+              "section": "default_radio0",
+              "ifname": "wlan0",
+              "vlans": [],
+              "stations": [],
+              "config": {
+                "mode": "ap",
+                "ssid": "OpenWrt-5G",
+                "encryption": "sae-mixed",
+                "network": [
+                  "lan"
+                ]
+              },
+              "iwinfo": {
+                "phy": "phy0",
+                "channel": 36,
+                "frequency": 5180,
+                "txpower": 23,
+                "quality": 70,
+                "quality_max": 70,
+                "hwmodes": [
+                  "a",
+                  "n",
+                  "ac",
+                  "ax"
+                ],
+                "htmodes": [
+                  "HT20",
+                  "HT40",
+                  "VHT20",
+                  "VHT40",
+                  "VHT80",
+                  "VHT160",
+                  "HE20",
+                  "HE40",
+                  "HE80",
+                  "HE160"
+                ],
+                "hardware": {
+                  "id": [
+                    5315,
+                    30725,
+                    5315,
+                    30725
+                  ],
+                  "name": "MediaTek MT7986"
+                },
+                "ssid": "OpenWrt-5G",
+                "bssid": "94:83:C4:A0:00:02",
+                "mode": "Master",
+                "signal": -30,
+                "noise": -92,
+                "bitrate": 2401900,
+                "encryption": {
+                  "enabled": true,
+                  "wpa": [
+                    2,
+                    3
+                  ],
+                  "authentication": [
+                    "psk",
+                    "sae"
+                  ],
+                  "ciphers": [
+                    "ccmp"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "iwinfo.assoclist({\"device\":\"wlan0\"})": [
+      0,
+      {
+        "results": [
+          {
+            "mac": "4E:1F:6C:22:9A:10",
+            "signal": -48,
+            "noise": -92,
+            "inactive": 120,
+            "connected_time": 5321,
+            "rx": {
+              "rate": 1201000,
+              "mhz": 80,
+              "he": true,
+              "mcs": 11,
+              "nss": 2,
+              "packets": 182311
+            },
+            "tx": {
+              "rate": 1134200,
+              "mhz": 80,
+              "he": true,
+              "mcs": 10,
+              "nss": 2,
+              "packets": 240518
+            }
+          },
+          {
+            "mac": "A6:3C:64:C0:2D:C3",
+            "signal": -61,
+            "noise": -92,
+            "inactive": 900,
+            "connected_time": 40210,
+            "rx": {
+              "rate": 433300,
+              "mhz": 80,
+              "vht": true,
+              "mcs": 9,
+              "nss": 1,
+              "packets": 991020
+            },
+            "tx": {
+              "rate": 390000,
+              "mhz": 80,
+              "vht": true,
+              "mcs": 8,
+              "nss": 1,
+              "packets": 1503321
+            }
+          },
+          {
+            "mac": "92:57:22:ED:DB:BF",
+            "signal": -55,
+            "noise": -92,
+            "inactive": 30,
+            "connected_time": 12044,
+            "rx": {
+              "rate": 864800,
+              "mhz": 80,
+              "he": true,
+              "mcs": 9,
+              "nss": 2,
+              "packets": 51211
+            },
+            "tx": {
+              "rate": 960700,
+              "mhz": 80,
+              "he": true,
+              "mcs": 11,
+              "nss": 2,
+              "packets": 70218
+            }
+          }
+        ]
+      }
+    ],
+    "file.read({\"path\":\"/proc/mounts\"})": [
+      0,
+      {
+        "data": "/dev/root /rom squashfs ro,relatime 0 0\nproc /proc proc rw,nosuid,nodev,noexec,noatime 0 0\nsysfs /sys sysfs rw,nosuid,nodev,noexec,noatime 0 0\ncgroup2 /sys/fs/cgroup cgroup2 rw,nosuid,nodev,noexec,relatime,nsdelegate 0 0\ntmpfs /tmp tmpfs rw,nosuid,nodev,noatime 0 0\n/dev/loop0 /overlay f2fs rw,lazytime,noatime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=reuse,fsync_mode=posix 0 0\noverlayfs:/overlay / overlay rw,noatime,lowerdir=/,upperdir=/overlay/upper,workdir=/overlay/work 0 0\ntmpfs /dev tmpfs rw,nosuid,relatime,size=512k,mode=755 0 0\ndevpts /dev/pts devpts rw,nosuid,noexec,relatime,mode=600,ptmxmode=000 0 0\ndebugfs /sys/kernel/debug debugfs rw,noatime 0 0\nnone /sys/fs/bpf bpf rw,nosuid,nodev,noexec,noatime,mode=700 0 0\npstore /sys/fs/pstore pstore rw,noatime 0 0\n"
+      }
+    ],
+    "luci.getMountPoints({})": [
+      0,
+      {
+        "result": [
+          {
+            "device": "/dev/root",
+            "mount": "/rom",
+            "size": 47185920,
+            "free": 0,
+            "avail": 0
+          },
+          {
+            "device": "tmpfs",
+            "mount": "/tmp",
+            "size": 515899392,
+            "free": 513277952,
+            "avail": 513277952
+          },
+          {
+            "device": "/dev/loop0",
+            "mount": "/overlay",
+            "size": 7700742144,
+            "free": 7381975040,
+            "avail": 7381975040
+          },
+          {
+            "device": "overlayfs:/overlay",
+            "mount": "/",
+            "size": 7700742144,
+            "free": 7381975040,
+            "avail": 7381975040
+          },
+          {
+            "device": "tmpfs",
+            "mount": "/dev",
+            "size": 524288,
+            "free": 524288,
+            "avail": 524288
+          }
+        ]
+      }
+    ]
+  },
+  "http": {
+    "POST /cgi-bin/cgi-exec /bin/dmesg -r": {
+      "status": 200,
+      "type": "text/plain",
+      "body": "<5>[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd034]\n<5>[    0.000000] Linux version 5.4.211 (builder@buildhost) (gcc version 8.4.0 (OpenWrt GCC 8.4.0 r16847-f8282da11e)) #0 SMP Thu Apr 13 2023\n<6>[    0.000000] Machine model: GL.iNet GL-MT6000\n<6>[    0.000000] Zone ranges:\n<6>[    0.000000]   DMA32    [mem 0x0000000040000000-0x000000007fffffff]\n<6>[    0.000000] percpu: Embedded 21 pages/cpu s48216 r8192 d29608 u86016\n<5>[    0.000000] Kernel command line: console=ttyS0,115200n1 loglevel=8 earlycon=uart8250,mmio32,0x11002000 root=PARTLABEL=rootfs rootwait\n<6>[    0.000000] Memory: 1001232K/1048576K available (8574K kernel code, 916K rwdata, 2716K rodata, 448K init, 377K bss, 47344K reserved)\n<6>[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1\n<6>[    0.000000] arch_timer: cp15 timer(s) running at 13.00MHz (phys).\n<6>[    0.026000] smp: Brought up 1 node, 4 CPUs\n<6>[    0.026000] SMP: Total of 4 processors activated.\n<6>[    0.027000] CPU features: detected: 32-bit EL0 Support\n<6>[    0.031000] CPU: All CPU(s) started at EL2\n<6>[    0.198000] clocksource: Switched to clocksource arch_sys_counter\n<6>[    0.244000] Serial: 8250/16550 driver, 3 ports, IRQ sharing disabled\n<6>[    0.247000] 11002000.serial: ttyS0 at MMIO 0x11002000 (irq = 120, base_baud = 2500000) is a ST16650V2\n<6>[    0.281000] mmc0: new HS200 MMC card at address 0001\n<6>[    0.282000] mmcblk0: mmc0:0001 8GTF4R 7.28 GiB\n<6>[    0.290000]  mmcblk0: p1 p2 p3 p4 p5 p6 p7\n<6>[    0.402000] mtk_soc_eth 15100000.ethernet: generated random MAC address 94:83:c4:a0:00:01\n<6>[    0.409000] mt7530 mdio-bus:1f: MediaTek MT7531AE detected, 5 ports usable\n<6>[    1.101000] VFS: Mounted root (squashfs filesystem) readonly on device 179:5.\n<6>[    1.115000] Freeing unused kernel memory: 448K\n<6>[    1.204000] init: Console is alive\n<6>[    1.358000] kmodloader: loading kernel modules from /etc/modules-boot.d/*\n<6>[    2.902000] mt7986-wmac 18000000.wifi: HW/SW Version: 0x8a108a10, Build Time: 20221208201745a\n<6>[    3.110000] mt7986-wmac 18000000.wifi: WM Firmware Version: ____000000, Build Time: 20221208201806\n<6>[    5.874000] procd: - early -\n<6>[    6.731000] procd: - init -\n<6>[    7.912000] urngd: v1.0.2 started.\n<6>[   10.402000] br-lan: port 1(lan1) entered forwarding state\n<6>[   12.950000] IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready\n<6>[   12.951000] br-lan: port 5(wlan0) entered forwarding state\n"
+    }
+  }
+}

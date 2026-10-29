@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"edge21"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+	<meta charset="utf-8">
+	<title>
+		OpenWrt - DHCP and DNS
+		- LuCI</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="full-screen" content="yes">
+	<meta name="x5-page-mode" content="app">
+	<meta name="browsermode" content="application">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="msapplication-TileColor" content="#5a8dee">
+	<meta name="application-name" content="OpenWrt - LuCI">
+	<meta name="apple-mobile-web-app-title" content="OpenWrt - LuCI">
+	<link rel="apple-touch-icon" sizes="144x144" href="/openwrt-21.02-themes/playground/luci-static/edge21/icon/apple-icon-144x144.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/openwrt-21.02-themes/playground/luci-static/edge21/icon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/openwrt-21.02-themes/playground/luci-static/edge21/icon/favicon-32x32.png">
+	<meta name="msapplication-TileColor" content="#5a8dee">
+	<meta name="theme-color" content="#5a8dee">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/edge21/css/cascade.css?v=1.0.4-1">
+	<link rel="stylesheet" id="p21-dark" href="/openwrt-21.02-themes/playground/luci-static/edge21/css/dark.css?v=1.0.4-1" media="(prefers-color-scheme: dark)">
+	<script>
+	(function() {
+		var s; try { s = localStorage.getItem('edge21.scheme'); } catch (e) {}
+		var mode = (s == 'light' || s == 'dark') ? s : 'auto', l = document.getElementById('p21-dark');
+		l.media = mode == 'dark' ? 'all' : (mode == 'light' ? 'not all' : '(prefers-color-scheme: dark)');
+		var dark = mode == 'dark' || (mode == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+		document.documentElement.setAttribute('data-darkmode', dark ? 'true' : 'false');
+		document.documentElement.setAttribute('data-scheme', mode);
+	})();
+	</script>
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/edge21/css/theme.css?v=1.0.4-1">
+	<link rel="shortcut icon" href="/openwrt-21.02-themes/playground/luci-static/edge21/favicon.png">
+	<script src="/openwrt-21.02-themes/playground/translations-en.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/edge21/js/jquery.min.js?v=3.5.1"></script>
+</head>
+
+<body
+	class="lang_en DHCP and DNS logged-in"
+	data-page="admin-network-dhcp">
+
+	<div class="main">
+		<div class="main-left" id="mainmenu" style="display:none">
+			<div class="sidenav-header d-flex align-items-center">
+				<a class="brand" href="#">OpenWrt</a>
+				<div class="ml-auto">
+					<!-- Sidenav toggler -->
+					<div class="sidenav-toggler d-none d-xl-block active" data-action="sidenav-unpin"
+						data-target="#sidenav-main">
+						<div class="sidenav-toggler-inner">
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-right">
+			<header class="bg-primary">
+				<div class="fill">
+					<div class="container">
+						<div class="flex1">
+							<a class="showSide"></a>
+							<a class="brand" href="#">OpenWrt</a>
+						</div>
+						<div class="status" id="indicators"></div>
+					</div>
+				</div>
+			</header>
+			<div class="darkMask"></div>
+						<button type="button" class="p21-scheme" id="p21-scheme">
+							<svg class="i-auto" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="9" r="7.25"/><path d="M9 1.75A7.25 7.25 0 019 16.25Z" fill="currentColor" stroke="none"/></svg>
+							<svg class="i-light" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="3.4"/><line x1="9" y1="1" x2="9" y2="3"/><line x1="9" y1="15" x2="9" y2="17"/><line x1="2.9" y1="2.9" x2="4.3" y2="4.3"/><line x1="13.7" y1="13.7" x2="15.1" y2="15.1"/><line x1="1" y1="9" x2="3" y2="9"/><line x1="15" y1="9" x2="17" y2="9"/><line x1="2.9" y1="15.1" x2="4.3" y2="13.7"/><line x1="13.7" y1="4.3" x2="15.1" y2="2.9"/></svg>
+							<svg class="i-dark" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 10A7 7 0 017 1.5 7.5 7.5 0 1015.5 10Z"/></svg>
+						</button>
+						<script>
+						(function() {
+							var btn = document.getElementById('p21-scheme'), root = document.documentElement,
+							    link = document.getElementById('p21-dark'), mq = window.matchMedia('(prefers-color-scheme: dark)'),
+							    names = { auto: 'Follow the browser', light: 'Light', dark: 'Dark' };
+							function apply(mode) {
+								link.media = mode == 'dark' ? 'all' : (mode == 'light' ? 'not all' : '(prefers-color-scheme: dark)');
+								root.setAttribute('data-scheme', mode);
+								root.setAttribute('data-darkmode', (mode == 'dark' || (mode == 'auto' && mq.matches)) ? 'true' : 'false');
+								btn.title = 'Colour scheme: ' + names[mode];
+								btn.setAttribute('aria-label', btn.title);
+							}
+							apply(root.getAttribute('data-scheme') || 'auto');
+							btn.addEventListener('click', function() {
+								var order = ['auto', 'light', 'dark'], next = order[(order.indexOf(root.getAttribute('data-scheme')) + 1) % 3];
+								try { localStorage.setItem('edge21.scheme', next); } catch (e) {}
+								apply(next);
+							});
+							mq.addEventListener('change', function() { if (root.getAttribute('data-scheme') == 'auto') apply('auto'); });
+						})();
+						</script>
+			<div id="maincontent">
+				<div class="container"><noscript>
+						<div class="alert-message error">
+							<h4>JavaScript required!</h4>
+							<p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+						</div>
+					</noscript>
+
+					<div id="tabmenu" style="display:none"></div>
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/edge21","documentroot":"\/www","pathinfo":"\/admin\/network\/dhcp","apply_display":1.5,"requestpath":["admin","network","dhcp"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/edge21\/cgi-bin\/luci","dispatchpath":["admin","network","dhcp"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"view","path":"network\/dhcp"},"order":30,"readonly":false,"depends":{"fs":{"\/usr\/sbin\/dnsmasq":"executable"},"acl":["luci-mod-network-dhcp"],"uci":{"dhcp":true}},"title":"DHCP and DNS"},"pollinterval":5});
+</script>
+
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+	<script type="text/javascript">
+		L.require('ui').then(function(ui) {
+			ui.instantiateView('network/dhcp');
+		});
+	</script>
+</div>
+
+
+</div>
+<footer class="mobile-hide">
+	<div>
+		<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank">Powered by LuCI openwrt-21.02 branch (git-23.093.57360-e98243e)</a> /
+						<a href="https://github.com/jerrykuku/luci-theme-argon" target="_blank">Edge on ArgonTheme 2.3.1 (21.02 port)</a> /
+						OpenWrt 21.02.7 r16847-f8282da11e
+		<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+	</div>
+</footer>
+</div>
+</div>
+<script>
+	// thanks for Jo-Philipp Wich <jow@openwrt.org>
+	var luciLocation = ["admin","network","dhcp"];
+	var winHeight = $(window).height();
+	$(window).resize(function () {
+		var winWidth = $(window).width()
+		if(winWidth < 600){
+			var newHeight = $(this).height();
+			var keyboradHeight = newHeight - winHeight;
+			$(".ftc").css("bottom", keyboradHeight + 30);
+		}
+	})
+</script>
+<script type="text/javascript">L.require('menu-edge21')</script>
+<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

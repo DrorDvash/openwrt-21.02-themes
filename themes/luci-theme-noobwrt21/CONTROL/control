@@ -1,0 +1,13 @@
+Package: luci-theme-noobwrt21
+Version: 1.0.4-1
+Depends: luci-base
+Source: https://github.com/nooblk-98/luci-theme-noobwrt
+License: Apache-2.0, OFL-1.1
+Section: luci
+Maintainer: Dror Dvash <DrorDvash@users.noreply.github.com>
+Architecture: all
+Installed-Size: 0
+Description: NoobWRT (21.02 port) - clean sidebar theme with a quick-access toolbar.
+ Port of luci-theme-noobwrt 1.1.7 (nooblk-98, Apache-2.0) to OpenWrt 21.02
+ Lua templates. Light or dark (follows the browser, switch in the toolbar).
+ Registers luci.themes.NoobWRT21; it does not change the active theme.

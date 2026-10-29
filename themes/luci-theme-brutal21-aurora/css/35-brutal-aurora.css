@@ -1,0 +1,12 @@
+
+/* Brutal on Aurora: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#tabmenu a { color: #d60067 !important; } /* was #ff3d9a: 2.95 -> 4.64:1 */
+.cbi-tabmenu a { color: #111111 !important; } /* was #fff7e0: 1.24 -> 14.25:1 */
+.cbi-tabmenu.mode a { color: #111111 !important; } /* was #fff7e0: 1.24 -> 14.25:1 */
+.login-footer a { color: #d60067 !important; } /* was #ff3d9a: 2.95 -> 4.64:1 */
+.table.cbi-section-table var { color: #db0069 !important; } /* was #ff3d9a: 3.07 -> 4.66:1 */
+button.login-submit:not(:hover):not(:focus) { background: #e5006e !important; } /* was #ff3d9a under #ffffff: 3.29 -> 4.61:1 */
+footer a { color: #d60067 !important; } /* was #ff3d9a: 2.95 -> 4.64:1 */
+/* AUTO-CONTRAST END */

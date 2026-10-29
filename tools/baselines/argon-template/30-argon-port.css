@@ -1,0 +1,254 @@
+
+/* ==========================================================================
+ * Argon port layer (tools/argon-template/30-argon-port.css, used by every
+ * "<theme>21-argon" variant). Maps Argon 2.3.1's variables and sidebar /
+ * header / login chrome onto the theme's tokens, then applies the
+ * theme-independent 21.02 fixes from the bootstrap ports' shared layer.
+ * Loaded after Argon's cascade.css and its inlined dark.css.
+ * ========================================================================== */
+
+:root,
+:root[data-darkmode="false"],
+:root[data-darkmode="true"] {
+	--p21-head: var(--t-head, var(--p21-card));
+	--p21-on: var(--t-on, var(--on-primary-color, #fff));
+	--p21-bg: var(--t-bg, var(--background-color-low));
+	--p21-card: var(--t-card, var(--background-color-high));
+	--p21-ink: var(--t-ink, var(--text-color-highest));
+	--p21-dim: var(--t-dim, var(--text-color-medium));
+	--p21-rule: var(--t-rule, var(--border-color-medium));
+	--p21-hover: var(--t-hover, var(--background-color-medium));
+	--p21-accent: var(--t-accent, var(--primary-color-high));
+	--p21-accent2: var(--t-accent2, var(--primary-color-low));
+}
+
+
+/* Argon's own variables */
+:root {
+	--primary: var(--p21-accent);
+	--dark-primary: var(--p21-accent);
+	--bar-bg: var(--p21-head);
+	--main-color: var(--p21-accent);
+	--header-bg: var(--p21-head);
+	--header-color: var(--p21-ink);
+	--menu-bg-color: var(--p21-card);
+	--menu-color: var(--p21-dim);
+	--menu-color-hover: var(--p21-ink);
+	--main-menu-color: var(--p21-ink);
+	--submenu-bg-hover: var(--p21-hover);
+	--submenu-bg-hover-active: var(--p21-accent);
+	--background-color: var(--p21-bg);
+	--login-form-bg-color: var(--p21-card);
+	--gray-dark: var(--p21-ink);
+	--default: var(--p21-ink);
+}
+
+/* the theme paints the page (its html/body background); Argon's panels sit on it */
+body { color: var(--p21-ink); }
+.main, .main-right, #maincontent { background: transparent; }
+
+/* --- Sidebar ---------------------------------------------------------------- */
+
+.main-left {
+	background: var(--p21-card);
+	-webkit-backdrop-filter: blur(14px);
+	backdrop-filter: blur(14px);
+	border-right: 1px solid var(--p21-rule);
+	box-shadow: none;
+}
+
+.main-left .sidenav-header .brand,
+header .fill .container .flex1 .brand {
+	font-family: inherit;
+	font-weight: 700;
+	letter-spacing: .02em;
+	color: var(--p21-accent);
+}
+
+.main .main-left .nav li a,
+.main .main-left .nav li.slide .slide-menu .active a { color: var(--p21-dim); }
+
+.main .main-left .nav > li > a:first-child.active,
+.main .main-left .nav > li > a:first-child:hover,
+.main .main-left .nav li .menu.active,
+.main .main-left .nav li .menu:hover {
+	color: var(--p21-on);
+	background: var(--p21-accent);
+}
+
+.main .main-left .nav li.slide .slide-menu li a:hover,
+.main .main-left .nav li.slide .slide-menu .active a { color: var(--p21-ink); }
+
+.main-left::-webkit-scrollbar-thumb { background-color: var(--p21-rule); }
+.main-left::-webkit-scrollbar-track { background-color: transparent; }
+
+/* --- Header bar (Argon paints it with !important) ---------------------------- */
+
+header.bg-primary,
+header::after {
+	background-color: var(--p21-head) !important;
+}
+
+header.bg-primary { border-bottom: 1px solid var(--p21-rule); }
+header::after { display: none; }
+header, header .fill .container .flex1 .showSide { color: var(--p21-ink); }
+
+/* --- Argon's light-theme surfaces -> theme tokens -------------------------------
+   (Argon's own dark.css is not used: it hard-codes greys. Same selectors as
+   Argon's cascade.css, loaded later, so they win at equal specificity.) */
+
+h2, h3 { background: transparent; box-shadow: none; }
+
+.alert, .alert-message { background-color: var(--p21-card); color: var(--p21-ink); }
+
+.table .table-titles th,
+#cbi-wireless .td,
+.cbi-section-table-row,
+.cbi-rowstyle-1,
+.cbi-tabcontainer > .cbi-value:nth-of-type(2n),
+.cbi-section .cbi-section-remove:nth-of-type(2n),
+.container > .cbi-section .cbi-section-node:nth-of-type(2n),
+.cbi-section[id] .cbi-section-remove:nth-of-type(4n+3),
+.cbi-section[id] .cbi-section-node:nth-of-type(4n+3),
+#view > .spinning { background: transparent; }
+
+div > table > tbody > tr:nth-of-type(2n),
+div > .table > .tr:nth-of-type(2n),
+div > .table > .tbody > .tr:nth-of-type(2n),
+fieldset > table > tbody > tr:nth-of-type(2n),
+.cbi-rowstyle-2,
+.tr[data-title]::before,
+.tr.cbi-section-table-titles.named::before { background-color: var(--p21-hover); }
+
+.cbi-section-table .cbi-section-table-titles .cbi-section-table-cell,
+table > tbody > tr > th, table > tfoot > tr > th, table > thead > tr > th {
+	background-color: transparent;
+	color: var(--p21-dim);
+	border-bottom-color: var(--p21-rule);
+}
+
+table > tbody > tr > td, .table .td { color: var(--p21-ink); }
+
+.tabs { background: transparent; }
+.cbi-tabmenu > li, .tabs > li { background: var(--p21-hover); }
+.cbi-tabmenu > li > a, .tabs > li > a { color: var(--p21-ink); }
+.cbi-tabmenu > li.cbi-tab, .tabs > li.active { background: var(--p21-card); }
+.cbi-tabmenu > li.cbi-tab > a, .tabs > li.active > a { color: var(--p21-accent); }
+.tabs::-webkit-scrollbar-thumb, .cbi-tabmenu::-webkit-scrollbar-thumb { background-color: var(--p21-rule); }
+.tabs::-webkit-scrollbar-track, .cbi-tabmenu::-webkit-scrollbar-track { background-color: transparent; }
+
+/* zone colours: bootstrap's dark-mode tint (not in Argon), matching the white badge text */
+:root[data-darkmode="true"] .zonebadge[style],
+:root[data-darkmode="true"] .ifacebox-head[style] {
+	background: linear-gradient(rgba(var(--zone-color-rgb), .4), rgba(var(--zone-color-rgb), .3)) !important;
+}
+
+/* tab panes (Argon paints [data-tab-title] white) */
+[data-tab-title], .cbi-section-node-tabbed { background: transparent; box-shadow: none; }
+
+/* opened dropdown lists: opaque theme surface, theme text (Argon: white / black) */
+.cbi-dropdown[open] > ul.dropdown { background: var(--p21-bg); border: 1px solid var(--p21-rule); }
+.cbi-dropdown[open] > ul.dropdown li { color: var(--p21-ink); }
+.cbi-dropdown[open] > ul.dropdown > li { border-bottom-color: var(--p21-rule); }
+/* Argon clips #view (overflow:hidden, only for its rounded corners). LuCI sizes a list to
+   the scroll container further out, so #view cut the bottom off Save & Apply's list, and
+   focusing a hovered item scrolled #view itself: the page jumped up */
+#view { overflow: visible; }
+
+/* modal: opaque, so the page underneath never shows through */
+.modal { background: var(--p21-bg); color: var(--p21-ink); border: 1px solid var(--p21-rule); }
+.modal .cbi-section, .modal .cbi-section-node { background: transparent; box-shadow: none; }
+
+/* progress bars: Argon writes the label inside a 1rem bar (overflow hidden); theme blocks
+   draw thin bars (e.g. 8px) that clip it, so the label sits above the bar as in 21.02 bootstrap */
+.cbi-progressbar { background-color: var(--p21-bg); overflow: visible; margin: 1.5em 0 .3em; }
+.cbi-progressbar::after { top: auto; bottom: calc(100% + 3px); height: auto; line-height: 1.3;
+	font-size: .75rem; color: var(--p21-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ifacebox, .ifacebadge, td > .ifacebadge, .td > .ifacebadge,
+.network-status-table .ifacebox-body .ifacebadge,
+.cbi-value-field > ul > li .ifacebadge { background-color: var(--p21-hover); color: var(--p21-ink); }
+
+#syslog, .commandbox,
+[data-page="admin-system-startup"] textarea,
+[data-page="admin-system-crontab"] #view p textarea { background-color: var(--p21-bg); color: var(--p21-ink); }
+
+.cbi-section-error { background-color: var(--p21-card); }
+header .fill .status span[data-style="inactive"] { background-color: var(--p21-hover); }
+
+
+/* Argon forces color:#fff !important on its "primary" buttons. The theme decides which
+   of them are outlines (ink text) and which are filled (on-accent text): its blocks say
+   so per button through --on-color (25.12 bootstrap's variable), which wins when set
+   (e.g. blueprint's white-filled dialog Save button carries dark text). */
+.btn.primary, .cbi-page-actions .cbi-button-save, .cbi-page-actions .cbi-button-apply+.cbi-button-save, .cbi-button-add, .cbi-button-save, .cbi-button-positive, .cbi-button-link, .cbi-button[value="Enable"], .cbi-button[value="Scan"], .cbi-button[value^="Back"], .cbi-button-neutral[onclick="handleConfig(event)"],
+.cbi-page-actions .cbi-button-apply, .cbi-section-actions .cbi-button-edit, .cbi-button-edit, .cbi-button-apply, .cbi-button-reload, .cbi-button-action, .cbi-button[value="Submit"], .cbi-button[value="Upload"], .cbi-button[value$="Apply"], .cbi-button[onclick="addKey(event)"],
+.cbi-dynlist>.add-item .cbi-button-add {
+	color: var(--on-color, var(--p21-ink)) !important;
+}
+
+.btn, .cbi-button { color: var(--on-color, var(--p21-ink)); }
+
+/* filled buttons and every hover state: on-accent text (not in Save & Apply's open list,
+   which sits on the list surface) */
+.cbi-button-apply, .cbi-page-actions .cbi-button-apply, .btn.primary, .cbi-button-action.important,
+.cbi-dropdown.cbi-button-apply, .cbi-dropdown.cbi-button-apply > ul:not(.dropdown) li,
+.cbi-dropdown.cbi-button-apply > ul:not(.dropdown) span, .cbi-dropdown.cbi-button-apply > span,
+.btn:hover, .cbi-button:hover {
+	color: var(--on-color, var(--p21-on)) !important;
+}
+/* Argon fills the dynamic-list "+" with the accent whatever the theme says (its --on-color
+   describes an outline button there): always on-accent text */
+html:root .cbi-dynlist > .add-item .cbi-button-add,
+html:root .cbi-dynlist > .add-item .cbi-button-add:hover { color: var(--p21-on) !important; }
+
+/* Argon's remaining light defaults */
+h4 { color: var(--p21-ink); }
+.alert h4, .alert-message h4 { color: #111; }
+.tr.table-titles > .th, .tr.cbi-section-table-titles > .th,
+.table[width="100%"] > .tr:first-child > .td,
+[data-page="admin-network-diagnostics"] .tr > .td { background-color: transparent; color: var(--p21-dim); }
+#cbi-wireless .td { background-color: transparent; }
+header .fill .status span[data-style="active"] { background-color: var(--p21-accent); color: var(--p21-on); }
+.cbi-button.drag-handle { color: var(--p21-ink); }
+footer, footer div { color: var(--p21-ink); }
+[data-page="admin-system-opkg"] #maincontent > .container,
+#iptables, .Firewall form,
+#cbi-network > .cbi-section-node, #cbi-wireless > .cbi-section-node, #cbi-wireless > #wifi_assoclist_table,
+[data-page^="admin-system-admin"]:not(.node-main-login) .cbi-map:not(#cbi-dropbear) { background: transparent; box-shadow: none; }
+
+/* --- Footer ------------------------------------------------------------------ */
+
+footer, footer > a, footer a { color: var(--p21-dim); }
+
+/* --- Login page -------------------------------------------------------------- */
+
+.login-page .main-bg { background: transparent; }
+
+.login-page .login-container .login-form {
+	background: var(--p21-card);
+	-webkit-backdrop-filter: blur(14px);
+	backdrop-filter: blur(14px);
+	border-right: 1px solid var(--p21-rule);
+}
+
+.login-page .login-container .login-form .brand { color: var(--p21-accent); }
+.login-page .login-container .login-form .brand .icon { width: 48px; height: 48px; }
+
+.login-page .login-container .login-form .form-login .input-group input {
+	color: var(--p21-ink);
+	background: transparent;
+	border-color: var(--p21-rule);
+}
+
+.login-page .login-container .login-form .form-login .input-group::before { color: var(--p21-dim); }
+.login-page .login-container .login-form .cbi-button-apply { color: var(--p21-on); background: var(--p21-accent); }
+.login-page .login-container footer, .login-page .login-container footer a { color: var(--p21-dim); }
+
+/* open dropdown lists and dialogs float over content: opaque even when the theme's colours
+   are translucent (glass), or form text shows through them */
+:root:not([data-darkmode="true"]) { --p21-solid: #fff; }
+:root[data-darkmode="true"] { --p21-solid: #121418; }
+html:root :is(.modal, .cbi-dropdown[open] > ul.dropdown) {
+	background: linear-gradient(var(--p21-bg), var(--p21-bg)), var(--p21-solid);
+}
+

@@ -1,0 +1,8 @@
+
+/* Circadian on Argon: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+.table button.cbi-button-negative:not(:hover):not(:focus) { color: #e96367 !important; } /* was #e5484d: 3.87 -> 4.65:1 */
+.table.cbi-section-table button.cbi-button-negative.remove:not(:hover):not(:focus) { color: #e96367 !important; } /* was #e5484d: 3.87 -> 4.65:1 */
+.table.cbi-section-table button.cbi-button-remove:not(:hover):not(:focus) { color: #e96367 !important; } /* was #e5484d: 3.87 -> 4.65:1 */
+/* AUTO-CONTRAST END */

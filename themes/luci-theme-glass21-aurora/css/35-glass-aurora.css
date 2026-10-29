@@ -1,0 +1,27 @@
+
+/* Glass on Aurora: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.34 -> 11.36:1 */
+.cbi-tabmenu a { background: #506dd3 !important; } /* was #f3f5fc under #ffffff: 1.09 -> 4.70:1 */
+.cbi-tabmenu a { color: #fdfeff !important; } /* was #f3f5fc: 4.31 -> 4.65:1 */
+.cbi-tabmenu.mode a { background: #506dd3 !important; } /* was #f3f5fc under #ffffff: 1.09 -> 4.70:1 */
+.cbi-tabmenu.mode a { color: #fdfeff !important; } /* was #f3f5fc: 4.31 -> 4.65:1 */
+.ifacebadge em { color: #fcfdfe !important; } /* was #9aaee6: 2.15 -> 4.63:1 */
+.ifacebadge span { color: #ffffff !important; } /* was #111111: 1.85 -> 10.23:1 */
+.ifacebadge strong { color: #ffffff !important; } /* was #111111: 1.85 -> 10.23:1 */
+.modal.cbi-modal button.cbi-button-positive:not(:hover):not(:focus) { background: #675bf8 !important; } /* was #a29bfb under #ffffff: 2.44 -> 4.74:1 */
+.modal.cbi-modal button:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.46 -> 13.09:1 */
+.table button.cbi-button-negative:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.34 -> 9.55:1 */
+.table.cbi-section-table button.cbi-button-negative.remove:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.23 -> 15.53:1 */
+.table.cbi-section-table button.cbi-button-neutral.down:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.40 -> 13.68:1 */
+.table.cbi-section-table button.cbi-button-neutral.enable-disable:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.33 -> 14.34:1 */
+.table.cbi-section-table button.cbi-button-neutral.reconnect:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.40 -> 13.70:1 */
+.table.cbi-section-table button.cbi-button-neutral:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.40 -> 13.70:1 */
+.table.cbi-section-table button.cbi-button-remove:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.23 -> 14.82:1 */
+.table.cbi-section-table button.drag-handle:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 1.35 -> 13.34:1 */
+button.cbi-button-neutral:not(:hover):not(:focus) { color: #ffffff !important; } /* was #0b0d24: 2.39 -> 8.02:1 */
+button.login-submit:not(:hover):not(:focus) { background: #0079c7 !important; } /* was #8fd3ff under #ffffff: 1.62 -> 4.61:1 */
+span.ifacebadge { background: #46804e !important; } /* was #7ab783 under #ffffff: 2.35 -> 4.71:1 */
+span.ifacebadge { color: #ffffff !important; } /* was #111111: 1.44 -> 9.13:1 */
+/* AUTO-CONTRAST END */

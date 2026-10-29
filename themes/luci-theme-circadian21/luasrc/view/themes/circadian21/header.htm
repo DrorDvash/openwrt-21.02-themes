@@ -1,0 +1,99 @@
+<%#
+ Circadian theme, OpenWrt 21.02 port (luci-theme-circadian21).
+ Based on luci-theme-bootstrap (21.02) and luci-theme-circadian by vistrocity.
+ Copyright 2008 Steven Barth <steven@midlink.org>
+ Copyright 2008-2016 Jo-Philipp Wich <jow@openwrt.org>
+ Copyright 2012 David Menting <david@nut-bolt.nl>
+ Licensed to the public under the Apache License 2.0.
+-%>
+
+<%
+	local sys  = require "luci.sys"
+	local util = require "luci.util"
+	local http = require "luci.http"
+	local disp = require "luci.dispatcher"
+
+	local boardinfo = util.ubus("system", "board") or {}
+
+	local node = disp.context.dispatched
+
+	-- Circadian is dark-only: always render with the bootstrap dark palette enabled
+	local darkpref = "true"
+	local rkver = "1.0.4-1"
+
+	-- send as HTML5
+	http.prepare_content("text/html")
+-%>
+<!DOCTYPE html>
+<html lang="<%=luci.i18n.context.lang%>"<%= ifattr(darkpref ~= nil, "data-darkmode", darkpref) %>>
+	<head>
+		<meta charset="utf-8">
+		<title><%=striptags( (boardinfo.hostname or "?") .. ( (node and node.title) and ' - ' .. translate(node.title) or '')) %> - LuCI</title>
+		<% if darkpref == nil then %>
+			<script type="text/javascript">
+				var mediaQuery = window.matchMedia('(prefers-color-scheme: dark)'),
+				    rootElement = document.querySelector(':root'),
+				    setDarkMode = function(match) { rootElement.setAttribute('data-darkmode', match.matches) };
+
+				mediaQuery.addEventListener('change', setDarkMode);
+				setDarkMode(mediaQuery);
+			</script>
+		<% end %>
+		<meta name="theme-color" content="#080c18">
+			<script>(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-tod',h>=5&&h<9?'dawn':h>=9&&h<17?'day':h>=17&&h<20?'dusk':'night')})();</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="darkreader-lock">
+		<link rel="stylesheet" href="<%=media%>/cascade.css?v=<%=rkver%>">
+		<link rel="stylesheet" media="only screen and (max-device-width: 854px)" href="<%=media%>/mobile.css?v=<%=rkver%>" type="text/css" />
+		<link rel="icon" href="<%=media%>/logo_48.png" sizes="48x48">
+		<link rel="icon" href="<%=media%>/logo.svg" sizes="any">
+		<link rel="shortcut icon" href="<%=media%>/favicon.png">
+		<% if node and node.css then %>
+			<link rel="stylesheet" href="<%=resource%>/<%=node.css%>">
+		<% end -%>
+		<% if css then %>
+			<style title="text/css"><%= css %></style>
+		<% end -%>
+		<script src="<%=url('admin/translations', luci.i18n.context.lang)%>"></script>
+		<script src="<%=resource%>/cbi.js"></script>
+	</head>
+
+	<body class="lang_<%=luci.i18n.context.lang%> <% if node then %><%= striptags( node.title ) %><%- end %>" data-page="<%= pcdata(table.concat(disp.context.requestpath, "-")) %>">
+		<% if not blank_page then %>
+		<header>
+			<a class="brand" href="/"><%=striptags(boardinfo.hostname or "?")%></a>
+			<ul class="nav" id="topmenu" style="display:none"></ul>
+			<div class="hdr-clock" aria-hidden="true" id="hdr-clock"></div>
+			<div id="indicators" class="pull-right"></div>
+		</header>
+
+		<div id="maincontent" class="container">
+			<%- if luci.sys.process.info("uid") == 0 and luci.sys.user.getuser("root") and not luci.sys.user.getpasswd("root") then -%>
+				<div class="alert-message warning">
+					<h4><%:No password set!%></h4>
+					<p><%:There is no password set on this router. Please configure a root password to protect the web interface.%></p>
+					<% if disp.lookup("admin/system/admin") then %>
+					  <div class="right"><a class="btn" href="<%=url("admin/system/admin")%>"><%:Go to password configuration...%></a></div>
+					<% end %>
+				</div>
+			<%- end -%>
+
+			<%- if boardinfo.rootfs_type == "initramfs" then -%>
+				<div class="alert-message warning">
+					<h4><%:System running in recovery (initramfs) mode.%></h4>
+					<p><%:No changes to settings will be stored and are lost after rebooting. This mode should only be used to install a firmware upgrade%></p>
+					<% if disp.lookup("admin/system/flash") then %>
+					  <div class="right"><a class="btn" href="<%=url("admin/system/flash")%>"><%:Go to firmware upgrade...%></a></div>
+					<% end %>
+				</div>
+			<%- end -%>
+
+			<noscript>
+				<div class="alert-message warning">
+					<h4><%:JavaScript required!%></h4>
+					<p><%:You must enable JavaScript in your browser or LuCI will not work properly.%></p>
+				</div>
+			</noscript>
+
+			<div id="tabmenu" style="display:none"></div>
+		<% end %>

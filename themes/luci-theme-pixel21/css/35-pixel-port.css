@@ -1,0 +1,17 @@
+
+/* 8-bit-specific 21.02 port fixes (add rules found by tools/qa.py / tools/a11y.py) */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-host button.cbi-button-remove:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+#cbi-network-interface button.cbi-button-neutral.down:not(:hover):not(:focus) { color: #b896e5 !important; } /* was #ab84e0: 3.87 -> 4.65:1 */
+#cbi-network-interface button.cbi-button-neutral.reconnect:not(:hover):not(:focus) { color: #b896e5 !important; } /* was #ab84e0: 3.87 -> 4.65:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+#cbi-wireless-wifi-device button.cbi-button-neutral.enable-disable:not(:hover):not(:focus) { color: #b896e5 !important; } /* was #ab84e0: 3.87 -> 4.65:1 */
+#cbi-wireless-wifi-device button.cbi-button-neutral:not(:hover):not(:focus) { color: #b896e5 !important; } /* was #ab84e0: 3.87 -> 4.65:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+button.cbi-button-negative:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+button.cbi-button-neutral:not(:hover):not(:focus) { color: #b896e5 !important; } /* was #ab84e0: 3.87 -> 4.65:1 */
+/* AUTO-CONTRAST END */

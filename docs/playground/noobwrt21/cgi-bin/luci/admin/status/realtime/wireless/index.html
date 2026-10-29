@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"noobwrt21"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OpenWrt - Wireless - LuCI</title>
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="format-detection" content="telephone=no, email=no">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="OpenWrt - LuCI">
+	<meta name="theme-color" content="#5e72e4">
+	<link rel="icon" type="image/png" sizes="32x32" href="/openwrt-21.02-themes/playground/luci-static/noobwrt21/icon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/openwrt-21.02-themes/playground/luci-static/noobwrt21/icon/android-icon-192x192.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/openwrt-21.02-themes/playground/luci-static/noobwrt21/icon/apple-icon-144x144.png">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/noobwrt21/css/cascade.css?v=1.0.4-1">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/noobwrt21/css/dark.css?v=1.0.4-1" id="dark-theme-style" media="(prefers-color-scheme: dark)">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/noobwrt21/css/theme.css?v=1.0.4-1">
+	<script>
+		/* light/dark before the first paint: the toolbar's choice, else the browser's scheme */
+		(function () {
+			var s = null;
+			try { s = localStorage.getItem('noobwrt21.scheme'); } catch (e) {}
+			var l = document.getElementById('dark-theme-style');
+			if (s === 'dark' || s === 'light')
+				l.media = (s === 'dark') ? 'all' : 'not all';
+			var dark = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+			document.documentElement.setAttribute('data-darkmode', dark ? 'true' : 'false');
+		})();
+	</script>
+	<script src="/openwrt-21.02-themes/playground/translations-en.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+</head>
+
+<body
+	class="lang_en logged-in"
+	data-page="admin-status-realtime-wireless">
+	<script>
+		if (document.documentElement.getAttribute('data-darkmode') === 'true')
+			document.body.classList.add('dark-theme');
+	</script>
+
+	<div class="main">
+		<div class="main-left" id="mainmenu" style="display:none">
+			<div class="sidenav-header d-flex align-items-center">
+				<a class="brand" href="#">OpenWrt</a>
+				<div class="ml-auto">
+					<!-- Sidenav toggler -->
+					<div class="sidenav-toggler d-none d-xl-block active" data-action="sidenav-unpin"
+						data-target="#sidenav-main">
+						<div class="sidenav-toggler-inner">
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-right">
+			<header class="bg-primary">
+				<div class="fill">
+					<div class="container">
+						<div class="flex1">
+							<a class="showSide" href="#" aria-label="Menu"></a>
+							<a class="brand" href="#">OpenWrt</a>
+						</div>
+						<div class="status" id="indicators"></div>
+					</div>
+				</div>
+			</header>
+			<div class="darkMask"></div>
+			<div id="maincontent">
+				<div class="container"><noscript>
+						<div class="alert-message error">
+							<h4>JavaScript required!</h4>
+							<p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+						</div>
+					</noscript>
+
+					<div id="tabmenu" style="display:none"></div>
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/noobwrt21","documentroot":"\/www","pathinfo":"\/admin\/status\/realtime\/wireless","apply_display":1.5,"requestpath":["admin","status","realtime","wireless"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/noobwrt21\/cgi-bin\/luci","dispatchpath":["admin","status","realtime","wireless"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"view","path":"status\/wireless"},"order":3,"readonly":true,"depends":{"uci":{"wireless":{"@wifi-device":true}}},"title":"Wireless"},"pollinterval":5});
+</script>
+
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+	<script type="text/javascript">
+		L.require('ui').then(function(ui) {
+			ui.instantiateView('status/wireless');
+		});
+	</script>
+</div>
+
+
+				</div>
+				<footer class="mobile-hide">
+					<div class="footer-content">
+						<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank" rel="noreferrer">Powered by LuCI openwrt-21.02 branch (git-23.093.57360-e98243e)</a>
+						<span class="footer-separator">|</span>
+						<a href="https://github.com/nooblk-98/luci-theme-noobwrt" target="_blank" rel="noreferrer">NoobWrt Theme 1.1.7 (21.02 port)</a>
+						<span class="footer-separator">|</span>
+						<span> OpenWrt 21.02.7 r16847-f8282da11e</span>
+						<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+					</div>
+				</footer>
+			</div>
+		</div>
+
+<div class="toolbar-wrapper" id="toolbar-wrapper">
+	<button class="toolbar-pull-tab" id="toolbar-pull-tab" type="button" aria-label="Toggle toolbar" title="Toggle toolbar">
+		<svg viewBox="0 0 10 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<polyline points="7,2 2,8 7,14"></polyline>
+		</svg>
+	</button>
+
+	<div class="toolbar-container">
+		<button class="toolbar-item theme-toggle" id="theme-toggle" type="button" title="Light / dark" aria-label="Light / dark">
+			<svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+				<circle cx="12" cy="12" r="5"></circle>
+				<line x1="12" y1="1" x2="12" y2="3"></line>
+				<line x1="12" y1="21" x2="12" y2="23"></line>
+				<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+				<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+				<line x1="1" y1="12" x2="3" y2="12"></line>
+				<line x1="21" y1="12" x2="23" y2="12"></line>
+				<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+				<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+			</svg>
+			<svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;" aria-hidden="true">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</button>
+
+		<div class="toolbar-menu" id="toolbar-menu">
+			
+			<a href="/openwrt-21.02-themes/playground/noobwrt21/cgi-bin/luci/admin/status/overview" class="toolbar-item" title="Overview" data-path="admin/status/overview" style="display:none">
+				<img src="/openwrt-21.02-themes/playground/luci-static/noobwrt21/navbar/home.png" alt="Overview">
+			</a>
+			
+			<a href="/openwrt-21.02-themes/playground/noobwrt21/cgi-bin/luci/admin/network/network" class="toolbar-item" title="Interfaces" data-path="admin/network/network" style="display:none">
+				<img src="/openwrt-21.02-themes/playground/luci-static/noobwrt21/navbar/network.png" alt="Interfaces">
+			</a>
+			
+			<a href="/openwrt-21.02-themes/playground/noobwrt21/cgi-bin/luci/admin/network/wireless" class="toolbar-item" title="Wireless" data-path="admin/network/wireless" style="display:none">
+				<img src="/openwrt-21.02-themes/playground/luci-static/noobwrt21/navbar/wifi.png" alt="Wireless">
+			</a>
+			
+			<a href="/openwrt-21.02-themes/playground/noobwrt21/cgi-bin/luci/admin/network/firewall" class="toolbar-item" title="Firewall" data-path="admin/network/firewall" style="display:none">
+				<img src="/openwrt-21.02-themes/playground/luci-static/noobwrt21/navbar/firewall.png" alt="Firewall">
+			</a>
+			
+			<a href="/openwrt-21.02-themes/playground/noobwrt21/cgi-bin/luci/admin/status/logs" class="toolbar-item" title="System Log" data-path="admin/status/logs" style="display:none">
+				<img src="/openwrt-21.02-themes/playground/luci-static/noobwrt21/navbar/info.png" alt="System Log">
+			</a>
+			
+			<a href="/openwrt-21.02-themes/playground/noobwrt21/cgi-bin/luci/admin/services/ttyd" class="toolbar-item" title="Terminal" data-path="admin/services/ttyd" style="display:none">
+				<img src="/openwrt-21.02-themes/playground/luci-static/noobwrt21/navbar/terminal.png" alt="Terminal">
+			</a>
+			
+			<a href="/openwrt-21.02-themes/playground/noobwrt21/cgi-bin/luci/admin/system/system" class="toolbar-item" title="System" data-path="admin/system/system" style="display:none">
+				<img src="/openwrt-21.02-themes/playground/luci-static/noobwrt21/navbar/settings.png" alt="System">
+			</a>
+			
+		</div>
+	</div>
+</div>
+<button class="noob-menu-fab" id="noob-menu-fab" type="button" aria-label="Menu" title="Menu" aria-controls="mainmenu" aria-expanded="false">
+	<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+		<line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line>
+	</svg>
+</button>
+
+<script type="text/javascript">//<![CDATA[
+(function() {
+	var KEY = 'noobwrt21.scheme';
+	var root = document.documentElement;
+	var link = document.getElementById('dark-theme-style');
+	var themeToggle = document.getElementById('theme-toggle');
+	var sunIcon = themeToggle.querySelector('.sun-icon');
+	var moonIcon = themeToggle.querySelector('.moon-icon');
+	var toolbarWrapper = document.getElementById('toolbar-wrapper');
+	var pullTab = document.getElementById('toolbar-pull-tab');
+	var scheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+	function saved() {
+		try { return localStorage.getItem(KEY); } catch (e) { return null; }
+	}
+
+	function show(dark) {
+		root.setAttribute('data-darkmode', dark ? 'true' : 'false');
+		document.body.classList.toggle('dark-theme', dark);
+		sunIcon.style.display  = dark ? 'none'  : 'block';
+		moonIcon.style.display = dark ? 'block' : 'none';
+	}
+
+	/* no choice saved: follow the browser, also when it switches while the page is open */
+	scheme.addEventListener('change', function(e) {
+		if (!saved())
+			show(e.matches);
+	});
+	show(root.getAttribute('data-darkmode') === 'true');
+
+	themeToggle.addEventListener('click', function(e) {
+		e.preventDefault();
+		var dark = root.getAttribute('data-darkmode') !== 'true';
+		link.media = dark ? 'all' : 'not all';
+		try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch (e) {}
+		show(dark);
+	});
+
+	/* show the pages LuCI's menu has (the menu script loads it anyway; it is cached) */
+	L.require('ui').then(function(ui) { return ui.menu.load(); }).then(function(tree) {
+		document.querySelectorAll('#toolbar-menu a[data-path]').forEach(function(a) {
+			var n = tree;
+			a.getAttribute('data-path').split('/').forEach(function(p) { n = n && n.children && n.children[p]; });
+			if (n && n.satisfied !== false)
+				a.style.display = '';
+		});
+	});
+
+	/* ---- Toolbar slide hide / show ---- */
+	function applyToolbarState(hidden) {
+		toolbarWrapper.classList.toggle('hidden', hidden);
+		toolbarWrapper.classList.remove('peek');
+		pullTab.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+		document.body.classList.toggle('toolbar-hidden', hidden);
+	}
+
+	/* no choice saved: shown on wider screens, only its tab on phones (it would cover content) */
+	var state = null;
+	try { state = localStorage.getItem('noobwrt21.toolbar'); } catch (e) {}
+	applyToolbarState(state ? state === 'hidden' : window.matchMedia('(max-width: 768px)').matches);
+
+	/* click the tab: hide / show for good */
+	pullTab.addEventListener('click', function(e) {
+		e.preventDefault();
+		var hidden = !toolbarWrapper.classList.contains('hidden');
+		applyToolbarState(hidden);
+		try { localStorage.setItem('noobwrt21.toolbar', hidden ? 'hidden' : 'visible'); } catch (e) {}
+	});
+
+	/* hover while hidden: slide in for a peek, back out on leave */
+	var peekTimeout = null;
+	toolbarWrapper.addEventListener('mouseenter', function() {
+		clearTimeout(peekTimeout);
+		if (toolbarWrapper.classList.contains('hidden'))
+			toolbarWrapper.classList.add('peek');
+	});
+	toolbarWrapper.addEventListener('mouseleave', function() {
+		if (toolbarWrapper.classList.contains('hidden'))
+			peekTimeout = setTimeout(function() { toolbarWrapper.classList.remove('peek'); }, 200);
+	});
+})();
+/* phones: the floating button stands in for the header's hamburger (the header is hidden) */
+(function() {
+	var fab = document.getElementById('noob-menu-fab'), side = document.getElementById('mainmenu');
+	if (!fab) return;
+	fab.addEventListener('click', function() {
+		var burger = document.querySelector('a.showSide');
+		if (burger) burger.click();
+		fab.setAttribute('aria-expanded', side && side.classList.contains('active') ? 'true' : 'false');
+	});
+	var mask = document.querySelector('.darkMask');
+	if (mask) mask.addEventListener('click', function() { fab.setAttribute('aria-expanded', 'false'); });
+})();
+//]]></script>
+
+
+<script>
+	var luciLocation = ["admin","status","realtime","wireless"];
+	var winHeight = window.innerHeight;
+	window.addEventListener('resize', function () {
+		if (window.innerWidth < 600) {
+			var ftc = document.querySelector('.ftc');
+			if (ftc)
+				ftc.style.bottom = (window.innerHeight - winHeight + 30) + 'px';
+		}
+	});
+</script>
+<script type="text/javascript">L.require('menu-noobwrt21')</script>
+<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

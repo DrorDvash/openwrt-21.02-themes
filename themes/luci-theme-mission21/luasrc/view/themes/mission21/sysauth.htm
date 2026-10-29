@@ -1,0 +1,78 @@
+<%#
+ Mission Control theme, OpenWrt 21.02 port (luci-theme-mission21).
+ Copyright 2021 Jo-Philipp Wich <jo@mein.io>
+ Licensed to the public under the Apache License 2.0.
+-%>
+
+<%
+	-- tell the theme's templates to not render header and footer
+	blank_page = true
+%>
+
+<%+header%>
+
+<section hidden>
+	<form method="post" class="cbi-map">
+		<div class="cbi-section">
+			<div class="cbi-section-node">
+				<div class="cbi-value">
+					<label class="cbi-value-title" for="luci_username"><%:Username%></label>
+					<div class="cbi-value-field">
+						<input name="luci_username" id="luci_username" type="text" autocomplete="username" <%=attr("value", duser)%>>
+					</div>
+				</div>
+				<div class="cbi-value">
+					<label class="cbi-value-title" for="luci_password"><%:Password%></label>
+					<div class="cbi-value-field">
+						<input name="luci_password" id="luci_password" type="password" autocomplete="current-password">
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<hr>
+
+	<% if fuser then %>
+	<div class="alert-message error">
+		<%:Invalid username and/or password! Please try again.%>
+	</div>
+	<% end %>
+
+	<button class="btn cbi-button-positive important"><%:Login%></button>
+</section>
+
+<div id="view">
+	<div class="spinning"><%:Loading view…%></div>
+	<script type="text/javascript">
+		/* Inlined equivalent of view/bootstrap/sysauth.js, so this package
+		   only ships files under its own theme paths. */
+		L.require('ui').then(function(ui) {
+			var form = document.querySelector('form'),
+			    btn = document.querySelector('button');
+
+			var dlg = ui.showModal(
+				_('Authorization Required'),
+				[].slice.call(document.querySelectorAll('section > *')),
+				'login'
+			);
+
+			form.addEventListener('keypress', function(ev) {
+				if (ev.key == 'Enter')
+					btn.click();
+			});
+
+			btn.addEventListener('click', function() {
+				dlg.querySelectorAll('*').forEach(function(node) { node.style.display = 'none' });
+				dlg.appendChild(E('div', { 'class': 'spinning' }, _('Logging in…')));
+
+				form.submit()
+			});
+
+			L.dom.content(document.querySelector('#view'), null);
+			document.querySelector('input[type="password"]').focus();
+		});
+	</script>
+</div>
+
+<%+footer%>

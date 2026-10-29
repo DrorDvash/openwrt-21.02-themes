@@ -1,0 +1,225 @@
+/* Obsidian override block (vistrocity/openwrt-luci-themes), content rules only;
+   15 bootstrap top-bar rules removed by tools/port-theme.py --baseline argon */
+
+
+:root, :root[data-darkmode="true"] {
+	--background-color-delta-l-sign: 1;
+	--background-color-h: 214;
+	--background-color-s: 28%;
+	--background-color-l: 8%;
+
+	--text-color-delta-l-sign: -1;
+	--text-color-h: 210;
+	--text-color-s: 25%;
+	--text-color-l: 96%;
+
+	--border-color-delta-l-sign: 1;
+
+	--primary-color-high: #2dd4bf;
+	--primary-color-medium: #14b8a6;
+	--primary-color-low: #0d9488;
+	--on-primary-color: #04211d;
+
+	--error-color-high-rgb: 248, 113, 113;
+	--error-color-medium: #ef4444;
+	--error-color-low: #dc2626;
+
+	--success-color-high-rgb: 52, 211, 153;
+	--success-color-medium: #10b981;
+	--success-color-low: #059669;
+
+	--warn-color-high: #fbbf24;
+	--warn-color-medium: #f59e0b;
+	--warn-color-low: #d97706;
+	--on-warn-color: #231600;
+
+	--obsidian-radius: 10px;
+	--obsidian-card: #111a24;
+	--obsidian-card-raised: #16212d;
+	--obsidian-line: #223244;
+	--obsidian-glow: 45, 212, 191;
+
+	color-scheme: dark;
+}
+
+body {
+	background:
+		radial-gradient(1200px 500px at 85% -10%, rgba(var(--obsidian-glow), .08), transparent 60%),
+		#0b1118;
+	background-attachment: fixed;
+	padding: 0 5px 5px;
+}
+
+::selection { background: rgba(var(--obsidian-glow), .35); }
+
+a { color: var(--primary-color-high); }
+a:hover { color: #7ef0e0; }
+
+.cbi-map > .cbi-section, .cbi-section.cbi-tblsection, #view > .cbi-section, .cbi-map {
+	scroll-margin-top: 60px;
+}
+
+.cbi-section {
+	background: var(--obsidian-card);
+	border: 1px solid var(--obsidian-line);
+	border-radius: var(--obsidian-radius);
+	padding: 14px 16px;
+	margin-bottom: 16px;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset, 0 8px 22px rgba(0, 0, 0, .25);
+}
+
+.cbi-section > h3, h2, h3 {
+	color: #e8f1f8;
+	font-weight: 600;
+	letter-spacing: .01em;
+}
+
+h2 { border-bottom: 1px solid var(--obsidian-line); padding-bottom: 6px; }
+
+.cbi-value { border-bottom-color: var(--obsidian-line); }
+
+.cbi-section-node > .cbi-value:last-child { border-bottom: 0; }
+
+.table .th {
+	background: var(--obsidian-card-raised);
+	color: #9fb3c8;
+	text-transform: uppercase;
+	font-size: 11px;
+	letter-spacing: .06em;
+}
+
+.table .tr:nth-child(odd) .td { background: rgba(255, 255, 255, .012); }
+.table .tr:hover .td { background: rgba(var(--obsidian-glow), .05); }
+
+input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], textarea, select, .cbi-dropdown:not(.btn):not(.cbi-button) {
+	background-color: #0d151e;
+	color: #e8f1f8;
+	border: 1px solid var(--obsidian-line);
+	border-radius: 8px;
+	box-shadow: none;
+}
+
+input:focus, textarea:focus, select:focus, .cbi-dropdown:focus, .cbi-dropdown[open], .btn:focus, .cbi-button:focus {
+	--focus-color-rgb: 45, 212, 191;
+	border-color: rgba(var(--focus-color-rgb), .85) !important;
+	box-shadow: 0 0 0 3px rgba(var(--focus-color-rgb), .18) !important;
+}
+
+.btn, .cbi-button, input[type="button"], input[type="submit"], input[type="reset"] {
+	background: var(--obsidian-card-raised);
+	color: var(--on-color, #d6e3ef);
+	border: 1px solid var(--obsidian-line);
+	border-radius: 8px;
+	text-shadow: none;
+	box-shadow: none;
+	transition: background .15s, border-color .15s, box-shadow .15s, transform .05s;
+}
+
+.btn:hover, .cbi-button:hover {
+	background: #1c2b3a;
+}
+
+.btn:active, .cbi-button:active { transform: translateY(1px); }
+
+.cbi-button-action, .cbi-button-apply, .cbi-button-edit, .cbi-button-reload, .btn.primary, .cbi-button-action.important {
+	--on-color: var(--on-primary-color);
+	background: linear-gradient(var(--primary-color-high), var(--primary-color-medium));
+	border-color: var(--primary-color-medium);
+	font-weight: 600;
+}
+
+.cbi-page-actions .cbi-button-save {
+	--on-color: #04211d;
+	background: linear-gradient(var(--success-color-high), var(--success-color-medium));
+	border-color: var(--success-color-medium);
+	font-weight: 600;
+}
+
+.cbi-page-actions .cbi-button-apply + .cbi-button-save, .cbi-page-actions .cbi-button-negative + .cbi-button-save {
+	--on-color: var(--primary-color-high);
+	background: transparent;
+	border-color: var(--primary-color-medium);
+	font-weight: 600;
+}
+
+.cbi-page-actions .cbi-button-apply + .cbi-button-save:hover {
+	background: rgba(var(--obsidian-glow), .12);
+}
+
+.cbi-button-action:hover, .cbi-button-apply:hover, .cbi-button-edit:hover, .cbi-button-reload:hover, .btn.primary:hover {
+	background: linear-gradient(#5eead4, var(--primary-color-high));
+}
+
+.cbi-button-negative, .cbi-button-remove, .cbi-button-reset {
+	background: rgba(var(--error-color-high-rgb), .12);
+	border-color: rgba(var(--error-color-high-rgb), .5);
+}
+
+.cbi-button-negative:hover, .cbi-button-remove:hover, .cbi-button-reset:hover {
+	background: rgba(var(--error-color-high-rgb), .22);
+}
+
+.cbi-tabmenu li.cbi-tab a, .cbi-tabmenu li a { color: #9fb3c8; }
+
+.cbi-tabmenu li.cbi-tab a {
+	color: var(--primary-color-high);
+	border-bottom-color: var(--primary-color-high);
+}
+
+.alert-message, .alert-message.warning {
+	border-radius: var(--obsidian-radius);
+	border: 1px solid rgba(251, 191, 36, .35);
+	background: rgba(251, 191, 36, .08);
+	color: #fde9a8;
+	text-shadow: none;
+}
+
+.alert-message.danger, .alert-message.error {
+	border-color: rgba(var(--error-color-high-rgb), .45);
+	background: rgba(var(--error-color-high-rgb), .10);
+	color: #fecaca;
+}
+
+.alert-message.success, .alert-message.info {
+	border-color: rgba(var(--obsidian-glow), .4);
+	background: rgba(var(--obsidian-glow), .08);
+	color: #b9f5ec;
+}
+
+.modal {
+	background: var(--obsidian-card-raised);
+	border: 1px solid var(--obsidian-line);
+	border-radius: 14px;
+	box-shadow: 0 30px 80px rgba(0, 0, 0, .65);
+}
+
+#modal_overlay { background: rgba(4, 8, 12, .72); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+
+.cbi-progressbar {
+	border-color: var(--obsidian-line);
+	background: #0d151e;
+	border-radius: 999px;
+}
+
+.cbi-progressbar::before { color: var(--text-color-high); }
+
+.cbi-progressbar > div {
+	background: linear-gradient(90deg, var(--primary-color-low), var(--primary-color-high));
+	border-radius: 999px;
+	box-shadow: 0 0 10px rgba(var(--obsidian-glow), .5);
+}
+
+.ifacebox, .ifacebadge {
+	background: var(--obsidian-card-raised);
+	border-color: var(--obsidian-line);
+	text-shadow: none;
+	box-shadow: none;
+	border-radius: 8px;
+}
+
+* { scrollbar-color: #2a3d52 #0b1118; scrollbar-width: thin; }
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+	* { transition: none !important; animation: none !important; }
+}

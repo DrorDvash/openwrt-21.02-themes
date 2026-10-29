@@ -1,0 +1,62 @@
+/* ==========================================================================
+ * Edge port layer (tools/baselines/edge-template/30-edge-port.css): Edge's
+ * stylesheet on the Argon 2.3.1 frame, then the theme-independent 21.02 fixes.
+ * ========================================================================== */
+
+:root {
+	--p21-bg: #f4f5fa;
+	--p21-card: #fff;
+	--p21-ink: #32325d;
+	--p21-dim: #525f7f;
+	--p21-rule: #dee2e6;
+	--p21-hover: #f0f2f8;
+	--p21-accent: #5a8dee;
+	--p21-accent2: #3c6fd8;
+	--p21-on: #fff;
+	--p21-head: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0s !important;
+		transition-delay: 0s !important;
+		animation-duration: 0s !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* Edge sizes the content column with float + width: calc(100% - 13rem) next to a fixed
+   sidebar; Argon 2.3.1's .main is a flex row whose .main-right grows to the full width,
+   which put the content under the sidebar: keep Edge's width, right-aligned */
+@media screen and (min-width: 769px) {
+	.main > .main-right { flex: 0 0 auto; margin-left: auto; }
+}
+
+/* the brand used Argon's TypoGraphica font, which the port does not ship */
+.main-left .sidenav-header .brand,
+header .brand { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 600; letter-spacing: .02em; }
+
+/* Argon's base clips #view (overflow:hidden, only for its rounded corners). LuCI sizes a list
+   to the scroll container further out, so #view cut the bottom off Save & Apply's list, and
+   focusing a hovered item scrolled #view itself: the page jumped up */
+#view { overflow: visible; }
+
+/* the light/dark button (dark-button.htm; only themes with a dark.css have it): Edge hides
+   its top bar on wide screens, so it floats: top right, on phones bottom right */
+.p21-scheme {
+	position: fixed; top: 14px; right: 18px; z-index: 900;
+	display: inline-flex; align-items: center; justify-content: center;
+	width: 38px !important; min-width: 0 !important; height: 38px !important; padding: 0 !important; margin: 0;
+	cursor: pointer; color: #32325d; line-height: 1;
+	border: 1px solid rgba(0, 0, 0, .12); border-radius: 50%; background: #fff;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+}
+@media screen and (max-width: 768px) { .p21-scheme { top: auto; bottom: 18px; } }
+.p21-scheme svg { width: 18px; height: 18px; display: none; }
+html[data-scheme="auto"] .p21-scheme .i-auto, html[data-scheme="light"] .p21-scheme .i-light,
+html[data-scheme="dark"] .p21-scheme .i-dark { display: block; }
+html[data-darkmode="true"] .p21-scheme { background: #232936; border-color: rgba(255, 255, 255, .2); color: #e4e8ef; }
+.p21-scheme:focus-visible { outline: 2px solid #5a8dee; outline-offset: 2px; }

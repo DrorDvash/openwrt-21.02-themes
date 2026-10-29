@@ -1,0 +1,10 @@
+#!/bin/sh
+# Drop LuCI caches once more after the files are gone, and remove the theme's
+# own directories (opkg only tracks files). rmdir only removes empty dirs.
+[ -n "${IPKG_INSTROOT}" ] && exit 0
+if [ "$1" != "upgrade" ]; then
+	rmdir /www/luci-static/brutal21/*/*/* /www/luci-static/brutal21/*/* /www/luci-static/brutal21/* 2>/dev/null
+	rmdir /www/luci-static/brutal21 /usr/lib/lua/luci/view/themes/brutal21 2>/dev/null
+fi
+rm -rf /tmp/luci-*
+exit 0

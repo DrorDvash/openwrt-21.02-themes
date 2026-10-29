@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"aurora21"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+		<meta charset="utf-8">
+		<title>Wireless - OpenWrt</title>
+		
+		<script>
+			(function () {
+				var t = localStorage.getItem('aurora.theme') || 'device';
+				var dark = t === 'dark' || (t === 'device' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+				document.documentElement.setAttribute('data-darkmode', String(dark));
+				
+			})();
+		</script>
+		
+		<script>
+			const setTheme = (theme) => {
+				const current = ['light', 'dark', 'device'].includes(theme) ? theme : 'device';
+				const isDark = current === 'dark' || (current === 'device' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+				const next = String(isDark);
+				const prev = document.documentElement.getAttribute('data-darkmode');
+				const apply = () => document.documentElement.setAttribute('data-darkmode', next);
+				const navOpen = document.body?.classList.contains('mobile-navigation-open');
+				if (prev !== null && prev !== next && document.startViewTransition && !navOpen &&
+					!window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+					document.startViewTransition(window.ViewTransitionTypeSet ? { update: apply, types: ['theme'] } : apply);
+				else
+					apply();
+				localStorage.setItem('aurora.theme', current);
+			};
+			const syncSwitchers = () => {
+				const current = localStorage.getItem('aurora.theme') || 'device';
+				document.querySelectorAll('.theme-switcher .theme-option').forEach(opt => {
+					const active = opt.dataset.theme === current;
+					opt.classList.toggle('active', active);
+					opt.querySelector('input[type="radio"]')?.setAttribute('checked', active);
+				});
+			};
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+				if ((localStorage.getItem('aurora.theme') || 'device') === 'device') setTheme('device'), syncSwitchers();
+			});
+			document.addEventListener('DOMContentLoaded', () => {
+				syncSwitchers();
+				document.querySelectorAll('.theme-switcher .theme-option').forEach(opt =>
+					opt.addEventListener('click', () => (setTheme(opt.dataset.theme), syncSwitchers())));
+			});
+		</script>
+		
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+		<meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+		<meta name="color-scheme" content="light dark">
+		
+		<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/aurora21/main.css?v=1.0.4-1" data-luci-shell>
+		
+		<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/aurora21/css/theme.css?v=1.0.4-1" data-luci-shell>
+		<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/aurora21/images/logo.svg?v=1.0.4-1" sizes="any" type="image/svg+xml">
+		<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/aurora21/images/favicon.png" sizes="32x32">
+		<link rel="apple-touch-icon" href="/openwrt-21.02-themes/playground/luci-static/aurora21/images/favicon.png">
+		<script src="/openwrt-21.02-themes/playground/translations-en.js"></script>
+		<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js"></script>
+	</head>
+
+	<body class="lang_en" data-page="admin-network-wireless" data-nav-type="mega-menu" data-asset-version="1.0.4-1" data-nav-stamp="mega-menu:en:root:1.0.4-1">
+		
+		
+		<header>
+			<div class="header-content">
+				<div class="navigation-controls">
+					<button class="navigation-toggle" id="navigation-toggle" type="button" title="Navigation" aria-label="Navigation" aria-controls="mobile-menu-overlay" aria-expanded="false">
+						<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<line class="navigation-toggle-line navigation-toggle-line-top" x1="2.5" y1="5" x2="17.5" y2="5"/>
+							<line class="navigation-toggle-line navigation-toggle-line-middle" x1="2.5" y1="10" x2="17.5" y2="10"/>
+							<line class="navigation-toggle-line navigation-toggle-line-bottom" x1="2.5" y1="15" x2="17.5" y2="15"/>
+						</svg>
+					</button>
+				</div>
+				<a class="brand" href="/">OpenWrt</a>
+				<ul class="nav" id="topmenu" style="display:none"></ul>
+				
+				<button class="cmdk-trigger" id="cmdk-trigger" type="button" aria-label="Navigation"></button>
+				<div id="indicators" class="pull-right"></div>
+			</div>
+		
+			<div class="desktop-menu-container">
+				<div class="desktop-menu-sheet"><div class="desktop-menu-canvas"></div></div>
+				<div class="desktop-menu-board" aria-hidden="true"><span class="board-label">Device</span>
+					<span class="board-line board-line-host" title="OpenWrt"><span class="board-text">OpenWrt</span></span>
+					
+					<span class="board-line board-line-model" title="GL.iNet GL-MT6000"><span class="board-text">GL.iNet GL-MT6000</span></span>
+					
+					
+					<span class="board-line board-line-firmware" title="OpenWrt 21.02.7 r16847-f8282da11e"><span class="board-text">OpenWrt 21.02.7 r16847-f8282da11e</span></span>
+					
+					
+					<span class="board-line board-line-kernel" title="5.4.211"><span class="board-text">5.4.211</span></span>
+					
+				</div>
+			</div>
+		</header>
+
+		<div class="desktop-menu-overlay"></div>
+		
+
+		
+		<script>
+			
+			/* paint the menu cached by menu-aurora21.js on its last render, inert until the module renders over it */
+			(() => {
+				try {
+					const body = document.body, cache = JSON.parse(sessionStorage.getItem('aurora.nav'));
+					const luci = Object.values(JSON.parse(sessionStorage.getItem('luci-session-store')) ?? {})[0];
+					if (!luci?.menu || cache?.[0] !== body.dataset.navStamp) return;
+					for (const id in cache[1]) {
+						const el = document.getElementById(id);
+						el.innerHTML = cache[1][id];
+						el.style.display = '';
+						el.dataset.restored = '';
+						el.inert = true;
+					}
+					
+				} catch (e) {}
+			})();
+		</script>
+
+		<div class="mobile-menu-overlay" id="mobile-menu-overlay">
+			<nav class="mobile-nav" aria-label="Navigation">
+				<div class="mobile-nav-body">
+					<div class="mobile-nav-label">Navigation</div>
+					<ul class="mobile-nav-list" id="mobile-nav-list">
+					</ul>
+				</div>
+				<div class="mobile-nav-footer">
+					<div class="mobile-nav-footer-action" id="mobile-nav-footer-action"></div>
+					
+					<div class="theme-switcher mobile">
+	<label class="theme-option active" data-theme="device">
+		<input type="radio" name="mobile-theme" value="device" checked>
+		<span class="theme-icon">
+			<svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 3.25C0.5 1.45507 1.95507 0 3.75 0H8.25C10.0449 0 11.5 1.45507 11.5 3.25V11.25V12H10.75H1.25H0.5V11.25V3.25ZM3.75 1.5C2.7835 1.5 2 2.2835 2 3.25V10.5H10V3.25C10 2.2835 9.2165 1.5 8.25 1.5H3.75ZM3 3.5C3 2.94772 3.44772 2.5 4 2.5H8C8.55228 2.5 9 2.94772 9 3.5V7H3V3.5ZM6.5 9.5H9V8H6.5V9.5Z" fill="currentColor" transform="translate(2.5, 2)"></path></svg>
+		</span>
+	</label>
+	<label class="theme-option" data-theme="light">
+		<input type="radio" name="mobile-theme" value="light">
+		<span class="theme-icon">
+			<svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.75 1V0.25H6.25V1V1.25V2H7.75V1.25V1ZM7 9C8.10457 9 9 8.10457 9 7C9 5.89543 8.10457 5 7 5C5.89543 5 5 5.89543 5 7C5 8.10457 5.89543 9 7 9ZM7 10.5C8.933 10.5 10.5 8.933 10.5 7C10.5 5.067 8.933 3.5 7 3.5C5.067 3.5 3.5 5.067 3.5 7C3.5 8.933 5.067 10.5 7 10.5ZM7.75 12V12.75V13V13.75H6.25V13V12.75V12H7.75ZM12 6.25H12.75H13H13.75V7.75H13H12.75H12V6.25ZM1 6.25H0.25V7.75H1H1.25H2V6.25H1.25H1ZM10.0052 2.93414L10.5355 2.40381L10.7123 2.22703L11.2426 1.6967L12.3033 2.75736L11.773 3.28769L11.5962 3.46447L11.0659 3.9948L10.0052 2.93414ZM2.22703 10.7123L1.6967 11.2426L2.75736 12.3033L3.28769 11.773L3.46447 11.5962L3.9948 11.0659L2.93414 10.0052L2.40381 10.5355L2.22703 10.7123ZM2.93414 3.9948L2.40381 3.46447L2.22703 3.28769L1.6967 2.75736L2.75736 1.6967L3.28769 2.22703L3.46447 2.40381L3.9948 2.93414L2.93414 3.9948ZM10.7123 11.773L11.2426 12.3033L12.3033 11.2426L11.773 10.7123L11.5962 10.5355L11.0659 10.0052L10.0052 11.0659L10.5355 11.5962L10.7123 11.773Z" fill="currentColor" transform="translate(1.25, 1.25)"></path></svg>
+		</span>
+	</label>
+	<label class="theme-option" data-theme="dark">
+		<input type="radio" name="mobile-theme" value="dark">
+		<span class="theme-icon">
+			<svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 0.25V1V1.5H11L11.75 1.5V3H11H10.5V3.5V4.25H9V3.5V3H8.5H7.75V1.5H8.5H9V1V0.25H10.5ZM3.25514 2.75496C2.33413 3.53491 1.75 4.69972 1.75 6C1.75 8.34721 3.65279 10.25 6 10.25C7.30029 10.25 8.4651 9.66587 9.24505 8.74485C9.16377 8.74827 9.08207 8.74999 9 8.74999C5.82436 8.74999 3.25 6.17563 3.25 2.99999C3.25 2.91792 3.25172 2.83623 3.25514 2.75496ZM0.25 6C0.25 3.51072 1.83142 1.39271 4.042 0.592193L5.00256 1.55275C4.83933 2.00347 4.75 2.49047 4.75 2.99999C4.75 5.3472 6.65279 7.24999 9 7.24999C9.50953 7.24999 9.99653 7.16065 10.4473 6.99743L11.4078 7.95798C10.6073 10.1686 8.48929 11.75 6 11.75C2.82436 11.75 0.25 9.17564 0.25 6Z" fill="currentColor" transform="translate(2.25, 2.25)"></path></svg>
+		</span>
+	</label>
+</div>
+
+					
+				</div>
+			</nav>
+		</div>
+
+		<div id="maincontent" tabindex="-1"><noscript>
+				<div class="alert-message warning">
+					<h4>JavaScript required!</h4>
+					<p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+				</div>
+			</noscript>
+
+			<div id="tabmenu" style="display:none"></div>
+		
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/aurora21","documentroot":"\/www","pathinfo":"\/admin\/network\/wireless","apply_display":1.5,"requestpath":["admin","network","wireless"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/aurora21\/cgi-bin\/luci","dispatchpath":["admin","network","wireless"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"view","path":"network\/wireless"},"order":15,"readonly":false,"depends":{"acl":["luci-mod-network-config"],"uci":{"wireless":{"@wifi-device":true}}},"title":"Wireless"},"pollinterval":5});
+</script>
+
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+	<script type="text/javascript">
+		L.require('ui').then(function(ui) {
+			ui.instantiateView('network/wireless');
+		});
+	</script>
+</div>
+
+
+		
+			<footer>
+				<span>
+					Powered by
+					<a href="https://github.com/openwrt/luci" target="_blank" rel="noreferrer">LuCI openwrt-21.02 branch (git-23.093.57360-e98243e)</a>
+					/  OpenWrt 21.02.7 r16847-f8282da11e
+					/ <a href="https://github.com/eamonxg/luci-theme-aurora" target="_blank" rel="noreferrer">Aurora on Aurora</a> (21.02 port)
+				</span>
+				<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+				<div class="theme-switcher">
+	<label class="theme-option active" data-theme="device">
+		<input type="radio" name="theme" value="device" checked>
+		<span class="theme-icon">
+			<svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 3.25C0.5 1.45507 1.95507 0 3.75 0H8.25C10.0449 0 11.5 1.45507 11.5 3.25V11.25V12H10.75H1.25H0.5V11.25V3.25ZM3.75 1.5C2.7835 1.5 2 2.2835 2 3.25V10.5H10V3.25C10 2.2835 9.2165 1.5 8.25 1.5H3.75ZM3 3.5C3 2.94772 3.44772 2.5 4 2.5H8C8.55228 2.5 9 2.94772 9 3.5V7H3V3.5ZM6.5 9.5H9V8H6.5V9.5Z" fill="currentColor" transform="translate(2.5, 2)"></path></svg>
+		</span>
+	</label>
+	<label class="theme-option" data-theme="light">
+		<input type="radio" name="theme" value="light">
+		<span class="theme-icon">
+			<svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.75 1V0.25H6.25V1V1.25V2H7.75V1.25V1ZM7 9C8.10457 9 9 8.10457 9 7C9 5.89543 8.10457 5 7 5C5.89543 5 5 5.89543 5 7C5 8.10457 5.89543 9 7 9ZM7 10.5C8.933 10.5 10.5 8.933 10.5 7C10.5 5.067 8.933 3.5 7 3.5C5.067 3.5 3.5 5.067 3.5 7C3.5 8.933 5.067 10.5 7 10.5ZM7.75 12V12.75V13V13.75H6.25V13V12.75V12H7.75ZM12 6.25H12.75H13H13.75V7.75H13H12.75H12V6.25ZM1 6.25H0.25V7.75H1H1.25H2V6.25H1.25H1ZM10.0052 2.93414L10.5355 2.40381L10.7123 2.22703L11.2426 1.6967L12.3033 2.75736L11.773 3.28769L11.5962 3.46447L11.0659 3.9948L10.0052 2.93414ZM2.22703 10.7123L1.6967 11.2426L2.75736 12.3033L3.28769 11.773L3.46447 11.5962L3.9948 11.0659L2.93414 10.0052L2.40381 10.5355L2.22703 10.7123ZM2.93414 3.9948L2.40381 3.46447L2.22703 3.28769L1.6967 2.75736L2.75736 1.6967L3.28769 2.22703L3.46447 2.40381L3.9948 2.93414L2.93414 3.9948ZM10.7123 11.773L11.2426 12.3033L12.3033 11.2426L11.773 10.7123L11.5962 10.5355L11.0659 10.0052L10.0052 11.0659L10.5355 11.5962L10.7123 11.773Z" fill="currentColor" transform="translate(1.25, 1.25)"></path></svg>
+		</span>
+	</label>
+	<label class="theme-option" data-theme="dark">
+		<input type="radio" name="theme" value="dark">
+		<span class="theme-icon">
+			<svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 0.25V1V1.5H11L11.75 1.5V3H11H10.5V3.5V4.25H9V3.5V3H8.5H7.75V1.5H8.5H9V1V0.25H10.5ZM3.25514 2.75496C2.33413 3.53491 1.75 4.69972 1.75 6C1.75 8.34721 3.65279 10.25 6 10.25C7.30029 10.25 8.4651 9.66587 9.24505 8.74485C9.16377 8.74827 9.08207 8.74999 9 8.74999C5.82436 8.74999 3.25 6.17563 3.25 2.99999C3.25 2.91792 3.25172 2.83623 3.25514 2.75496ZM0.25 6C0.25 3.51072 1.83142 1.39271 4.042 0.592193L5.00256 1.55275C4.83933 2.00347 4.75 2.49047 4.75 2.99999C4.75 5.3472 6.65279 7.24999 9 7.24999C9.50953 7.24999 9.99653 7.16065 10.4473 6.99743L11.4078 7.95798C10.6073 10.1686 8.48929 11.75 6 11.75C2.82436 11.75 0.25 9.17564 0.25 6Z" fill="currentColor" transform="translate(2.25, 2.25)"></path></svg>
+		</span>
+	</label>
+</div>
+
+			</footer>
+		</div>
+		<script>L.require('menu-aurora21')</script>
+		<script src="/openwrt-21.02-themes/playground/luci-static/aurora21/custom-entry.js?v=1.0.4-1" defer></script>
+		
+	<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

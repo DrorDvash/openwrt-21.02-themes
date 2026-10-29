@@ -1,0 +1,9 @@
+
+/* Blueprint-specific 21.02 port fixes (add rules found by tools/qa.py / tools/a11y.py) */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+.cbi-dropdown label { color: #a0c0d6 !important; } /* was #9bbcd4: 4.46 -> 4.66:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { color: #ff9494 !important; } /* was #ff8f8f: 4.48 -> 4.64:1 */
+.cbi-value-description code { color: #a0c0d6 !important; } /* was #9bbcd4: 4.46 -> 4.66:1 */
+.cbi-value-title code { color: #a0c0d6 !important; } /* was #9bbcd4: 4.46 -> 4.66:1 */
+/* AUTO-CONTRAST END */

@@ -1,0 +1,9 @@
+.venv/
+src/
+work/
+dist/
+__pycache__/
+*.pyc
+testenv/test-root-password.env
+testenv/.network.*
+tools/showcase/leakguard.local

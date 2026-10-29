@@ -1,0 +1,17 @@
+
+/* Aurora's own colours: the shared 21.02 fixes (common layer) read --p21-* tokens */
+:root,
+:root[data-darkmode="false"],
+:root[data-darkmode="true"] {
+	--p21-head: var(--surface);
+	--p21-on: var(--on-brand);
+	--p21-bg: var(--bg);
+	--p21-card: var(--surface);
+	--p21-ink: var(--text);
+	--p21-dim: var(--text-muted);
+	--p21-rule: var(--hairline);
+	--p21-hover: var(--hover-faint);
+	--p21-accent: var(--brand);
+	--p21-accent2: var(--brand);
+	--p21-err-ink: var(--danger);
+}

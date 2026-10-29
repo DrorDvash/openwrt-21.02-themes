@@ -1,0 +1,13 @@
+Package: luci-theme-edge21
+Version: 1.0.4-1
+Depends: luci-base
+Source: https://github.com/kiddin9/luci-theme-edge
+License: Apache-2.0
+Section: luci
+Maintainer: Dror Dvash <DrorDvash@users.noreply.github.com>
+Architecture: all
+Installed-Size: 0
+Description: Edge (21.02 port) - material sidebar theme, light and dark.
+ Edge's stylesheet (kiddin9, Apache-2.0) on the luci-theme-argon 2.3.1 frame
+ (jerrykuku, Apache-2.0). Registers luci.themes.Edge21; it does not change the
+ active theme.

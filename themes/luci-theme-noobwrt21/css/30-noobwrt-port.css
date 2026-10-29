@@ -1,0 +1,240 @@
+/* ==========================================================================
+ * NoobWRT port layer (tools/baselines/noobwrt-template/30-noobwrt-port.css):
+ * NoobWRT's own frame on 21.02, then the theme-independent 21.02 fixes.
+ * Dark mode: html[data-darkmode="true"] (set before the first paint by the header).
+ * ========================================================================== */
+
+:root {
+	--p21-bg: #f4f5f7;
+	--p21-card: #fff;
+	--p21-ink: #32325d;
+	--p21-dim: #525f7f;
+	--p21-rule: #dee2e6;
+	--p21-hover: #f0f2fb;
+	--p21-accent: var(--primary);
+	--p21-accent2: #4b5fd6;
+	--p21-on: #fff;
+	--p21-head: #fff;
+}
+
+html[data-darkmode="true"] {
+	--p21-bg: #1e1e1e;
+	--p21-card: #252526;
+	--p21-ink: #cccccc;
+	--p21-dim: #a8a8a8;
+	--p21-rule: #3c3c3c;
+	--p21-hover: #2d2d30;
+	--p21-accent: #7c8ff5;
+	--p21-accent2: #97a6f7;
+	--p21-on: #111;
+	--p21-head: #252526;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0s !important;
+		transition-delay: 0s !important;
+		animation-duration: 0s !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* The login picture is not shipped (origin unknown): a sky in the picture's colours instead */
+.login-page .main-bg {
+	background: radial-gradient(ellipse at 22% 78%, rgba(255, 255, 255, .55) 0, rgba(255, 255, 255, 0) 42%),
+		radial-gradient(ellipse at 78% 30%, rgba(122, 140, 245, .55) 0, rgba(122, 140, 245, 0) 55%),
+		radial-gradient(ellipse at 95% 95%, rgba(244, 143, 177, .45) 0, rgba(244, 143, 177, 0) 40%),
+		linear-gradient(160deg, #3cb6cf 0%, #6fc9dc 38%, #a7dbe8 70%, #e9c9d6 100%);
+}
+html[data-darkmode="true"] .login-page .main-bg {
+	background: radial-gradient(ellipse at 78% 30%, rgba(94, 114, 228, .35) 0, rgba(94, 114, 228, 0) 55%),
+		radial-gradient(ellipse at 15% 85%, rgba(60, 182, 207, .25) 0, rgba(60, 182, 207, 0) 45%),
+		linear-gradient(160deg, #0f1b2d 0%, #16233a 50%, #241a33 100%);
+}
+
+/* NoobWRT's base clips #view (overflow:hidden, for its rounded corners). LuCI sizes a list
+   to the scroll container further out, so #view would cut the bottom off Save & Apply's
+   list, and focusing a hovered item would scroll #view itself */
+#view { overflow: visible; }
+
+/* The toolbar floats over the right edge of the page and covered the last column of wide
+   tables (a port forward's Delete button could not be clicked). Room is kept for it: its
+   width while shown, its pull tab while hidden. On phones it starts hidden (toolbar.htm). */
+body.logged-in .main-right > #maincontent { padding-right: 76px; }
+body.logged-in.toolbar-hidden .main-right > #maincontent { padding-right: 24px; }
+@media (max-width: 768px) {
+	body.logged-in .main-right > #maincontent { padding-right: 64px; }
+	body.logged-in.toolbar-hidden .main-right > #maincontent { padding-right: 22px; }
+}
+/* As NoobWRT's own screenshots show it (its 1.1.7 code still draws the bar): no header band,
+   the sidebar carries the logo; on phones a floating button opens the sidebar instead of the
+   header's hamburger, and the cards use the full width */
+body.logged-in .main-right > header { display: none; }
+body.logged-in .main-right > #maincontent { padding-top: 15px; }
+.noob-menu-fab { display: none; }
+@media (max-width: 768px) {
+	.noob-menu-fab {
+		display: flex; align-items: center; justify-content: center;
+		position: fixed; right: 16px; bottom: 16px; z-index: 1000;
+		width: 46px; height: 46px; padding: 0; border-radius: 12px; cursor: pointer;
+		color: var(--primary); background: rgba(255, 255, 255, .95);
+		border: 1px solid rgba(0, 0, 0, .85); box-shadow: 0 4px 14px rgba(0, 0, 0, .15);
+	}
+	.noob-menu-fab svg { width: 22px; height: 22px; }
+	html[data-darkmode="true"] .noob-menu-fab {
+		color: #a49cf0; background: rgba(20, 20, 25, .98); border-color: rgba(255, 255, 255, .85);
+	}
+	body.logged-in.toolbar-hidden .main-right > #maincontent { padding-right: 0; }
+}
+
+/* hidden toolbar: the panel slid off-screen is also hidden from focus and screen readers
+   (after the slide); a hover peek or the tab shows it again */
+.toolbar-wrapper.hidden:not(.peek) .toolbar-container { visibility: hidden; transition: visibility 0s .35s; }
+
+/* ==========================================================================
+ * Theme-independent 21.02 fixes (same as the bootstrap ports' shared layer)
+ * ========================================================================== */
+
+/* --- Focus states ------------------------------------------------------------- */
+
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.cbi-button:focus-visible,
+.cbi-tabmenu a:focus-visible,
+.tabs a:focus-visible,
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+	outline: 2px solid var(--p21-accent2);
+	outline-offset: 2px;
+}
+
+/* --- 21.02 widgets that 25.12 override blocks do not cover ---------------------- */
+
+/* 21.02 keeps a tinted box behind inactive tabs (on the <li>), on which the
+   25.12 overrides' dim tab text drops below AA: use full ink for inactive tabs. */
+.tabs { border-bottom: 1px solid var(--p21-rule); }
+.tabs > li > a,
+.cbi-tabmenu > li > a { color: var(--p21-ink); }
+.tabs > li.active > a { color: var(--p21-accent); }
+
+/* 21.02 paints opened-list items with --primary-color-medium/-low (themes often
+   set those to two unrelated accents) and dark --on-primary-color text; use a
+   readable tint + accent bar instead. */
+.cbi-dropdown[open] > ul.dropdown > li[selected] {
+	background: var(--p21-hover);
+	background: color-mix(in srgb, var(--p21-accent) 16%, transparent);
+	color: var(--p21-ink);
+}
+
+.cbi-dropdown[open] > ul.dropdown > li.focus {
+	background: var(--p21-hover);
+	color: var(--p21-ink);
+	box-shadow: inset 3px 0 0 var(--p21-accent);
+}
+
+.cbi-dropdown[open] > ul.dropdown > li[selected].focus {
+	background: var(--p21-hover);
+	background: color-mix(in srgb, var(--p21-accent) 28%, transparent);
+	color: var(--p21-ink);
+	box-shadow: inset 3px 0 0 var(--p21-accent);
+}
+
+/* "+" button next to a dropdown's "-- custom --" input (added by the menu JS) */
+/* only while the list is open: closed dropdowns hide every non-selected row */
+.cbi-dropdown[open] > ul.dropdown > li.p21-create-li { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.cbi-dropdown[open] > ul.dropdown > li.p21-create-li > input.create-item-input { flex: 1 1 auto; min-width: 0; width: auto; }
+/* 21.02 shows a clone of the list (ul.preview) while open: hide our additions there */
+.cbi-dropdown:not([open]) .p21-create-add,
+.cbi-dropdown:not([open]) .p21-create-error,
+.cbi-dropdown > ul.preview .p21-create-add,
+.cbi-dropdown > ul.preview .p21-create-error { display: none; }
+.p21-create-add { flex: 0 0 auto; min-width: 36px; min-height: 32px; padding: 0 10px; font-weight: 700; line-height: 1; }
+.p21-create-error:not(:empty) {
+	flex: 1 0 100%;
+	padding: 4px 6px;
+	font-size: 12.5px;
+	white-space: normal;
+	color: var(--p21-err-ink, var(--t-err-ink, var(--error-color-high, #c00)));
+	border-left: 3px solid currentColor;
+}
+
+.cbi-tooltip { background: var(--p21-card); color: var(--p21-ink); border: 1px solid var(--p21-rule); }
+
+/* 21.02 hard-codes #0069d6 for <var> values */
+div.cbi-value var,
+.td.cbi-value-field var { color: var(--p21-accent); }
+
+div.cbi-value var[data-tooltip],
+.td.cbi-value-field var[data-tooltip],
+div.cbi-value var.cbi-tooltip-container,
+.td.cbi-value-field var.cbi-tooltip-container { border-bottom-color: var(--p21-accent); }
+
+/* Placeholders ("any", "-- add MAC --", input hints) at AA: 21.02 uses
+   --text-color-low and 25.12 overrides often dim ::placeholder further. */
+.cbi-dropdown > .more { color: var(--p21-dim); }
+/* placeholders render as <em>: keep the field's own text colour, the italics mark them */
+.cbi-dropdown:not(.btn):not(.cbi-button) > ul > li[placeholder] { color: inherit; }
+::placeholder { color: var(--p21-dim); opacity: 1; }
+
+/* Zone badges and zone-coloured interface heads (21.02 only; 25.12 themes never style
+   them): light themes get the full pastel zone colour, dark themes a translucent tint
+   over their background, so pick the text colour per mode instead of the theme ink. */
+:root:not([data-darkmode="true"]) .zonebadge[style],
+:root:not([data-darkmode="true"]) .ifacebox-head[style] { color: #111; text-shadow: none; }
+:root[data-darkmode="true"] .zonebadge[style],
+:root[data-darkmode="true"] .ifacebox-head[style] { color: #fff; text-shadow: 0 1px 1px rgba(0, 0, 0, .6); }
+.zonebadge[style] > strong,
+.zonebadge[style] > em,
+.zonebadge[style] .cbi-tooltip-container > strong,
+.ifacebox-head[style] * { color: inherit; }
+.zonebadge-empty { color: var(--p21-ink); border-color: var(--p21-dim); }
+:root:not([data-darkmode="true"]) .ifacebox-head:not([style]) { color: #111; }
+
+/* Dark themes: 21.02 paints untinted interface box heads #eee and the realtime
+   graph views an inline white panel (their labels are fill:#eee with a dark
+   shadow, so they read best on a dark scope panel). */
+:root[data-darkmode="true"] .ifacebox-head:not([style]) { background-color: var(--p21-hover); color: var(--p21-ink); }
+
+:root[data-darkmode="true"] #view div[style*="border:1px solid #000;background:#fff"] {
+	background: var(--p21-bg) !important;
+	border-color: var(--p21-rule) !important;
+}
+
+:root[data-darkmode="true"] #view div[style*="border:1px solid #000;background:#fff"] svg line {
+	stroke: var(--p21-rule) !important;
+	stroke-width: 1px !important;
+}
+
+/* Interface boxes: Argon 2.3.1 sets overflow:hidden on them (to round the coloured head),
+   which cuts the device tooltip that opens inside the box on hover */
+.ifacebox { overflow: visible; }
+.ifacebox > .ifacebox-head { border-top-left-radius: inherit; border-top-right-radius: inherit; }
+.table .td:has(.cbi-tooltip-container) { overflow: visible; }   /* same tooltip in clipped table cells */
+
+/* 25.12 override blocks kill motion with `*`, which does not match ::before/::after */
+@media (prefers-reduced-motion: reduce) {
+	*::before,
+	*::after { transition: none !important; animation: none !important; }
+}
+
+
+@media (max-width: 720px) {
+	/* wide tables scroll inside their own box, never the page */
+	.cbi-section-node, .table-wrapper { max-width: 100%; }
+
+	/* row action buttons (e.g. Status > Processes) wrap instead of overflowing */
+	/* (buttons keep their content width: shrinking them spills labels such as "[ KILL ]") */
+	.table .td.cbi-section-actions > div { flex-wrap: wrap; row-gap: 3px; }
+
+	/* opkg (System > Software) controls: its inline view CSS forces nowrap + 250px labels */
+	#maincontent .controls > * { min-width: 0; max-width: 100%; flex-basis: 100%; white-space: normal; }
+	#maincontent .controls > * > label { min-width: 0; }
+	#maincontent .control-group { display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; max-width: 100%; }
+	#maincontent .control-group > input { flex: 1 1 8em; min-width: 0; width: auto; }
+	#maincontent .control-group > .btn { flex: 0 1 auto; }
+
+}

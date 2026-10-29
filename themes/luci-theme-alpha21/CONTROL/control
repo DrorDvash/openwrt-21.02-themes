@@ -1,0 +1,12 @@
+Package: luci-theme-alpha21
+Version: 1.0.4-1
+Depends: luci-base
+Source: https://github.com/derisamedia/luci-theme-alpha
+License: Apache-2.0
+Section: luci
+Maintainer: Dror Dvash <DrorDvash@users.noreply.github.com>
+Architecture: all
+Installed-Size: 0
+Description: Alpha (21.02 port) - dark glass sidebar theme.
+ Port of luci-theme-alpha 3.9.7 (derisamedia, Apache-2.0) to OpenWrt 21.02
+ Lua templates. Registers luci.themes.Alpha21; it does not change the active theme.

@@ -1,0 +1,17 @@
+
+/* Retro-specific 21.02 port fixes (add rules found by tools/qa.py / tools/a11y.py) */
+
+/* Upstream bug (also in its own screenshot): the "system tray" clock inherits
+   bootstrap's #bfbfbf header text on the #c0c0c0 taskbar, i.e. it is invisible. */
+.hdr-clock { color: #000; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+.cbi-section h3 { background: #0f79bf !important; } /* was #1084d0 under #ffffff: 4.01 -> 4.66:1 */
+div.text { background: #008585 !important; } /* was #008080 under #000000: 4.40 -> 4.69:1 */
+h3 { background: #0f79bf !important; } /* was #1084d0 under #ffffff: 4.01 -> 4.66:1 */
+header div.hdr-clock { color: #4c4c4c !important; } /* was #bfbfbf: 1.01 -> 4.72:1 */
+/* AUTO-CONTRAST END */
+
+/* The teal desktop carries both black text (4.40:1) and white headings (4.77:1);
+   #008383 is visually the same teal and gives black 4.57:1 and white 4.59:1. */
+:root, :root[data-darkmode="false"], :root[data-darkmode="true"] { --r-desktop: #008383; }

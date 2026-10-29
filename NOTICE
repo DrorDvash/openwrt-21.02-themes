@@ -1,0 +1,22 @@
+openwrt-21.02-themes
+https://github.com/DrorDvash/openwrt-21.02-themes
+
+The theme designs are the work of their authors. Every package under themes/ keeps its
+upstream LICENSE and has its own NOTICE: where it comes from and what the port changed.
+
+  vistrocity          https://github.com/vistrocity/openwrt-luci-themes   the 16 reskins
+  jerrykuku           https://github.com/jerrykuku/luci-theme-argon       Argon layout
+  eamonxg             https://github.com/eamonxg/luci-theme-aurora        Aurora, Aurora layout
+  derisamedia         https://github.com/derisamedia/luci-theme-alpha     Alpha
+  kiddin9, GaryPang   https://github.com/kiddin9/luci-theme-edge          Edge
+  nooblk-98           https://github.com/nooblk-98/luci-theme-noobwrt     NoobWRT
+  ox1d3x3             https://github.com/ox1d3x3/uniwrt-luci              UniWRT
+  Lutty Yang          luci-theme-material                                 (Edge and NoobWRT build on it)
+  Creative Tim        Argon Dashboard                                     (the design Argon follows)
+  OpenWrt LuCI        https://github.com/openwrt/luci                     Bootstrap layout, LuCI itself
+
+Font: Red Hat Display, SIL Open Font License 1.1 (in the NoobWRT package, licence included).
+
+The 21.02 ports, Edge's dark palette, the tools in tools/ and testenv/, and the website in
+docs/: Copyright 2026 Dror Dvash (https://github.com/DrorDvash), Apache License 2.0 (LICENSE).
+The playground's idea follows luci-theme-footstrap's (VizzleTF).

@@ -1,0 +1,27 @@
+
+/* Paper on Argon: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#lease6_status_table th { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+#lease_status_table th { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+#wifi_assoclist_table th { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+#wifi_assoclist_table th.hide-xs { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.cbi-dropdown label { color: #717171 !important; } /* was #808080: 3.72 -> 4.60:1 */
+.cbi-section-table-titles th.cbi-section-table-cell { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.cbi-section-table-titles th.col-1.size { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.cbi-section-table-titles th.col-10 { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.cbi-section-table-titles th.col-2 { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.cbi-section-table-titles th.col-2.version { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.table th { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.table.assoclist th { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.table.assoclist th.hide-xs { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.table.lases th { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.table.lases th.cbi-section-actions { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.table.leases6 th { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+.table.leases6 th.cbi-section-actions { color: #716a5c !important; } /* was #a49d8f: 2.35 -> 4.68:1 */
+a.food { color: #736b5d !important; } /* was #a49d8f: 2.39 -> 4.67:1 */
+a.menu { color: #736b5d !important; } /* was #a49d8f: 2.39 -> 4.67:1 */
+a.menu.active { color: #8e8473 !important; } /* was #736b5d: 3.27 -> 4.67:1 */
+footer a { color: #736b5d !important; } /* was #a49d8f: 2.39 -> 4.67:1 */
+footer a.luci-link { color: #736b5d !important; } /* was #a49d8f: 2.39 -> 4.67:1 */
+/* AUTO-CONTRAST END */

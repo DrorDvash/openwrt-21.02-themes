@@ -1,0 +1,8 @@
+#!/bin/sh
+# test-only: no NTP to the internet. The LAN DHCP pool stays enabled (as on the
+# real router) so LuCI's static-lease validation has a pool to check against;
+# it only ever serves the isolated docker subnet.
+uci -q set system.ntp.enabled=0
+uci -q set system.ntp.enable_server=0
+uci commit
+exit 0

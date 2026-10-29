@@ -1,0 +1,263 @@
+/* Glass override block (vistrocity/openwrt-luci-themes), content rules only;
+   16 bootstrap top-bar rules removed by tools/port-theme.py --baseline aurora */
+
+
+:root, :root[data-darkmode="true"] {
+	--background-color-delta-l-sign: 1;
+	--background-color-h: 235;
+	--background-color-s: 40%;
+	--background-color-l: 9%;
+
+	--text-color-delta-l-sign: -1;
+	--text-color-h: 225;
+	--text-color-s: 60%;
+	--text-color-l: 97%;
+
+	--border-color-delta-l-sign: 1;
+
+	--primary-color-high: #8fd3ff;
+	--primary-color-medium: #7aa7ff;
+	--primary-color-low: #a78bfa;
+	--on-primary-color: #0b0d24;
+
+	--error-color-high-rgb: 255, 125, 145;
+	--error-color-medium: #f43f5e;
+	--error-color-low: #e11d48;
+
+	--success-color-high-rgb: 94, 234, 190;
+	--success-color-medium: #34d399;
+	--success-color-low: #10b981;
+
+	--warn-color-high: #fcd34d;
+	--warn-color-medium: #fbbf24;
+	--warn-color-low: #f59e0b;
+	--on-warn-color: #231600;
+
+	--glass-fill: rgba(255, 255, 255, .07);
+	--glass-fill-strong: rgba(255, 255, 255, .11);
+	--glass-fill-input: rgba(8, 10, 32, .45);
+	--glass-border: rgba(255, 255, 255, .16);
+	--glass-border-soft: rgba(255, 255, 255, .09);
+	--glass-blur: blur(18px) saturate(170%);
+	--glass-radius: 16px;
+	--glass-shadow: 0 8px 32px rgba(3, 4, 20, .45), inset 0 1px 0 rgba(255, 255, 255, .14);
+	--glass-glow: 143, 211, 255;
+	--glass-menu: rgba(22, 24, 62, .88);
+
+	color-scheme: dark;
+}
+
+html { background: #0a0b1e; }
+
+body {
+	background:
+		radial-gradient(900px 600px at 8% 0%, rgba(124, 58, 237, .55), transparent 60%),
+		radial-gradient(800px 650px at 95% 12%, rgba(6, 182, 212, .42), transparent 60%),
+		radial-gradient(900px 700px at 70% 105%, rgba(236, 72, 153, .38), transparent 60%),
+		radial-gradient(700px 500px at 0% 100%, rgba(59, 130, 246, .35), transparent 60%),
+		#0a0b1e;
+	background-attachment: fixed;
+	padding: 0 8px 8px;
+}
+
+::selection { background: rgba(var(--glass-glow), .35); }
+
+a { color: var(--primary-color-high); }
+a:hover { color: #d6efff; }
+
+.cbi-section {
+	background: var(--glass-fill);
+	-webkit-backdrop-filter: var(--glass-blur);
+	backdrop-filter: var(--glass-blur);
+	border: 1px solid var(--glass-border);
+	border-radius: var(--glass-radius);
+	padding: 16px 18px;
+	margin-bottom: 18px;
+	box-shadow: var(--glass-shadow);
+}
+
+h2, h3, .cbi-section > h3 {
+	color: #fff;
+	font-weight: 600;
+	letter-spacing: .01em;
+	text-shadow: 0 1px 12px rgba(var(--glass-glow), .25);
+}
+
+h2 { border-bottom: 1px solid var(--glass-border-soft); padding-bottom: 6px; }
+
+.cbi-map-descr, .cbi-section-descr { color: rgba(226, 232, 255, .7); }
+
+.cbi-value { border-bottom-color: var(--glass-border-soft); }
+.cbi-section-node > .cbi-value:last-child { border-bottom: 0; }
+
+.table .th {
+	background: rgba(255, 255, 255, .08);
+	color: rgba(226, 232, 255, .8);
+	text-transform: uppercase;
+	font-size: 11px;
+	letter-spacing: .07em;
+	border-color: var(--glass-border-soft);
+}
+
+.table .td { border-color: var(--glass-border-soft); background: transparent; }
+.table .tr:nth-child(odd) .td { background: rgba(255, 255, 255, .02); }
+.table .tr:hover .td { background: rgba(var(--glass-glow), .09); }
+
+input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], textarea, select, .cbi-dropdown:not(.btn):not(.cbi-button) {
+	background-color: var(--glass-fill-input);
+	color: #f1f5ff;
+	border: 1px solid var(--glass-border);
+	border-radius: 10px;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, .25);
+}
+
+::placeholder { color: rgba(226, 232, 255, .4); }
+
+input:focus, textarea:focus, select:focus, .cbi-dropdown:focus, .cbi-dropdown[open], .btn:focus, .cbi-button:focus {
+	--focus-color-rgb: 143, 211, 255;
+	border-color: rgba(var(--focus-color-rgb), .9) !important;
+	box-shadow: 0 0 0 3px rgba(var(--focus-color-rgb), .2), 0 0 18px rgba(var(--focus-color-rgb), .25) !important;
+}
+
+.cbi-dropdown[open] > ul.dropdown {
+	background: var(--glass-menu);
+	border: 1px solid var(--glass-border);
+	border-radius: 10px;
+	-webkit-backdrop-filter: var(--glass-blur);
+	backdrop-filter: var(--glass-blur);
+}
+
+.btn, .cbi-button, input[type="button"], input[type="submit"], input[type="reset"] {
+	background: var(--glass-fill-strong);
+	color: var(--on-color, #e6ecff);
+	border: 1px solid var(--glass-border);
+	border-radius: 10px;
+	text-shadow: none;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12);
+	transition: background .15s, border-color .15s, box-shadow .15s, transform .05s;
+}
+
+.btn:hover, .cbi-button:hover { background: rgba(255, 255, 255, .17); }
+.btn:active, .cbi-button:active { transform: translateY(1px); }
+
+.cbi-button-action, .cbi-button-apply, .cbi-button-edit, .cbi-button-reload, .btn.primary, .cbi-button-action.important {
+	--on-color: var(--on-primary-color);
+	background: linear-gradient(135deg, var(--primary-color-high), var(--primary-color-low));
+	border-color: rgba(255, 255, 255, .35);
+	font-weight: 600;
+	box-shadow: 0 4px 18px rgba(122, 167, 255, .35), inset 0 1px 0 rgba(255, 255, 255, .4);
+}
+
+.cbi-button-action:hover, .cbi-button-apply:hover, .cbi-button-edit:hover, .cbi-button-reload:hover, .btn.primary:hover {
+	background: linear-gradient(135deg, #b4e3ff, #bda8ff);
+}
+
+.cbi-button-positive, .cbi-button-fieldadd, .cbi-button-add, .cbi-button-save, .cbi-page-actions .cbi-button-save, .cbi-page-actions .cbi-button-apply + .cbi-button-save, .cbi-page-actions .cbi-button-negative + .cbi-button-save {
+	--on-color: var(--primary-color-high);
+	background: var(--glass-fill-strong);
+	border-color: rgba(var(--glass-glow), .6);
+	font-weight: 600;
+}
+
+.cbi-button-positive:hover, .cbi-button-fieldadd:hover, .cbi-button-add:hover, .cbi-button-save:hover, .cbi-page-actions .cbi-button-save:hover {
+	background: rgba(var(--glass-glow), .18);
+}
+
+.cbi-button-positive.important, .cbi-page-actions .cbi-button-positive.important {
+	--on-color: var(--on-primary-color);
+	background: linear-gradient(135deg, var(--primary-color-high), var(--primary-color-low));
+	border-color: rgba(255, 255, 255, .35);
+}
+
+.cbi-button-negative, .cbi-button-remove, .cbi-button-reset {
+	background: rgba(var(--error-color-high-rgb), .14);
+	border-color: rgba(var(--error-color-high-rgb), .55);
+}
+
+.cbi-button-negative:hover, .cbi-button-remove:hover, .cbi-button-reset:hover { background: rgba(var(--error-color-high-rgb), .26); }
+
+.cbi-tabmenu { border-bottom-color: var(--glass-border-soft); }
+
+.cbi-tabmenu li a { color: rgba(226, 232, 255, .7); }
+
+.cbi-tabmenu li.cbi-tab a {
+	color: #fff;
+	border-bottom-color: var(--primary-color-high);
+	text-shadow: 0 0 12px rgba(var(--glass-glow), .5);
+}
+
+.alert-message, .alert-message.warning {
+	border-radius: 14px;
+	border: 1px solid rgba(252, 211, 77, .4);
+	background: rgba(252, 211, 77, .10);
+	-webkit-backdrop-filter: var(--glass-blur);
+	backdrop-filter: var(--glass-blur);
+	color: #ffefb8;
+	text-shadow: none;
+}
+
+.alert-message.danger, .alert-message.error {
+	border-color: rgba(var(--error-color-high-rgb), .5);
+	background: rgba(var(--error-color-high-rgb), .12);
+	color: #ffd3da;
+}
+
+.alert-message.success, .alert-message.info {
+	border-color: rgba(var(--glass-glow), .45);
+	background: rgba(var(--glass-glow), .10);
+	color: #d6efff;
+}
+
+.modal {
+	background: rgba(30, 32, 80, .72);
+	-webkit-backdrop-filter: blur(26px) saturate(180%);
+	backdrop-filter: blur(26px) saturate(180%);
+	border: 1px solid var(--glass-border);
+	border-radius: 20px;
+	box-shadow: 0 30px 80px rgba(3, 4, 20, .7), inset 0 1px 0 rgba(255, 255, 255, .18);
+}
+
+#modal_overlay {
+	background: rgba(6, 7, 28, .55);
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+}
+
+.cbi-progressbar {
+	border-color: var(--glass-border);
+	background: rgba(8, 10, 32, .5);
+	border-radius: 999px;
+}
+
+.cbi-progressbar::before { color: var(--text-color-high); }
+
+.cbi-progressbar > div {
+	background: linear-gradient(90deg, var(--primary-color-low), var(--primary-color-high));
+	border-radius: 999px;
+	box-shadow: 0 0 12px rgba(var(--glass-glow), .55);
+}
+
+.ifacebox, .ifacebadge {
+	background: var(--glass-fill-strong);
+	border-color: var(--glass-border);
+	text-shadow: none;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14);
+	border-radius: 12px;
+}
+
+* { scrollbar-color: rgba(255, 255, 255, .28) transparent; scrollbar-width: thin; }
+
+/* Browsers without backdrop-filter: use more opaque surfaces so text stays readable */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	:root { --glass-fill: rgba(24, 26, 70, .85); --glass-fill-strong: rgba(40, 44, 100, .9); --glass-menu: rgb(26, 28, 72); }
+	.modal { background: rgb(26, 28, 72); }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+	:root { --glass-fill: rgb(24, 26, 70); --glass-fill-strong: rgb(40, 44, 100); --glass-menu: rgb(26, 28, 72); }
+	* { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* { transition: none !important; animation: none !important; }
+}

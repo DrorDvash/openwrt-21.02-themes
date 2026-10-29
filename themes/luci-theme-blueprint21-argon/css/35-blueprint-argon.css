@@ -1,0 +1,29 @@
+
+/* Blueprint on Argon: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#lease6_status_table th { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+#lease_status_table th { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+#wifi_assoclist_table th { color: #87afcb !important; } /* was #487fa7: 2.51 -> 4.64:1 */
+#wifi_assoclist_table th.hide-xs { color: #87afcb !important; } /* was #487fa7: 2.51 -> 4.64:1 */
+.cbi-dropdown label { color: #8e8e8e !important; } /* was #808080: 3.86 -> 4.65:1 */
+.cbi-section-table-titles th.cbi-section-table-cell { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.cbi-section-table-titles th.col-1.size { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.cbi-section-table-titles th.col-10 { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.cbi-section-table-titles th.col-2 { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.cbi-section-table-titles th.col-2.version { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.mobile-hide a { color: #85aeca !important; } /* was #80aac8: 4.44 -> 4.65:1 */
+.mobile-hide a.luci-link { color: #85aeca !important; } /* was #80aac8: 4.44 -> 4.65:1 */
+.table th { color: #90b5cf !important; } /* was #487fa7: 2.34 -> 4.66:1 */
+.table.assoclist th { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.table.assoclist th.hide-xs { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.table.lases th { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.table.lases th.cbi-section-actions { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.table.leases6 th { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+.table.leases6 th.cbi-section-actions { color: #85adcb !important; } /* was #487fa7: 2.54 -> 4.62:1 */
+a.food { color: #80aac8 !important; } /* was #487fa7: 2.66 -> 4.64:1 */
+a.menu { color: #80aac8 !important; } /* was #487fa7: 2.66 -> 4.64:1 */
+a.menu.active { color: #457a9f !important; } /* was #80aac8: 2.47 -> 4.63:1 */
+footer a { color: #80aac8 !important; } /* was #487fa7: 2.66 -> 4.64:1 */
+footer a.luci-link { color: #80aac8 !important; } /* was #487fa7: 2.66 -> 4.64:1 */
+/* AUTO-CONTRAST END */

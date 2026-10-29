@@ -1,0 +1,21 @@
+
+/* Aquarium-specific 21.02 port fixes (add rules found by tools/qa.py / tools/a11y.py) */
+
+/* hand fix: dialogs and open dropdown lists were 55-60 % opaque, so the form underneath
+   showed through; the same colours, solid */
+html:root #modal_overlay .modal { background-color: rgb(6, 48, 63) !important; }
+html:root .cbi-dropdown[open] > ul.dropdown { background-color: rgb(4, 38, 51) !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-host button.cbi-button-remove:not(:hover):not(:focus) { color: #ef8b8e !important; } /* was #e5484d: 2.85 -> 4.64:1 */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { color: #ef8b8e !important; } /* was #e5484d: 2.85 -> 4.64:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { color: #ef8b8e !important; } /* was #e5484d: 2.85 -> 4.64:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { color: #ef8b8e !important; } /* was #e5484d: 2.85 -> 4.64:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { color: #ef8b8e !important; } /* was #e5484d: 2.85 -> 4.64:1 */
+.cbi-map-descr abbr { color: #91cad5 !important; } /* was #86c5d1: 4.34 -> 4.62:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { color: #e9676b !important; } /* was #e5484d: 3.75 -> 4.63:1 */
+button.cbi-button-negative:not(:hover):not(:focus) { color: #f4afb1 !important; } /* was #e5484d: 2.13 -> 4.62:1 */
+div.cbi-map-descr { color: #91cad5 !important; } /* was #86c5d1: 4.34 -> 4.62:1 */
+footer a { color: #91cad5 !important; } /* was #86c5d1: 4.34 -> 4.62:1 */
+footer span { color: #91cad5 !important; } /* was #86c5d1: 4.34 -> 4.62:1 */
+/* AUTO-CONTRAST END */

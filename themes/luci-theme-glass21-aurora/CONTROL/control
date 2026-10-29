@@ -1,0 +1,14 @@
+Package: luci-theme-glass21-aurora
+Version: 1.0.4-1
+Depends: luci-base
+Source: https://github.com/eamonxg/luci-theme-aurora
+License: Apache-2.0
+Section: luci
+Maintainer: Dror Dvash <DrorDvash@users.noreply.github.com>
+Architecture: all
+Installed-Size: 0
+Description: Glass on Aurora (21.02 port) - the Aurora top-bar layout in Glass colours.
+ Layout, CSS and menu script from luci-theme-aurora 1.4.0 (eamonxg, Apache-2.0),
+ look from luci-theme-glass
+ (vistrocity/openwrt-luci-themes, Apache-2.0). Registers luci.themes.Glass21_aurora;
+ it does not change the active theme.

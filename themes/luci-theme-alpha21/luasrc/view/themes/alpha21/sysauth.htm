@@ -1,0 +1,37 @@
+<%#
+ Alpha, OpenWrt 21.02 port (luci-theme-alpha21). Lua translation of luci-theme-alpha
+ 3.9.7 sysauth.ut (derisamedia, Apache-2.0), rendered through the theme header.
+-%>
+<%
+	-- tell the theme header and footer to render the bare login page
+	blank_page = true
+-%>
+<%+header%>
+<form method="post">
+	<div class="box">
+		<div class="box-form">
+			<div class="box-login">
+				<% if fuser then %>
+				<div class="alert-message warning" role="alert">
+					<p><%:Invalid username and/or password! Please try again.%></p>
+				</div>
+				<% end %>
+				<div class="fieldset-body" id="login_form">
+					<p class="field">
+						<label class="cbi-value-title" for="luci_username"><%:Username%></label>
+						<input type="text" name="luci_username" id="luci_username" autocomplete="username" <%=attr("value", duser or "root")%>>
+					</p>
+					<p class="field">
+						<label class="cbi-value-title" for="luci_password"><%:Password%></label>
+						<input type="password" name="luci_password" id="luci_password" autocomplete="current-password">
+					</p>
+					<input type="submit" id="do_login" class="cbi-button-apply" value="<%:Login%>">
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<script>
+	document.getElementById('luci_username').value ? document.getElementById('luci_password').focus() : document.getElementById('luci_username').focus();
+</script>
+<%+footer%>

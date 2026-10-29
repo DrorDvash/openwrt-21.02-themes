@@ -1,0 +1,33 @@
+
+/* Synthwave-specific 21.02 port fixes (add rules found by tools/qa.py / tools/a11y.py) */
+
+
+
+/* Long pages (e.g. Status > Processes) scroll down over the hot-pink horizon,
+   where the transparent neon buttons became unreadable (red on pink, 1.7:1).
+   A dark fill keeps the neon outline look and works over any part of the backdrop. */
+.btn:not(:hover):not(:focus),
+.cbi-button:not(:hover):not(:focus) { background-color: rgba(12, 0, 32, .88); }
+
+/* Status > Routes: where the headings land on the sun depends on how long the tables are;
+   give them the theme's night backing (they measured 4.04:1 on the pink) */
+[data-page="admin-status-routes"] #maincontent h3 { background-color: #12061f; padding: .2em .5em; }
+[data-page="admin-status-routes"] #maincontent h3 abbr { color: inherit !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-dnsmasq h4 { color: #bd7aff !important; } /* was #b56bff: 4.10 -> 4.65:1 */
+#cbi-dhcp-host button.cbi-button-remove:not(:hover):not(:focus) { color: #ff7891 !important; } /* was #ff4d6d: 3.61 -> 4.62:1 */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { color: #ff7891 !important; } /* was #ff4d6d: 3.61 -> 4.62:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { color: #ff7891 !important; } /* was #ff4d6d: 3.61 -> 4.62:1 */
+#cbi-network-interface button.cbi-button-neutral.down:not(:hover):not(:focus) { color: #c387ff !important; } /* was #b56bff: 3.65 -> 4.61:1 */
+#cbi-network-interface button.cbi-button-neutral.reconnect:not(:hover):not(:focus) { color: #c387ff !important; } /* was #b56bff: 3.65 -> 4.61:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { color: #ff7891 !important; } /* was #ff4d6d: 3.61 -> 4.62:1 */
+#cbi-wireless-wifi-device button.cbi-button-action:not(:hover):not(:focus) { color: #111111 !important; } /* was #4ff5ff: 2.52 -> 5.64:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { color: #ff7891 !important; } /* was #ff4d6d: 3.61 -> 4.62:1 */
+#cbi-wireless-wifi-device button.cbi-button-neutral.enable-disable:not(:hover):not(:focus) { color: #c387ff !important; } /* was #b56bff: 3.65 -> 4.61:1 */
+#cbi-wireless-wifi-device button.cbi-button-neutral:not(:hover):not(:focus) { color: #c387ff !important; } /* was #b56bff: 3.65 -> 4.61:1 */
+button.cbi-button-action:not(:hover):not(:focus) { color: #4ff5ff !important; } /* was #00f0ff: 4.37 -> 4.64:1 */
+button.cbi-button-negative:not(:hover):not(:focus) { color: #ffe3e8 !important; } /* was #ff4d6d: 1.74 -> 4.65:1 */
+label.cbi-value-title { color: #bd7aff !important; } /* was #b56bff: 4.10 -> 4.65:1 */
+span.ifacebadge { color: #c082ff !important; } /* was #b56bff: 3.82 -> 4.62:1 */
+/* AUTO-CONTRAST END */

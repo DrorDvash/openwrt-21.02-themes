@@ -1,0 +1,19 @@
+<%#
+ Alpha, OpenWrt 21.02 port (luci-theme-alpha21). Lua translation of luci-theme-alpha
+ 3.9.7 footer.ut (derisamedia, Apache-2.0); the icon dock (configured in
+ /etc/config/alpha) is not part of the port.
+-%>
+<% if not blank_page then %>
+<% local ver = require "luci.version" %>
+			</div>
+			<footer class="mobile">
+				<a href="https://github.com/derisamedia/luci-theme-alpha" target="_blank" rel="noreferrer"><%= ver.distname %> <%= ver.distversion %> | Alpha OS Theme 3.9.7 (21.02 port)</a>
+			</footer>
+		</div>
+	</div>
+</div>
+<script>L.require('menu-alpha21')</script>
+<script src="<%=media%>/custom-entry.js?v=1.0.4-1" defer></script>
+<% end %>
+</body>
+</html>

@@ -1,0 +1,17 @@
+luci-theme-noobwrt21 - "NoobWRT (21.02 port)"
+
+Port of luci-theme-noobwrt 1.1.7 by nooblk-98,
+https://github.com/nooblk-98/luci-theme-noobwrt (Apache-2.0), itself derived from
+luci-theme-argon by jerrykuku (Apache-2.0) and luci-theme-material by Lutty Yang.
+Stylesheets, menu script, toolbar, icons, icon font and the NoobWRT logos are NoobWRT's.
+Red Hat Display: Copyright 2024 The Red Hat Project Authors (https://github.com/RedHatOfficial/RedHatFont),
+SIL Open Font License 1.1 (www/luci-static/noobwrt21/fonts/OFL.txt).
+
+Port changes (2026, Dror Dvash): ucode templates rewritten as OpenWrt 21.02 Lua
+templates; /etc/config/noobwrt, the settings page and the online wallpaper fetcher
+(rpcd backend) removed; the login picture removed (unknown origin; a CSS gradient
+instead); TypoGraphica font (all rights reserved) and Google Sans references replaced
+by Red Hat Display; italic face, video backgrounds, PWA manifest and the timed dark mode
+removed; toolbar shows a fixed set of 21.02 pages that exist on the router; dark.css
+linked instead of inlined; images downscaled; reduced-motion support, 21.02 widget
+fixes, phone fix for "-- custom --" dropdown entries.

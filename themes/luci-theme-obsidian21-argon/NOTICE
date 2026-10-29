@@ -1,0 +1,11 @@
+luci-theme-obsidian21-argon - "Obsidian on Argon (21.02 port)"
+
+Layout, templates, menu script, icon font and jQuery copy from luci-theme-argon 2.3.1
+by jerrykuku, https://github.com/jerrykuku/luci-theme-argon (Apache-2.0).
+Colours and content styling from luci-theme-obsidian by vistrocity,
+https://github.com/vistrocity/openwrt-luci-themes (Apache-2.0), itself a fork of
+luci-theme-bootstrap (OpenWrt LuCI project, Apache-2.0).
+
+Port changes (2026, Dror Dvash): Argon's online wallpapers, /etc/config/argon
+settings, background photos, TypoGraphica font and legacy font formats removed;
+theme colours mapped onto Argon; phone fix for "-- custom --" dropdown entries.

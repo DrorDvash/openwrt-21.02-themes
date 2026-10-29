@@ -1,0 +1,18 @@
+
+/* Teletext on Aurora: theme-specific fixes */
+
+/* Section titles as on Teletext's own layout: cyan bars with black text */
+.cbi-section h3 { background: #00ffff !important; color: #000 !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+.zonebadge em { color: #040404 !important; } /* was #111111: 4.24 -> 4.60:1 */
+.zonebadge strong { color: #040404 !important; } /* was #111111: 4.24 -> 4.60:1 */
+.zonebadge.cbi-tooltip-container strong { color: #040404 !important; } /* was #111111: 4.24 -> 4.60:1 */
+.zonebadge.zonebadge-empty strong { color: #777777 !important; } /* was #040404: 1.02 -> 4.69:1 */
+button.cbi-button-negative:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+/* AUTO-CONTRAST END */

@@ -1,0 +1,9 @@
+
+/* Rack on Aurora: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { color: #e85c61 !important; } /* was #e5484d: 4.04 -> 4.62:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { color: #e85a5e !important; } /* was #e5484d: 4.14 -> 4.68:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { color: #e85a5e !important; } /* was #e5484d: 4.14 -> 4.68:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { color: #e75358 !important; } /* was #e5484d: 4.29 -> 4.62:1 */
+/* AUTO-CONTRAST END */

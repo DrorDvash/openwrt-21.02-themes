@@ -1,0 +1,13 @@
+luci-theme-alpha21 - "Alpha (21.02 port)"
+
+Port of luci-theme-alpha 3.9.7 by derisamedia,
+https://github.com/derisamedia/luci-theme-alpha (Apache-2.0), itself derived from
+luci-theme-argon by jerrykuku (Apache-2.0). gaya.css, login style.css, menu script,
+icons and the Alpha OS logo are Alpha's; fonts/argon.woff is Argon 2.3.1's icon font.
+
+Port changes (2026, Dror Dvash): ucode templates rewritten as OpenWrt 21.02 Lua
+templates; /etc/config/alpha and the alpha-config dependency removed (glass colour and
+blur defaults written into the CSS); icon dock, background illustrations, Inter/Quicksand
+fonts, anniversary image and app.js removed; logo and favicon downscaled; CSS night-sky
+background; reduced-motion support, 21.02 widget fixes, phone fix for "-- custom --"
+dropdown entries.

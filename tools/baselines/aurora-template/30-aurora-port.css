@@ -1,0 +1,28 @@
+/* ==========================================================================
+ * Aurora port layer (tools/baselines/aurora-template/30-aurora-port.css, used by
+ * aurora21 and every "<theme>21-aurora" variant): fixes for Aurora 1.4.0's
+ * prebuilt CSS on OpenWrt 21.02 pages, then the theme-independent 21.02 fixes.
+ * ========================================================================== */
+
+/* system fonts instead of the Lato web font (no font files shipped) */
+:root {
+	--font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+/* prefers-reduced-motion: Aurora's own reduced-motion partial leaves control transitions on */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0s !important;
+		transition-delay: 0s !important;
+		animation-duration: 0s !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* (html: outranks the shared layer appended below) 21.02 paints zone badges / interface heads with the full pastel zone colour (inline
+   style) in every mode; Aurora keeps them as they are, so dark text in both modes */
+html:root[data-darkmode="true"] .zonebadge[style],
+html:root[data-darkmode="true"] .ifacebox-head[style] { color: #111; text-shadow: none; }

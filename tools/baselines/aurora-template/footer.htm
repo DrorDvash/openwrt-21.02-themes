@@ -1,0 +1,22 @@
+<%#
+ @TITLE@ on Aurora, OpenWrt 21.02 port (luci-theme-@ID@). Lua translation of
+ luci-theme-aurora 1.4.0 footer.ut (eamonxg, Apache-2.0).
+-%>
+		<% if not blank_page then %>
+		<% local ver = require "luci.version" %>
+			<footer>
+				<span>
+					Powered by
+					<a href="https://github.com/openwrt/luci" target="_blank" rel="noreferrer"><%= ver.luciname %> (<%= ver.luciversion %>)</a>
+					/ <%= ver.distname %> <%= ver.distversion %>
+					/ <a href="https://github.com/eamonxg/luci-theme-aurora" target="_blank" rel="noreferrer">@TITLE@ on Aurora</a> (21.02 port)
+				</span>
+				<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+				<% if "@MODE@" == "auto" then %><%+themes/@ID@/switcher%><% end %>
+			</footer>
+		</div>
+		<script>L.require('menu-@ID@')</script>
+		<script src="<%=media%>/custom-entry.js?v=@VERSION@" defer></script>
+		<% end %>
+	</body>
+</html>

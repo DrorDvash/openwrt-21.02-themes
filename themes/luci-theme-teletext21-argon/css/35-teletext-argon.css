@@ -1,0 +1,37 @@
+
+/* Teletext on Argon: theme-specific fixes */
+
+/* hand fixes (Argon layout): the grey section bars carried black (4.49:1) or white (4.48:1)
+   text on #747474/#777; one lighter grey with black text for all of them (5.3:1) */
+#maincontent h3 { background-color: #808080 !important; color: #000 !important; }
+#maincontent h3 abbr { color: inherit !important; }
+
+/* Section titles as on Teletext's own layout: cyan bars with black text (not grey) */
+.cbi-section h3, h3 { background: #00ffff !important; color: #000 !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-host button.cbi-button-add:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+#cbi-dhcp-host button.cbi-button-edit:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+#cbi-dhcp-host button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-firewall-redirect button.cbi-button-add:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+#cbi-firewall-redirect button.cbi-button-edit:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-firewall-zone button.cbi-button-add:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+#cbi-firewall-zone button.cbi-button-edit:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-network-interface button.cbi-button-add:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+#cbi-network-interface button.cbi-button-edit:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-wireless-wifi-device button.cbi-button-add:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+.cbi-page-actions.control-group button.cbi-button-save:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+.cbi-tabmenu a { background: #787800 !important; } /* was #ffff00 under #ffffff: 1.07 -> 4.68:1 */
+.cbi-tabmenu a { color: #ffffff !important; } /* was #111111: 1.17 -> 16.07:1 */
+.cbi-tabmenu.mode a { background: #787800 !important; } /* was #ffff00 under #ffffff: 1.07 -> 4.68:1 */
+.cbi-tabmenu.mode a { color: #ffffff !important; } /* was #111111: 1.17 -> 16.07:1 */
+.modal.cbi-modal button.cbi-button-positive:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+button.cbi-button-action:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+button.cbi-button-negative:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+button.cbi-button-positive:not(:hover):not(:focus) { background: #008282 !important; } /* was #00ffff under #ffffff: 1.25 -> 4.65:1 */
+/* AUTO-CONTRAST END */

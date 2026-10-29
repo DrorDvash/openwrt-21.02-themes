@@ -1,0 +1,13 @@
+Package: luci-theme-aurora21
+Version: 1.0.4-1
+Depends: luci-base
+Source: https://github.com/eamonxg/luci-theme-aurora
+License: Apache-2.0
+Section: luci
+Maintainer: Dror Dvash <DrorDvash@users.noreply.github.com>
+Architecture: all
+Installed-Size: 0
+Description: Aurora on Aurora (21.02 port) - the Aurora top-bar layout.
+ Layout, CSS and menu script from luci-theme-aurora 1.4.0 (eamonxg, Apache-2.0),
+ Aurora's own look. Registers luci.themes.Aurora21;
+ it does not change the active theme.

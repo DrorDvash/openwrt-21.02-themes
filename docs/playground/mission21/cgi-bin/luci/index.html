@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-darkmode="true">
+	<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"login","theme":"mission21"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+		<meta charset="utf-8">
+		<title>OpenWrt - Overview - LuCI</title>
+		
+		<meta name="theme-color" content="#05080d">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="darkreader-lock">
+		<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/mission21/cascade.css?v=1.0.4-1">
+		<link rel="stylesheet" media="only screen and (max-device-width: 854px)" href="/openwrt-21.02-themes/playground/luci-static/mission21/mobile.css?v=1.0.4-1" type="text/css" />
+		<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/mission21/logo_48.png" sizes="48x48">
+		<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/mission21/logo.svg" sizes="any">
+		<link rel="shortcut icon" href="/openwrt-21.02-themes/playground/luci-static/mission21/favicon.png">
+		<script src="/openwrt-21.02-themes/playground/translations-en.js"></script>
+		<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js"></script>
+	</head>
+
+	<body class="lang_en Overview" data-page="">
+		
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/mission21","documentroot":"\/www","pollinterval":5,"apply_display":1.5,"requestpath":[],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/mission21\/cgi-bin\/luci","dispatchpath":[],"apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"template","path":"admin_status\/index"},"order":1,"depends":{"acl":["luci-mod-status-index"]},"title":"Overview"}});
+</script>
+
+
+<section hidden>
+	<form method="post" class="cbi-map">
+		<div class="cbi-section">
+			<div class="cbi-section-node">
+				<div class="cbi-value">
+					<label class="cbi-value-title" for="luci_username">Username</label>
+					<div class="cbi-value-field">
+						<input name="luci_username" id="luci_username" type="text" autocomplete="username"  value="root">
+					</div>
+				</div>
+				<div class="cbi-value">
+					<label class="cbi-value-title" for="luci_password">Password</label>
+					<div class="cbi-value-field">
+						<input name="luci_password" id="luci_password" type="password" autocomplete="current-password">
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<hr>
+
+	
+
+	<button class="btn cbi-button-positive important">Login</button>
+</section>
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+	<script type="text/javascript">
+		/* Inlined equivalent of view/bootstrap/sysauth.js, so this package
+		   only ships files under its own theme paths. */
+		L.require('ui').then(function(ui) {
+			var form = document.querySelector('form'),
+			    btn = document.querySelector('button');
+
+			var dlg = ui.showModal(
+				_('Authorization Required'),
+				[].slice.call(document.querySelectorAll('section > *')),
+				'login'
+			);
+
+			form.addEventListener('keypress', function(ev) {
+				if (ev.key == 'Enter')
+					btn.click();
+			});
+
+			btn.addEventListener('click', function() {
+				dlg.querySelectorAll('*').forEach(function(node) { node.style.display = 'none' });
+				dlg.appendChild(E('div', { 'class': 'spinning' }, _('Logging in…')));
+
+				form.submit()
+			});
+
+			L.dom.content(document.querySelector('#view'), null);
+			document.querySelector('input[type="password"]').focus();
+		});
+	</script>
+</div>
+
+
+	<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

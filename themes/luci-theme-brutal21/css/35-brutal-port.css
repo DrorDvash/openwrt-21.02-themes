@@ -1,0 +1,9 @@
+
+/* Brutal-specific 21.02 port fixes (add rules found by tools/qa.py / tools/a11y.py) */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-firewall-redirect var { color: #e5006e !important; } /* was #ff3d9a: 3.29 -> 4.61:1 */
+#tabmenu a { color: #db0069 !important; } /* was #ff3d9a: 3.07 -> 4.66:1 */
+.modal.cbi-modal button.cbi-button-positive:not(:hover):not(:focus) { color: #111111 !important; } /* was #fff7e0: 3.48 -> 5.08:1 */
+.modal.login button.cbi-button-positive:not(:hover):not(:focus) { color: #111111 !important; } /* was #fff7e0: 3.52 -> 5.02:1 */
+/* AUTO-CONTRAST END */

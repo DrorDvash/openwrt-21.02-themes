@@ -1,0 +1,106 @@
+<%#
+ UniWRT, OpenWrt 21.02 port (luci-theme-uniwrt21). Lua translation of uniwrt-luci 2.0.38
+ footer.ut (ox1d3x3, Apache-2.0). The status bar lives in menu-uniwrt21.js (a package may add only
+ that one script to /www/luci-static/resources).
+-%>
+<% if not blank_page then %>
+    </div>
+  </div>
+</main>
+
+<footer class="u-footer">
+  <a class="u-credit" href="https://github.com/ox1d3x3/uniwrt-luci" target="_blank" rel="noopener noreferrer">OX1d3x3 X UniWRT V2.0.38 (21.02 port)</a>
+</footer>
+
+<script src="<%=resource%>/luci.js"></script>
+<script>
+  L.require('menu-uniwrt21');
+
+  if (history.scrollRestoration) history.scrollRestoration = 'manual';
+
+  /* ---- rail open/close (mobile) + collapse/pin (desktop) ---- */
+  (function(){
+    var rail   = document.getElementById('u-rail');
+    var scrim  = document.getElementById('u-scrim');
+    var burger = document.getElementById('u-burger');
+    var pin    = document.getElementById('u-rail-pin');
+    var html   = document.documentElement;
+
+    function openRail(){ if(rail){rail.classList.add('open');} if(scrim){scrim.classList.add('show');} }
+    function closeRail(){ if(rail){rail.classList.remove('open');} if(scrim){scrim.classList.remove('show');} }
+
+    if (burger) burger.addEventListener('click', function(){
+      rail && rail.classList.contains('open') ? closeRail() : openRail();
+    });
+    if (scrim) scrim.addEventListener('click', closeRail);
+
+    if (pin) {
+      var pinLabels = { collapsed: '<%:Expand menu%>', expanded: '<%:Collapse menu%>' };
+      function syncPinLabel(){
+        var t = pinLabels[html.getAttribute('data-rail') === 'collapsed' ? 'collapsed' : 'expanded'];
+        pin.title = t; pin.setAttribute('aria-label', t);
+      }
+      function setRail(state){
+        html.setAttribute('data-rail', state);
+        try { localStorage.setItem('uniwrt21-rail', state); } catch(e){}
+        syncPinLabel();
+      }
+      syncPinLabel();
+      pin.addEventListener('click', function(){
+        setRail(html.getAttribute('data-rail') === 'collapsed' ? 'expanded' : 'collapsed');
+      });
+      /* Collapsed rail is one big expand control: clicking anything inside it
+         (logo or a category icon) re-expands the full menu instead of
+         navigating. Desktop only — on mobile the rail is an off-canvas
+         overlay driven by the burger. */
+      if (rail) rail.addEventListener('click', function(ev){
+        if (html.getAttribute('data-rail') !== 'collapsed') return;
+        if (!window.matchMedia('(min-width: 921px)').matches) return;
+        /* a category icon: expand AND follow the link, so the page loads with
+           that category's sub-options in the open sidebar */
+        var tab = ev.target && ev.target.closest && ev.target.closest('.u-mode-tab');
+        if (tab) { setRail('expanded'); return; }
+        /* logo / arrow / empty rail: just expand */
+        ev.preventDefault();
+        ev.stopPropagation();
+        setRail('expanded');
+      }, true);
+    }
+  })();
+
+  /* ---- theme toggle: auto -> light -> dark ---- */
+  (function(){
+    var btn = document.getElementById('u-theme-toggle');
+    if (!btn) return;
+    var order = ['auto','light','dark'];
+    var labels = { auto:'<%:Theme: Auto%>', light:'<%:Theme: Light%>', dark:'<%:Theme: Dark%>' };
+    function apply(mode){
+      var d = document.getElementById('u-dark');
+      var m = document.getElementById('u-meta-color');
+      document.documentElement.dataset.theme = mode;
+      if (d) d.media = mode==='dark' ? 'all' : (mode==='light' ? 'not all' : '(prefers-color-scheme: dark)');
+      var dark = mode==='dark' || (mode==='auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.dataset.darkmode = dark ? 'true' : 'false';
+      if (m) m.content = dark ? '#131416' : '#ffffff';
+      btn.title = labels[mode]; btn.setAttribute('aria-label', labels[mode]);
+    }
+    apply(document.documentElement.dataset.theme || 'auto');
+    btn.addEventListener('click', function(){
+      var cur = document.documentElement.dataset.theme || 'auto';
+      var next = order[(order.indexOf(cur)+1) % 3];
+      try { localStorage.setItem('uniwrt21-theme', next); } catch(e){}
+      apply(next);
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
+      if ((document.documentElement.dataset.theme||'auto') !== 'auto') return;
+      var m = document.getElementById('u-meta-color');
+      document.documentElement.dataset.darkmode = e.matches ? 'true' : 'false';
+      if (m) m.content = e.matches ? '#131416' : '#ffffff';
+    });
+  })();
+</script>
+<script src="<%=media%>/custom-entry.js?v=1.0.4-1" defer></script>
+<% end %>
+<% if js then %><script><%=js%></script><% end %>
+</body>
+</html>

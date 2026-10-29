@@ -1,0 +1,26 @@
+
+/* Mission Control on Argon: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#lease6_status_table th { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+#lease_status_table th { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+#wifi_assoclist_table th { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+#wifi_assoclist_table th.hide-xs { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.cbi-section-table-titles th.cbi-section-table-cell { color: #4c829e !important; } /* was #427189: 3.65 -> 4.60:1 */
+.cbi-section-table-titles th.col-1.size { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.cbi-section-table-titles th.col-10 { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.cbi-section-table-titles th.col-2 { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.cbi-section-table-titles th.col-2.version { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.table th { color: #4c829e !important; } /* was #427189: 3.70 -> 4.67:1 */
+.table.assoclist th { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.table.assoclist th.hide-xs { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.table.lases th { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.table.lases th.cbi-section-actions { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.table.leases6 th { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+.table.leases6 th.cbi-section-actions { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+a.food { color: #4b819c !important; } /* was #427189: 3.72 -> 4.62:1 */
+a.menu { color: #4b819c !important; } /* was #427189: 3.72 -> 4.62:1 */
+a.menu.active { color: #2f5161 !important; } /* was #4b819c: 2.33 -> 4.64:1 */
+footer a { color: #4b819c !important; } /* was #427189: 3.72 -> 4.62:1 */
+footer a.luci-link { color: #4b819c !important; } /* was #427189: 3.78 -> 4.70:1 */
+/* AUTO-CONTRAST END */

@@ -1,0 +1,21 @@
+
+/* Aurora on 21.02: theme-specific fixes */
+
+/* WCAG AA in the light palette (upstream 1.4.0 measures 4.07:1 for white on the brand
+   blue, 3.37:1 for brand text on brand-subtle buttons and 3.47:1 for table headers):
+   same hues, darker. */
+:root:not([data-darkmode="true"]) {
+	--brand: #006f9e;
+	--link: #006f9e;
+	--brand-hover: #005e86;
+	--focus-ring: rgba(0, 111, 158, .6);
+	--progress-end: #006f9e;
+	--text-subtle: #6a6f75;
+}
+
+/* dark palette: white on the teal brand measures 3.56:1, so filled controls carry the
+   page's near-black ink instead (5.3:1); table headers (--text-subtle) lifted to AA */
+:root[data-darkmode="true"] {
+	--on-brand: #05070e;
+	--text-subtle: #8a8f97;
+}

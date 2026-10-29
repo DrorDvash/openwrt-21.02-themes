@@ -1,0 +1,22 @@
+<%#
+ Synthwave on Aurora, OpenWrt 21.02 port (luci-theme-synthwave21-aurora). Lua translation of
+ luci-theme-aurora 1.4.0 footer.ut (eamonxg, Apache-2.0).
+-%>
+		<% if not blank_page then %>
+		<% local ver = require "luci.version" %>
+			<footer>
+				<span>
+					Powered by
+					<a href="https://github.com/openwrt/luci" target="_blank" rel="noreferrer"><%= ver.luciname %> (<%= ver.luciversion %>)</a>
+					/ <%= ver.distname %> <%= ver.distversion %>
+					/ <a href="https://github.com/eamonxg/luci-theme-aurora" target="_blank" rel="noreferrer">Synthwave on Aurora</a> (21.02 port)
+				</span>
+				<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+				<% if "dark" == "auto" then %><%+themes/synthwave21-aurora/switcher%><% end %>
+			</footer>
+		</div>
+		<script>L.require('menu-synthwave21-aurora')</script>
+		<script src="<%=media%>/custom-entry.js?v=1.0.4-1" defer></script>
+		<% end %>
+	</body>
+</html>

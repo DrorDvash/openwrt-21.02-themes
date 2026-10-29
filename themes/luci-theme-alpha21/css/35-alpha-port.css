@@ -1,0 +1,51 @@
+
+/* Alpha on 21.02: theme-specific fixes */
+
+/* the active sidebar entry: white on Alpha's #09c measures 3.27:1; same hue, darker (5.0:1) */
+:root { --submenu-bg-hover-active: #0077a3; }
+
+/* hand fix: the split "Save & Apply" button is one pill. Alpha's translucent cyan over the
+   page gives white text 4.39:1, so the pill gets the same teal one step darker (4.62:1) and
+   its parts (the label row and the arrow) stay transparent instead of drawing a solid box
+   inside it. (The contrast tool had painted every dropdown row and arrow solid teal.) */
+/* also while its list is open (Alpha's own see-through cyan came back then: 3.34:1); hover
+   darkens instead of lightening */
+.cbi-dropdown.cbi-button-apply { background: #058097 !important; }
+.cbi-dropdown.cbi-button-apply:hover:not([open]) { background: #046a7c !important; }
+.cbi-dropdown.btn > ul > li, .cbi-dropdown.btn > .open { background: transparent !important; }
+
+/* hand fix: zone badges and interface box heads carry 21.02's pastel zone colours (inline);
+   the names on them stay dark with nothing behind them, and the striped "no zone" badge
+   ("REJECT") gets a solid light backing under its translucent stripes. (The contrast tool
+   had painted green and grey boxes behind the names.) */
+html:root .zonebadge[style] *, html:root .ifacebox-head[style] * { color: #111 !important; background-color: transparent !important; text-shadow: none; }
+html:root .zonebadge-empty { background-color: #c8ccd2; }
+html:root .zonebadge-empty, html:root .zonebadge-empty * { color: #111 !important; text-shadow: none; }
+
+/* hand fix: Firewall > Zones policy selects showed "acce" for accept. Alpha sizes them per
+   screen width (11rem, 9rem <= 1600px, 4rem <= 2000px), but its 2000px block comes after
+   the 1600px one, so 4rem wins on every screen up to 2000px. */
+@media screen and (max-width: 2000px) {
+	#cbi-firewall-zone .td .cbi-input-select { min-width: 7rem; }
+}
+
+/* hand fix: open dropdown lists were 66 % grey over the page (form text showed through);
+   solid, in the colour they had over Alpha's dark background */
+html:root .cbi-dropdown[open] > ul.dropdown { background-color: #5a5c66 !important; }
+
+/* open lists: gaya.css spreads an item's parts apart (justify-content: space-around), so
+   "MAC (host)" read as "MAC (     host     )": centred, without the gaps */
+.cbi-dropdown[open] > ul.dropdown > li { justify-content: center; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-dnsmasq div.cbi-button-add:not(:hover):not(:focus) { background: #118096 !important; } /* was #12849b under #ffffff: 4.38 -> 4.61:1 */
+#cbi-firewall-redirect button.cbi-button-add:not(:hover):not(:focus) { background: #0d7f96 !important; } /* was #0e879f under #ffffff: 4.21 -> 4.67:1 */
+#cbi-firewall-redirect button.cbi-button-edit:not(:hover):not(:focus) { background: #0d8097 !important; } /* was #0d8299 under #ffffff: 4.50 -> 4.61:1 */
+#cbi-firewall-redirect var { color: #00a8e0 !important; } /* was #0099cc: 3.93 -> 4.69:1 */
+#cbi-firewall-zone button.cbi-button-add:not(:hover):not(:focus) { background: #0f8095 !important; } /* was #118ea5 under #ffffff: 3.86 -> 4.62:1 */
+#cbi-firewall-zone button.cbi-button-edit:not(:hover):not(:focus) { background: #0d7f96 !important; } /* was #0e859d under #ffffff: 4.32 -> 4.67:1 */
+.cbi-page-actions.control-group button.cbi-button-save:not(:hover):not(:focus) { background: #058097 !important; } /* was #05849c under #ffffff: 4.39 -> 4.62:1 */
+.mobile a { color: #e6e6e6 !important; } /* was #e6e6e6: 8.74 -> 8.74:1 */
+.modal.cbi-modal button.cbi-button-positive:not(:hover):not(:focus) { background: #20808b !important; } /* was #2593a0 under #ffffff: 3.65 -> 4.64:1 */
+button.cbi-button-action:not(:hover):not(:focus) { background: #088097 !important; } /* was #0995af under #ffffff: 3.54 -> 4.62:1 */
+/* AUTO-CONTRAST END */

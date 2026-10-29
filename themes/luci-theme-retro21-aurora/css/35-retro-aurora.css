@@ -1,0 +1,23 @@
+
+/* Retro on Aurora: theme-specific fixes */
+
+/* hand fixes (Aurora layout), as in the top-menu port: #008383 is visually the same teal
+   and carries black (4.57:1) and white (4.59:1); the blue section bars one step darker */
+:root, :root[data-darkmode="false"], :root[data-darkmode="true"] { --r-desktop: #008383; }
+h3 abbr { color: inherit !important; }
+
+/* hand fix: the blue section bars carried black or white text; white on #0f79bf (4.66:1) */
+h3 { color: #fff !important; background: #0f79bf !important; }
+
+/* hand fix: with its list open, Save & Apply turns navy but kept black text (1.2:1) */
+html:root .cbi-page-actions .cbi-dropdown.cbi-button-apply[open] { color: #fff !important; }
+
+/* The page behind the scrollbar matches the light page (Retro's teal desktop only showed in the
+   gutter), and the page title is dark text, as on Retro's own layout, not a grey bar */
+html { background-color: #f5f5f5 !important; }
+h2 { background: none !important; color: #111 !important; text-shadow: none !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+.cbi-tabmenu a { background: #757575 !important; } /* was #c0c0c0 under #ffffff: 1.82 -> 4.61:1 */
+.cbi-tabmenu.mode a { background: #757575 !important; } /* was #c0c0c0 under #ffffff: 1.82 -> 4.61:1 */
+/* AUTO-CONTRAST END */

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-darkmode="true">
+	<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"pixel21"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+		<meta charset="utf-8">
+		<title>OpenWrt - SSH Access - LuCI</title>
+		
+		<meta name="theme-color" content="#0d0a1c">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="darkreader-lock">
+		<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/pixel21/cascade.css?v=1.0.4-1">
+		<link rel="stylesheet" media="only screen and (max-device-width: 854px)" href="/openwrt-21.02-themes/playground/luci-static/pixel21/mobile.css?v=1.0.4-1" type="text/css" />
+		<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/pixel21/logo_48.png" sizes="48x48">
+		<link rel="icon" href="/openwrt-21.02-themes/playground/luci-static/pixel21/logo.svg" sizes="any">
+		<link rel="shortcut icon" href="/openwrt-21.02-themes/playground/luci-static/pixel21/favicon.png">
+		<script src="/openwrt-21.02-themes/playground/translations-en.js"></script>
+		<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js"></script>
+	</head>
+
+	<body class="lang_en SSH Access" data-page="admin-system-admin-dropbear">
+		
+		<header>
+			<a class="brand" href="/">OpenWrt</a>
+			<ul class="nav" id="topmenu" style="display:none"></ul>
+			<div class="hdr-clock" aria-hidden="true" id="hdr-clock"></div>
+			<div id="indicators" class="pull-right"></div>
+		</header>
+
+		<div id="maincontent" class="container"><noscript>
+				<div class="alert-message warning">
+					<h4>JavaScript required!</h4>
+					<p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+				</div>
+			</noscript>
+
+			<div id="tabmenu" style="display:none"></div>
+		
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/pixel21","documentroot":"\/www","pathinfo":"\/admin\/system\/admin\/dropbear","apply_display":1.5,"requestpath":["admin","system","admin","dropbear"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/pixel21\/cgi-bin\/luci","dispatchpath":["admin","system","admin","dropbear"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"view","path":"system\/dropbear"},"order":2,"readonly":false,"depends":{"acl":["luci-mod-system-ssh"],"fs":{"\/usr\/sbin\/dropbear":"executable"}},"title":"SSH Access"},"pollinterval":5});
+</script>
+
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+	<script type="text/javascript">
+		L.require('ui').then(function(ui) {
+			ui.instantiateView('system/dropbear');
+		});
+	</script>
+</div>
+
+
+		
+		</div>
+		<footer>
+			<span>
+				<a href="https://github.com/openwrt/luci">Powered by LuCI openwrt-21.02 branch (git-23.093.57360-e98243e)</a> / OpenWrt 21.02.7 r16847-f8282da11e
+			</span>
+			<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+		</footer>
+		<script type="text/javascript">(function(){var e=document.getElementById('hdr-clock');if(!e)return;function p(n){return (n<10?'0':'')+n}function t(){var d=new Date();e.textContent='PLAYTIME '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())}t();setInterval(t,1000)})();</script>
+		<script type="text/javascript">L.require('menu-pixel21')</script>
+		
+	<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

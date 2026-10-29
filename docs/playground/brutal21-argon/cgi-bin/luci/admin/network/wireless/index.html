@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script>window.__pg={"base":"/openwrt-21.02-themes/playground","home":"/openwrt-21.02-themes/","page":"view","theme":"brutal21-argon"}</script><script src="/openwrt-21.02-themes/playground/pg-data.js"></script><script src="/openwrt-21.02-themes/playground/replay.js"></script>
+	<meta charset="utf-8">
+	<title>
+		OpenWrt - Wireless
+		- LuCI</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="full-screen" content="yes">
+	<meta name="x5-page-mode" content="app">
+	<meta name="browsermode" content="application">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="msapplication-TileColor" content="#ffde59">
+	<meta name="application-name" content="OpenWrt - LuCI">
+	<meta name="apple-mobile-web-app-title" content="OpenWrt - LuCI">
+	<link rel="apple-touch-icon" sizes="144x144" href="/openwrt-21.02-themes/playground/luci-static/brutal21-argon/icon/apple-icon-144x144.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/openwrt-21.02-themes/playground/luci-static/brutal21-argon/icon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/openwrt-21.02-themes/playground/luci-static/brutal21-argon/icon/favicon-32x32.png">
+	<meta name="msapplication-TileColor" content="#ffde59">
+	<meta name="theme-color" content="#ffde59">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/brutal21-argon/css/cascade.css?v=1.0.4-1">
+	<link rel="stylesheet" href="/openwrt-21.02-themes/playground/luci-static/brutal21-argon/css/theme.css?v=1.0.4-1">
+	<link rel="shortcut icon" href="/openwrt-21.02-themes/playground/luci-static/brutal21-argon/favicon.png">
+	<script src="/openwrt-21.02-themes/playground/translations-en.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/resources/cbi.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+	<script src="/openwrt-21.02-themes/playground/luci-static/brutal21-argon/js/jquery.min.js?v=3.5.1"></script>
+</head>
+
+<body
+	class="lang_en Wireless logged-in"
+	data-page="admin-network-wireless">
+
+	<div class="main">
+		<div class="main-left" id="mainmenu" style="display:none">
+			<div class="sidenav-header d-flex align-items-center">
+				<a class="brand" href="#">OpenWrt</a>
+				<div class="ml-auto">
+					<!-- Sidenav toggler -->
+					<div class="sidenav-toggler d-none d-xl-block active" data-action="sidenav-unpin"
+						data-target="#sidenav-main">
+						<div class="sidenav-toggler-inner">
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+							<i class="sidenav-toggler-line"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-right">
+			<header class="bg-primary">
+				<div class="fill">
+					<div class="container">
+						<div class="flex1">
+							<a class="showSide"></a>
+							<a class="brand" href="#">OpenWrt</a>
+						</div>
+						<div class="status" id="indicators"></div>
+					</div>
+				</div>
+			</header>
+			<div class="darkMask"></div>
+			<div id="maincontent">
+				<div class="container"><noscript>
+						<div class="alert-message error">
+							<h4>JavaScript required!</h4>
+							<p>You must enable JavaScript in your browser or LuCI will not work properly.</p>
+						</div>
+					</noscript>
+
+					<div id="tabmenu" style="display:none"></div>
+
+
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/promis.min.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript" src="/openwrt-21.02-themes/playground/luci-static/resources/luci.js?v=git-23.093.57360-e98243e"></script>
+<script type="text/javascript">
+	L = new LuCI({"apply_rollback":90,"resource":"\/openwrt-21.02-themes\/playground\/luci-static\/resources","media":"\/openwrt-21.02-themes\/playground\/luci-static\/brutal21-argon","documentroot":"\/www","pathinfo":"\/admin\/network\/wireless","apply_display":1.5,"requestpath":["admin","network","wireless"],"ubuspath":"\/ubus\/","scriptname":"\/openwrt-21.02-themes\/playground\/brutal21-argon\/cgi-bin\/luci","dispatchpath":["admin","network","wireless"],"sessionid":"00000000000000000000000000000000","token":"00000000000000000000000000000000","apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"view","path":"network\/wireless"},"order":15,"readonly":false,"depends":{"acl":["luci-mod-network-config"],"uci":{"wireless":{"@wifi-device":true}}},"title":"Wireless"},"pollinterval":5});
+</script>
+
+
+<div id="view">
+	<div class="spinning">Loading view…</div>
+	<script type="text/javascript">
+		L.require('ui').then(function(ui) {
+			ui.instantiateView('network/wireless');
+		});
+	</script>
+</div>
+
+
+</div>
+<footer class="mobile-hide">
+	<div>
+		<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank">Powered by LuCI openwrt-21.02 branch (git-23.093.57360-e98243e)</a> /
+						<a href="https://github.com/jerrykuku/luci-theme-argon" target="_blank">Brutal on ArgonTheme 2.3.1 (21.02 port)</a> /
+						OpenWrt 21.02.7 r16847-f8282da11e
+		<ul class="breadcrumb pull-right" id="modemenu" style="display:none"></ul>
+	</div>
+</footer>
+</div>
+</div>
+<script>
+	// thanks for Jo-Philipp Wich <jow@openwrt.org>
+	var luciLocation = ["admin","network","wireless"];
+	var winHeight = $(window).height();
+	$(window).resize(function () {
+		var winWidth = $(window).width()
+		if(winWidth < 600){
+			var newHeight = $(this).height();
+			var keyboradHeight = newHeight - winHeight;
+			$(".ftc").css("bottom", keyboradHeight + 30);
+		}
+	})
+</script>
+<script type="text/javascript">L.require('menu-brutal21-argon')</script>
+<script src="/openwrt-21.02-themes/playground/picker.js"></script></body>
+</html>
+
+

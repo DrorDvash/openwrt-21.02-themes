@@ -1,0 +1,173 @@
+/* ==========================================================================
+ * Aurora port layer (tools/baselines/aurora-template/30-aurora-port.css, used by
+ * aurora21 and every "<theme>21-aurora" variant): fixes for Aurora 1.4.0's
+ * prebuilt CSS on OpenWrt 21.02 pages, then the theme-independent 21.02 fixes.
+ * ========================================================================== */
+
+/* system fonts instead of the Lato web font (no font files shipped) */
+:root {
+	--font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+/* prefers-reduced-motion: Aurora's own reduced-motion partial leaves control transitions on */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0s !important;
+		transition-delay: 0s !important;
+		animation-duration: 0s !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* (html: outranks the shared layer appended below) 21.02 paints zone badges / interface heads with the full pastel zone colour (inline
+   style) in every mode; Aurora keeps them as they are, so dark text in both modes */
+html:root[data-darkmode="true"] .zonebadge[style],
+html:root[data-darkmode="true"] .ifacebox-head[style] { color: #111; text-shadow: none; }
+
+/* ==========================================================================
+ * Theme-independent 21.02 fixes (same as the bootstrap ports' shared layer)
+ * ========================================================================== */
+
+/* --- Focus states ------------------------------------------------------------- */
+
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.cbi-button:focus-visible,
+.cbi-tabmenu a:focus-visible,
+.tabs a:focus-visible,
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+	outline: 2px solid var(--p21-accent2);
+	outline-offset: 2px;
+}
+
+/* --- 21.02 widgets that 25.12 override blocks do not cover ---------------------- */
+
+/* 21.02 keeps a tinted box behind inactive tabs (on the <li>), on which the
+   25.12 overrides' dim tab text drops below AA: use full ink for inactive tabs. */
+.tabs { border-bottom: 1px solid var(--p21-rule); }
+.tabs > li > a,
+.cbi-tabmenu > li > a { color: var(--p21-ink); }
+.tabs > li.active > a { color: var(--p21-accent); }
+
+/* 21.02 paints opened-list items with --primary-color-medium/-low (themes often
+   set those to two unrelated accents) and dark --on-primary-color text; use a
+   readable tint + accent bar instead. */
+.cbi-dropdown[open] > ul.dropdown > li[selected] {
+	background: var(--p21-hover);
+	background: color-mix(in srgb, var(--p21-accent) 16%, transparent);
+	color: var(--p21-ink);
+}
+
+.cbi-dropdown[open] > ul.dropdown > li.focus {
+	background: var(--p21-hover);
+	color: var(--p21-ink);
+	box-shadow: inset 3px 0 0 var(--p21-accent);
+}
+
+.cbi-dropdown[open] > ul.dropdown > li[selected].focus {
+	background: var(--p21-hover);
+	background: color-mix(in srgb, var(--p21-accent) 28%, transparent);
+	color: var(--p21-ink);
+	box-shadow: inset 3px 0 0 var(--p21-accent);
+}
+
+/* "+" button next to a dropdown's "-- custom --" input (added by the menu JS) */
+/* only while the list is open: closed dropdowns hide every non-selected row */
+.cbi-dropdown[open] > ul.dropdown > li.p21-create-li { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.cbi-dropdown[open] > ul.dropdown > li.p21-create-li > input.create-item-input { flex: 1 1 auto; min-width: 0; width: auto; }
+/* 21.02 shows a clone of the list (ul.preview) while open: hide our additions there */
+.cbi-dropdown:not([open]) .p21-create-add,
+.cbi-dropdown:not([open]) .p21-create-error,
+.cbi-dropdown > ul.preview .p21-create-add,
+.cbi-dropdown > ul.preview .p21-create-error { display: none; }
+.p21-create-add { flex: 0 0 auto; min-width: 36px; min-height: 32px; padding: 0 10px; font-weight: 700; line-height: 1; }
+.p21-create-error:not(:empty) {
+	flex: 1 0 100%;
+	padding: 4px 6px;
+	font-size: 12.5px;
+	white-space: normal;
+	color: var(--p21-err-ink, var(--t-err-ink, var(--error-color-high, #c00)));
+	border-left: 3px solid currentColor;
+}
+
+.cbi-tooltip { background: var(--p21-card); color: var(--p21-ink); border: 1px solid var(--p21-rule); }
+
+/* 21.02 hard-codes #0069d6 for <var> values */
+div.cbi-value var,
+.td.cbi-value-field var { color: var(--p21-accent); }
+
+div.cbi-value var[data-tooltip],
+.td.cbi-value-field var[data-tooltip],
+div.cbi-value var.cbi-tooltip-container,
+.td.cbi-value-field var.cbi-tooltip-container { border-bottom-color: var(--p21-accent); }
+
+/* Placeholders ("any", "-- add MAC --", input hints) at AA: 21.02 uses
+   --text-color-low and 25.12 overrides often dim ::placeholder further. */
+.cbi-dropdown > .more { color: var(--p21-dim); }
+/* placeholders render as <em>: keep the field's own text colour, the italics mark them */
+.cbi-dropdown:not(.btn):not(.cbi-button) > ul > li[placeholder] { color: inherit; }
+::placeholder { color: var(--p21-dim); opacity: 1; }
+
+/* Zone badges and zone-coloured interface heads (21.02 only; 25.12 themes never style
+   them): light themes get the full pastel zone colour, dark themes a translucent tint
+   over their background, so pick the text colour per mode instead of the theme ink. */
+:root:not([data-darkmode="true"]) .zonebadge[style],
+:root:not([data-darkmode="true"]) .ifacebox-head[style] { color: #111; text-shadow: none; }
+:root[data-darkmode="true"] .zonebadge[style],
+:root[data-darkmode="true"] .ifacebox-head[style] { color: #fff; text-shadow: 0 1px 1px rgba(0, 0, 0, .6); }
+.zonebadge[style] > strong,
+.zonebadge[style] > em,
+.zonebadge[style] .cbi-tooltip-container > strong,
+.ifacebox-head[style] * { color: inherit; }
+.zonebadge-empty { color: var(--p21-ink); border-color: var(--p21-dim); }
+:root:not([data-darkmode="true"]) .ifacebox-head:not([style]) { color: #111; }
+
+/* Dark themes: 21.02 paints untinted interface box heads #eee and the realtime
+   graph views an inline white panel (their labels are fill:#eee with a dark
+   shadow, so they read best on a dark scope panel). */
+:root[data-darkmode="true"] .ifacebox-head:not([style]) { background-color: var(--p21-hover); color: var(--p21-ink); }
+
+:root[data-darkmode="true"] #view div[style*="border:1px solid #000;background:#fff"] {
+	background: var(--p21-bg) !important;
+	border-color: var(--p21-rule) !important;
+}
+
+:root[data-darkmode="true"] #view div[style*="border:1px solid #000;background:#fff"] svg line {
+	stroke: var(--p21-rule) !important;
+	stroke-width: 1px !important;
+}
+
+/* Interface boxes: Argon 2.3.1 sets overflow:hidden on them (to round the coloured head),
+   which cuts the device tooltip that opens inside the box on hover */
+.ifacebox { overflow: visible; }
+.ifacebox > .ifacebox-head { border-top-left-radius: inherit; border-top-right-radius: inherit; }
+.table .td:has(.cbi-tooltip-container) { overflow: visible; }   /* same tooltip in clipped table cells */
+
+/* 25.12 override blocks kill motion with `*`, which does not match ::before/::after */
+@media (prefers-reduced-motion: reduce) {
+	*::before,
+	*::after { transition: none !important; animation: none !important; }
+}
+
+
+@media (max-width: 720px) {
+	/* wide tables scroll inside their own box, never the page */
+	.cbi-section-node, .table-wrapper { max-width: 100%; }
+
+	/* row action buttons (e.g. Status > Processes) wrap instead of overflowing */
+	/* (buttons keep their content width: shrinking them spills labels such as "[ KILL ]") */
+	.table .td.cbi-section-actions > div { flex-wrap: wrap; row-gap: 3px; }
+
+	/* opkg (System > Software) controls: its inline view CSS forces nowrap + 250px labels */
+	#maincontent .controls > * { min-width: 0; max-width: 100%; flex-basis: 100%; white-space: normal; }
+	#maincontent .controls > * > label { min-width: 0; }
+	#maincontent .control-group { display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; max-width: 100%; }
+	#maincontent .control-group > input { flex: 1 1 8em; min-width: 0; width: auto; }
+	#maincontent .control-group > .btn { flex: 0 1 auto; }
+
+}

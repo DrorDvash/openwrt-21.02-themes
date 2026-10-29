@@ -1,0 +1,18 @@
+
+/* Mission Control on Aurora: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+.modal.cbi-modal button.cbi-button-positive:not(:hover):not(:focus) { background: #007ea1 !important; } /* was #4dd8ff under #ffffff: 1.67 -> 4.67:1 */
+.modal.cbi-modal button:not(:hover):not(:focus) { color: #ffffff !important; } /* was #130c00: 1.14 -> 17.04:1 */
+.table.cbi-section-table button.cbi-button-neutral.down:not(:hover):not(:focus) { color: #ffffff !important; } /* was #130c00: 1.07 -> 18.17:1 */
+.table.cbi-section-table button.cbi-button-neutral.enable-disable:not(:hover):not(:focus) { color: #ffffff !important; } /* was #130c00: 1.07 -> 18.17:1 */
+.table.cbi-section-table button.cbi-button-neutral.reconnect:not(:hover):not(:focus) { color: #ffffff !important; } /* was #130c00: 1.07 -> 18.17:1 */
+.table.cbi-section-table button.cbi-button-neutral:not(:hover):not(:focus) { color: #ffffff !important; } /* was #130c00: 1.07 -> 18.17:1 */
+.table.cbi-section-table button.drag-handle:not(:hover):not(:focus) { color: #ffffff !important; } /* was #130c00: 1.07 -> 18.17:1 */
+.zonebadge em { color: #070707 !important; } /* was #111111: 4.32 -> 4.61:1 */
+.zonebadge strong { color: #070707 !important; } /* was #111111: 4.32 -> 4.61:1 */
+.zonebadge.cbi-tooltip-container strong { color: #0c0c0c !important; } /* was #111111: 4.44 -> 4.60:1 */
+.zonebadge.zonebadge-empty strong { color: #ffffff !important; } /* was #070707: 1.05 -> 19.23:1 */
+button.cbi-button-neutral:not(:hover):not(:focus) { color: #ffffff !important; } /* was #130c00: 1.13 -> 17.18:1 */
+button.login-submit:not(:hover):not(:focus) { background: #9c6b00 !important; } /* was #ffb000 under #ffffff: 1.83 -> 4.65:1 */
+/* AUTO-CONTRAST END */

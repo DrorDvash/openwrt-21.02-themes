@@ -1,0 +1,81 @@
+/* ==========================================================================
+ * Alpha port layer (tools/baselines/alpha-template/30-alpha-port.css): what
+ * Alpha's templates injected from /etc/config/alpha, the page background,
+ * then the theme-independent 21.02 fixes.
+ * ========================================================================== */
+
+:root {
+	--p21-bg: #10192b;
+	--p21-card: #222235;
+	--p21-ink: #fff;
+	--p21-dim: #c3c7d4;
+	--p21-rule: rgba(255, 255, 255, .18);
+	--p21-hover: rgba(255, 255, 255, .08);
+	--p21-accent: #09c;
+	--p21-accent2: #4dc3ff;
+	--p21-on: #fff;
+	--p21-head: #161624;
+	--font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+/* night sky in Alpha's teal and blue (the shipped illustrations are not redistributed) */
+body,
+body.node-main-login {
+	background-color: #0b2f45;
+	background-image:
+		radial-gradient(1px 1px at 12% 18%, rgba(255, 210, 170, .8), transparent 60%),
+		radial-gradient(1.5px 1.5px at 72% 12%, rgba(120, 255, 220, .8), transparent 60%),
+		radial-gradient(1px 1px at 38% 33%, rgba(255, 210, 170, .7), transparent 60%),
+		radial-gradient(1.5px 1.5px at 86% 41%, rgba(255, 210, 170, .7), transparent 60%),
+		radial-gradient(1px 1px at 22% 58%, rgba(120, 255, 220, .6), transparent 60%),
+		radial-gradient(1px 1px at 57% 22%, rgba(255, 255, 255, .7), transparent 60%),
+		radial-gradient(ellipse 90% 60% at 50% 115%, rgba(40, 230, 180, .55), rgba(20, 120, 140, .25) 45%, transparent 70%),
+		radial-gradient(ellipse 120% 90% at 50% 120%, #1d6f86 0%, #134a66 40%, #0b2f45 75%);
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+/* glass panels: the alpha-config defaults (colour #2222359a, blur 20px) */
+.main > .main-left,
+.cbi-section,
+.cbi-section-error,
+#iptables,
+.Firewall form,
+#cbi-network > .cbi-section-node,
+#cbi-wireless > .cbi-section-node,
+#cbi-wireless > #wifi_assoclist_table,
+[data-tab-title],
+[data-page^="admin-system-admin"]:not(.node-main-login) .cbi-map:not(#cbi-dropbear),
+[data-page="admin-system-opkg"] #maincontent > .container,
+.tabs,
+.cbi-tabmenu,
+.cbi-tooltip {
+	background-color: #2222359a;
+	-webkit-backdrop-filter: blur(20px);
+	backdrop-filter: blur(20px);
+}
+
+/* the icon dock is configured in /etc/config/alpha, which the port does not use */
+.navbar { display: none; }
+
+/* login page: the logo alone (no anniversary image) */
+.node-main-login header .tengah { max-width: min(220px, 60vw); height: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0s !important;
+		transition-delay: 0s !important;
+		animation-duration: 0s !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* (html: outranks the shared layer appended below) 21.02 paints zone badges and interface
+   heads with the full pastel zone colour; Alpha keeps it, so dark text on them */
+html:root .zonebadge[style],
+html:root .ifacebox-head[style] { color: #111; text-shadow: none; }
+html:root .zonebadge[style] em,
+html:root .zonebadge[style] strong { color: #111; }

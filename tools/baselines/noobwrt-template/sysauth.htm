@@ -1,0 +1,65 @@
+<%#
+ NoobWRT, OpenWrt 21.02 port (luci-theme-@ID@). Lua translation of luci-theme-noobwrt
+ @NWVER@ sysauth.ut (nooblk-98, Apache-2.0; derived from luci-theme-argon by jerrykuku).
+ Port changes: no online wallpapers (they were fetched on the router), no background
+ picture (its origin is unknown; the theme paints the background), no video backgrounds.
+-%>
+<%+themes/@ID@/out_header_login%>
+<%
+	local util = require "luci.util"
+	local boardinfo = util.ubus("system", "board") or {}
+	local hostname = striptags(boardinfo.hostname or "?")
+%>
+<!-- Login Page Start -->
+<div class="login-page">
+	<div class="main-bg" id="main-bg"></div>
+	<!-- Login Container Start -->
+	<div class="login-container">
+		<div class="login-form">
+			<div class="login-card split">
+				<div class="login-hero">
+					<div class="hero-particles">
+						<span></span><span></span><span></span><span></span>
+						<span></span><span></span><span></span><span></span>
+						<span></span><span></span><span></span><span></span>
+					</div>
+					<div class="hero-icon">
+						<img src="<%=media%>/img/logo.png" alt="">
+					</div>
+					<div class="hero-text">
+						<img class="hero-brand" src="<%=media%>/img/brand.png" alt="NoobWRT">
+					</div>
+				</div>
+				<div class="login-panel">
+					<div class="brand-text-only"><%=hostname%></div>
+					<div class="login-subtitle"><%:Authorization Required%></div>
+					<!-- Login Form Start -->
+					<form class="form-login" method="post" action="<%=pcdata(luci.http.getenv("REQUEST_URI"))%>">
+
+					<%- if fuser then %>
+					<div class="errorbox"><%:Invalid username and/or password! Please try again.%></div>
+					<% end -%>
+
+					<div class="input-container">
+						<div class="input-group user-icon">
+							<input class="cbi-input-user" id="cbi-input-user" type="text" name="luci_username" value="<%=pcdata(duser or "")%>" placeholder="<%:Username%>" autocomplete="username" />
+							<label class="sr-only" for="cbi-input-user"><%:Username%></label>
+						</div>
+						<div class="input-group pass-icon">
+							<input class="cbi-input-password" id="cbi-input-password" type="password" name="luci_password" placeholder="<%:Password%>" autocomplete="current-password" />
+							<label class="sr-only" for="cbi-input-password"><%:Password%></label>
+						</div>
+					</div>
+						<div class="form-actions">
+							<input type="submit" value="<%:Login%>" class="cbi-button cbi-button-apply" />
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- Login Form End -->
+			<script type="text/javascript">//<![CDATA[
+				var input = document.getElementsByName('luci_password')[0];
+				if (input)
+					input.focus();
+			//]]></script>
+<%+themes/@ID@/footer_login%>

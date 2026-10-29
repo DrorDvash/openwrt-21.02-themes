@@ -1,0 +1,14 @@
+
+/* 8-bit on Aurora: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+.zonebadge em { color: #0b0b0b !important; } /* was #111111: 4.44 -> 4.62:1 */
+.zonebadge strong { color: #0b0b0b !important; } /* was #111111: 4.44 -> 4.62:1 */
+.zonebadge.zonebadge-empty strong { color: #ffffff !important; } /* was #0b0b0b: 1.16 -> 16.96:1 */
+button.cbi-button-negative:not(:hover):not(:focus) { background: #e32231 !important; } /* was #e63946 under #ffffff: 4.17 -> 4.63:1 */
+/* AUTO-CONTRAST END */

@@ -1,0 +1,39 @@
+
+/* Topo on Aurora: theme-specific fixes */
+
+/* hand fix: Save & Apply's open list carried the theme's muted text (4.02:1); list items in
+   the theme's ink */
+html:root .cbi-dropdown[open] > ul.dropdown > li { color: var(--p21-ink); }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#wifi_assoclist_table em { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+#wifi_assoclist_table th { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+#wifi_assoclist_table th.hide-xs { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.cbi-map-descr abbr { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+.cbi-section-table-titles th.cbi-section-table-cell { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.cbi-section-table-titles th.col-1.size { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.cbi-section-table-titles th.col-10 { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.cbi-section-table-titles th.col-2 { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.cbi-section-table-titles th.col-2.version { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.cbi-value-description abbr { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+.ifacebadge em { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+.login-footer p { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+.table th { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.table.assoclist em { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+.table.assoclist th { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.table.assoclist th.hide-xs { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.table.cbi-section-table em { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+.table.cbi-section-table span { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+.table.lases em { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+.table.lases th { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.table.lases th.cbi-section-actions { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.table.leases6 em { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+.table.leases6 th { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.table.leases6 th.cbi-section-actions { color: #4f5c60 !important; } /* was #5f6f74: 3.55 -> 4.70:1 */
+.zonebadge strong { color: #414c4f !important; } /* was #5d6c71: 2.89 -> 4.68:1 */
+.zonebadge.zonebadge-empty strong { color: #5d6c71 !important; } /* was #5f6f74: 4.43 -> 4.62:1 */
+div.cbi-map-descr { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+div.cbi-value-description { color: #5c6b70 !important; } /* was #5f6f74: 4.40 -> 4.66:1 */
+footer span { color: #566469 !important; } /* was #5f6f74: 4.02 -> 4.71:1 */
+label.cbi-value-title { color: #5c6b70 !important; } /* was #5f6f74: 4.40 -> 4.66:1 */
+/* AUTO-CONTRAST END */

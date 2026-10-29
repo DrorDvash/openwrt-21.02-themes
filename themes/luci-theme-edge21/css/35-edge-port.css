@@ -1,0 +1,58 @@
+
+/* Edge on 21.02: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-dnsmasq div.cbi-button-add:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-dhcp-host button.cbi-button-add:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-dhcp-host button.cbi-button-edit:not(:hover):not(:focus) { background: #2c6de9 !important; } /* was #5a8dee under #ffffff: 3.24 -> 4.70:1 */
+#cbi-dhcp-host button.cbi-button-remove:not(:hover):not(:focus) { background: #ad6302 !important; } /* was #fdb75a under #ffffff: 1.74 -> 4.60:1 */
+#cbi-dhcp-host button.drag-handle:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-firewall-redirect button.cbi-button-add:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-firewall-redirect button.cbi-button-edit:not(:hover):not(:focus) { background: #2c6de9 !important; } /* was #5a8dee under #ffffff: 3.24 -> 4.70:1 */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { background: #ad6302 !important; } /* was #fdb75a under #ffffff: 1.74 -> 4.60:1 */
+#cbi-firewall-redirect button.drag-handle:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-firewall-redirect var { color: #1960e7 !important; } /* was #5a8dee: 2.79 -> 4.68:1 */
+#cbi-firewall-zone button.cbi-button-add:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-firewall-zone button.cbi-button-edit:not(:hover):not(:focus) { background: #2c6de9 !important; } /* was #5a8dee under #ffffff: 3.24 -> 4.70:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { background: #ad6302 !important; } /* was #fdb75a under #ffffff: 1.74 -> 4.60:1 */
+#cbi-firewall-zone button.drag-handle:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-network-device button.cbi-button-add:not(:hover):not(:focus) { background: #68758f !important; } /* was #f4f5f7 under #ffffff: 1.09 -> 4.64:1 */
+#cbi-network-device button.cbi-button-edit:not(:hover):not(:focus) { background: #68758f !important; } /* was #f4f5f7 under #ffffff: 1.09 -> 4.64:1 */
+#cbi-network-interface button.cbi-button-add:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-network-interface button.cbi-button-edit:not(:hover):not(:focus) { background: #2c6de9 !important; } /* was #5a8dee under #ffffff: 3.24 -> 4.70:1 */
+#cbi-network-interface button.cbi-button-neutral.down:not(:hover):not(:focus) { background: #64768c !important; } /* was #a3afbd under #ffffff: 2.23 -> 4.65:1 */
+#cbi-network-interface button.cbi-button-neutral.reconnect:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { background: #ad6302 !important; } /* was #fdb75a under #ffffff: 1.74 -> 4.60:1 */
+#cbi-system-system button.cbi-button-apply:not(:hover):not(:focus) { background: #2c6de9 !important; } /* was #5a8dee under #ffffff: 3.24 -> 4.70:1 */
+#cbi-wireless-wifi-device button.cbi-button-action:not(:hover):not(:focus) { background: #2c6de9 !important; } /* was #5a8dee under #ffffff: 3.24 -> 4.70:1 */
+#cbi-wireless-wifi-device button.cbi-button-add:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { background: #ad6302 !important; } /* was #fdb75a under #ffffff: 1.74 -> 4.60:1 */
+#cbi-wireless-wifi-device button.cbi-button-neutral.enable-disable:not(:hover):not(:focus) { background: #64768c !important; } /* was #a3afbd under #ffffff: 2.23 -> 4.65:1 */
+#cbi-wireless-wifi-device button.cbi-button-neutral:not(:hover):not(:focus) { background: #64768c !important; } /* was #a3afbd under #ffffff: 2.23 -> 4.65:1 */
+#tabmenu a { color: #175ee4 !important; } /* was #5a8dee: 2.68 -> 4.62:1 */
+.cbi-dropdown label { color: #ffffff !important; } /* was #6d6d6d: 1.10 -> 4.70:1 */
+.cbi-dropdown li { background: #2c6de9 !important; } /* was #5a8dee under #ffffff: 3.24 -> 4.70:1 */
+.cbi-dropdown li { color: #ffffff !important; } /* was #4d5156: 1.70 -> 4.70:1 */
+.cbi-dropdown span.open { background: #2c6de9 !important; } /* was #5a8dee under #ffffff: 3.24 -> 4.70:1 */
+.cbi-dropdown span.open { color: #ffffff !important; } /* was #4d5156: 1.70 -> 4.70:1 */
+.cbi-map-descr abbr { color: #726e6e !important; } /* was #797474: 4.22 -> 4.62:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { background: #ad6302 !important; } /* was #fdb75a under #ffffff: 1.74 -> 4.60:1 */
+.cbi-page-actions.control-group button.cbi-button-save:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+.cbi-section-table-titles abbr { color: #757070 !important; } /* was #797474: 4.36 -> 4.61:1 */
+.cbi-tabmenu a { color: #d81921 !important; } /* was #ee6e73: 2.66 -> 4.63:1 */
+.cbi-tabmenu.mode a { color: #d81921 !important; } /* was #ee6e73: 2.66 -> 4.63:1 */
+.cbi-value-title abbr { color: #706b6b !important; } /* was #797474: 4.12 -> 4.70:1 */
+.mobile-hide a { color: #4a61e1 !important; } /* was #5e72e4: 3.85 -> 4.71:1 */
+.mobile-hide a.luci-link { color: #4a61e1 !important; } /* was #5e72e4: 3.85 -> 4.71:1 */
+.mobile-hide div { color: #6f6f6f !important; } /* was #aaaaaa: 2.13 -> 4.61:1 */
+.modal.cbi-modal button.cbi-button-positive:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+.modal.cbi-modal button:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+a.menu.active { background: #556ae3 !important; } /* was #5e72e4 under #ffffff: 4.20 -> 4.61:1 */
+button.cbi-button-action:not(:hover):not(:focus) { background: #2c6de9 !important; } /* was #5a8dee under #ffffff: 3.24 -> 4.70:1 */
+button.cbi-button-negative:not(:hover):not(:focus) { background: #ad6302 !important; } /* was #fdb75a under #ffffff: 1.74 -> 4.60:1 */
+button.cbi-button-neutral:not(:hover):not(:focus) { background: #64768c !important; } /* was #a3afbd under #ffffff: 2.23 -> 4.65:1 */
+button.cbi-button-positive:not(:hover):not(:focus) { background: #19854f !important; } /* was #23bd70 under #ffffff: 2.45 -> 4.66:1 */
+footer a { color: #4a61e1 !important; } /* was #5e72e4: 3.85 -> 4.71:1 */
+footer a.luci-link { color: #4a61e1 !important; } /* was #5e72e4: 3.85 -> 4.71:1 */
+/* AUTO-CONTRAST END */
+

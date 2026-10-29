@@ -1,0 +1,9 @@
+
+/* Aquarium on Aurora: theme-specific fixes */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { color: #e85c61 !important; } /* was #e5484d: 4.07 -> 4.66:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { color: #e85c61 !important; } /* was #e5484d: 4.07 -> 4.66:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { color: #e85c61 !important; } /* was #e5484d: 4.07 -> 4.66:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { color: #e85c61 !important; } /* was #e5484d: 4.07 -> 4.66:1 */
+/* AUTO-CONTRAST END */

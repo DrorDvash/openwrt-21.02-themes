@@ -1,0 +1,12 @@
+
+/* Teletext-specific 21.02 port fixes (add rules found by tools/qa.py / tools/a11y.py) */
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+#cbi-dhcp-host button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-firewall-redirect button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-firewall-zone button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-network-interface button.cbi-button-remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+#cbi-wireless-wifi-device button.cbi-button-negative.remove:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+.cbi-page-actions.control-group button.cbi-button-reset:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+button.cbi-button-negative:not(:hover):not(:focus) { background: #eb0000 !important; } /* was #ff0000 under #ffffff: 4.00 -> 4.63:1 */
+/* AUTO-CONTRAST END */

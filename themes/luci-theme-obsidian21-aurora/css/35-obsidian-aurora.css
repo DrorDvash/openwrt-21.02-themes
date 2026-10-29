@@ -1,0 +1,10 @@
+
+/* Obsidian on Aurora: theme-specific fixes */
+
+/* hand fixes: the login button is Obsidian's light teal: its dark ink (#04211d, 9:1), as on
+   its other teal buttons; the active section tab pill is near-white: darker teal text (6.7:1) */
+html:root button.login-submit { color: #04211d !important; }
+html:root .cbi-tabmenu > li.cbi-tab > a { color: #136157 !important; }
+
+/* AUTO-CONTRAST BEGIN (tools/contrast-fix.py) */
+/* AUTO-CONTRAST END */

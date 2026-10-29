@@ -1,0 +1,66 @@
+<%#
+ Synthwave on Aurora, OpenWrt 21.02 port (luci-theme-synthwave21-aurora). Lua translation of
+ luci-theme-aurora 1.4.0 sysauth.ut (eamonxg, Apache-2.0; derived from
+ luci-theme-bootstrap, Copyright 2022 Jo-Philipp Wich <jo@mein.io>).
+-%>
+<%
+	-- tell the theme header and footer to render the bare page
+	blank_page = true
+	local boardinfo = require("luci.util").ubus("system", "board") or {}
+	local ver = require "luci.version"
+-%>
+<%+header%>
+
+<main class="login-screen">
+	<div class="login-shell">
+		<form method="post" class="login-card">
+			<div class="login-brand">
+				<div class="login-logo">
+					<img src="<%=media%>/images/logo.svg?v=1.0.4-1" alt="">
+				</div>
+				<div class="login-title">
+					<span class="login-hostname"><%=striptags(boardinfo.hostname or "?")%></span>
+					<span class="login-subtitle"><%:Authorization Required%></span>
+				</div>
+			</div>
+
+			<hr class="login-divider">
+
+			<div class="login-form">
+				<div class="login-fields">
+					<div class="login-field">
+						<label class="login-label" for="luci_username"><%:Username%></label>
+						<div class="input-wrap">
+							<input name="luci_username" id="luci_username" type="text" class="login-input" <%=attr("value", duser or "")%> autocomplete="username">
+						</div>
+					</div>
+
+					<div class="login-field">
+						<label class="login-label" for="luci_password"><%:Password%></label>
+						<div class="input-wrap">
+							<input name="luci_password" id="luci_password" type="password" class="login-input" autocomplete="current-password">
+						</div>
+					</div>
+				</div>
+
+				<% if fuser then %>
+				<div class="login-error" role="alert"><%:Invalid username and/or password! Please try again.%></div>
+				<% end %>
+
+				<div class="login-actions">
+					<button type="submit" class="login-submit"><%:Login%></button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<footer class="login-footer">
+		<p>Synthwave on <a href="https://github.com/eamonxg/luci-theme-aurora" target="_blank" rel="noreferrer">Aurora</a> · Powered by <%= ver.distname %> &amp; <a href="https://github.com/openwrt/luci" target="_blank" rel="noreferrer"><%= ver.luciname %></a></p>
+	</footer>
+</main>
+
+<script>
+	document.getElementById('luci_username').value ? document.getElementById('luci_password').focus() : document.getElementById('luci_username').focus();
+</script>
+
+<%+footer%>
