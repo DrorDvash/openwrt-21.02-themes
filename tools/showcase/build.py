@@ -90,6 +90,7 @@ def page_html(doc, tid, page, base, home):
     doc = re.sub(r'"token":"[0-9a-f]+"', '"token":"' + "0" * 32 + '"', doc)
     doc = re.sub(r'name="token" value="[0-9a-f]+"', 'name="token" value="' + "0" * 32 + '"', doc)
     doc = doc.replace("/cgi-bin/luci/admin/translations/en", f"{pg}/translations-en.js")
+    doc = doc.replace('href="/"', f'href="{pg}/{tid}/cgi-bin/luci/"')   # the logo: "/" on a router, the theme here
     doc = doc.replace("\\/cgi-bin\\/luci", f"{pg}/{tid}/cgi-bin/luci".replace("/", "\\/"))
     doc = re.sub(r'(?<![\w/])/cgi-bin/luci', f"{pg}/{tid}/cgi-bin/luci", doc)
     doc = doc.replace("\\/luci-static\\/", f"{pg}/luci-static/".replace("/", "\\/"))
