@@ -90,6 +90,30 @@
 			}, 1500);
 	}
 
+	/* The Overview starts its status boxes as soon as LuCI's ui module is loaded, without waiting
+	   for the router's feature list (luci.getFeatures). On a router the list is usually in first;
+	   here every answer is instant, a warm cache can win the race and hasSystemFeature() throws.
+	   Until LuCI has its list, answer from the recording. */
+	var features = (RPC['luci.getFeatures({})'] || [])[1] || {}, luciObj = null;
+	Object.defineProperty(window, 'L', {
+		configurable: true,
+		get: function () { return luciObj; },
+		set: function (v) {
+			luciObj = v;
+			var proto = v && Object.getPrototypeOf(v), has = proto && proto.hasSystemFeature;
+			if (!has || has.pg) return;
+			proto.hasSystemFeature = function (name, sub) {
+				try { return has.apply(this, arguments); }
+				catch (e) {
+					var ft = features[name];
+					if (arguments.length == 2) return (ft && typeof ft == 'object') ? ft[sub] : null;
+					return ft != null && ft != false;
+				}
+			};
+			proto.hasSystemFeature.pg = true;
+		}
+	});
+
 	function answer(e) {
 		var key = e.method + '()', obj, fn;
 		if (e.method == 'call' && Array.isArray(e.params)) {
