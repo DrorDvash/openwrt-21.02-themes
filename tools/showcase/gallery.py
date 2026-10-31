@@ -180,6 +180,7 @@ def card(t, dark, pg, extra=""):
 def page(themes, dark, base, repo):
     pg = f"{base}/playground"
     rel = f"https://github.com/{repo}/releases/latest" if repo else "#install"
+    gh = f"https://github.com/{repo}" if repo else "https://github.com/DrorDvash"
     natives = [t for t in themes if t["group"] == "native"]
     skins = {}
     for t in themes:
@@ -213,7 +214,7 @@ def page(themes, dark, base, repo):
                 + "".join(f'<tr><td>{l} layout</td><td>{w}</td><td>{a(u, u.split("github.com/")[1])}</td></tr>'
                           for l, (w, u) in LAYOUTS.items()))
     n = len(themes)
-    return TEMPLATE.format(n=n, nskins=len(skins), base=base, pg=pg, rel=rel, natives=native_html, skins=skin_html,
+    return TEMPLATE.format(n=n, nskins=len(skins), base=base, pg=pg, rel=rel, gh=gh, repo_name=gh.split("github.com/")[1], natives=native_html, skins=skin_html,
                            credits=credits, hero=f"img/uniwrt21-{'dark' if dark.get('uniwrt21') else 'light'}.webp")
 
 
@@ -236,6 +237,7 @@ a {{ color:var(--acc); }}
 .btn,.ghost {{ display:inline-flex; align-items:center; min-height:40px; padding:8px 16px; border-radius:10px; font-weight:600; text-decoration:none; }}
 .btn {{ background:var(--acc); color:var(--acc-ink); }}
 .ghost {{ background:var(--chip); color:var(--ink); }}
+.gh {{ gap:8px; }} .gh svg {{ width:20px; height:20px; fill:currentColor; flex:none; }}
 .hero img {{ width:100%; height:auto; border-radius:16px; display:block; }}
 h2 {{ font-size:28px; margin:56px 0 6px; }}
 .lead {{ color:var(--dim); margin:0 0 20px; max-width:50rem; }}
@@ -278,7 +280,7 @@ footer {{ color:var(--dim); font-size:14px; padding:40px 0 60px; }}
 <section class="hero">
   <div><h1>LuCI themes for OpenWrt&nbsp;21.02</h1></div>
   <p>{n} theme packages for routers still on LuCI 21.02, such as the GL.iNet Flint 2 (GL-MT6000) with GL firmware 4.x: five complete themes ported from newer OpenWrt, and {nskins} reskins on three layouts. Every one is tested on desktop and phone, light and dark.</p>
-  <div class="cta"><a class="btn" href="{pg}/">Try the live playground</a><a class="ghost" href="{rel}">Download</a><a class="ghost" href="#credits">Credits</a></div>
+  <div class="cta"><a class="btn" href="{pg}/">Try the live playground</a><a class="ghost" href="{rel}">Download</a><a class="ghost gh" href="{gh}"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a><a class="ghost" href="#credits">Credits</a></div>
   <img src="{hero}" width="1600" height="900" alt="UniWRT theme, Status page on a monitor and a phone">
 </section>
 
@@ -306,10 +308,10 @@ ssh root@192.168.8.1 'opkg install /tmp/luci-theme-*.ipk'</pre>
 </ul>
 
 <h2 id="credits">Credits</h2>
-<p class="lead">These are ports. The designs belong to their authors; every package keeps its upstream licence and a NOTICE that says what was changed. Ported, tested and maintained for LuCI 21.02 by <a href="https://github.com/DrorDvash">Dror Dvash</a>.</p>
+<p class="lead">These are ports. The designs belong to their authors; every package keeps its upstream licence and a NOTICE that says what was changed. Ported, tested and maintained for LuCI 21.02 by <a href="https://github.com/DrorDvash">@DrorDvash</a>.</p>
 <table><tr><th>Theme</th><th>Author</th><th>Upstream</th></tr>{credits}</table>
 
-<footer>The playground runs LuCI's own pages with answers recorded from an offline test router: the device, clients and numbers are made up, and nothing is saved.</footer>
+<footer>The playground runs LuCI's own pages with answers recorded from an offline test router: the device, clients and numbers are made up, and nothing is saved. Source and packages: <a href="{gh}">github.com/{repo_name}</a>.</footer>
 </div>
 <dialog class="viewer" aria-label="Screenshot viewer">
   <div class="bar"><b></b>
@@ -416,7 +418,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("themes", nargs="*")
     ap.add_argument("--base", default="")
-    ap.add_argument("--repo", default="")
+    ap.add_argument("--repo", default="DrorDvash/openwrt-21.02-themes")
     ap.add_argument("--shots-only", action="store_true")
     ap.add_argument("--page-only", action="store_true")
     ap.add_argument("--compose-only", action="store_true", help="re-frame the existing screenshots")
