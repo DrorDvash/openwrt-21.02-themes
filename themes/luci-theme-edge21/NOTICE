@@ -13,6 +13,8 @@ Port changes (2026, Dror Dvash): Edge's stylesheet put on the Argon 2.3.1 templa
 and played remote login audio); the embedded Google Sans font removed (not
 redistributable; system fonts instead); login photos, script.js, waves.css and logo
 image removed; a dark palette of the port's own (Edge is light only upstream) with
-a light/dark button, following the browser until one is picked; reduced-motion
+a light/dark button, following the browser until one is picked; Edge's login look
+(frosted card over a landscape) rebuilt with a landscape drawn by the port in SVG/CSS
+(no photos, audio or downloads), with a night variant; reduced-motion
 support, 21.02 widget fixes, phone fix for
 "-- custom --" dropdown entries.

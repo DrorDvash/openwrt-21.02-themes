@@ -1,0 +1,198 @@
+/* ==========================================================================
+ * NoobWRT port: the row of stat cards on top of Status > Overview (dashboard.js), drawn
+ * after NoobWRT's screenshots (that strip is part of NoobWRT's firmware, not of the theme).
+ * Colours: NoobWRT's palette, darkened (light) or lightened (dark) for WCAG AA.
+ * ========================================================================== */
+
+.noob-dash {
+	--nd-box: #fff;
+	--nd-card: #fff;
+	--nd-border: #d5dae3;
+	--nd-ink: #32325d;
+	--nd-dim: #525f7f;
+	--nd-green: #1d7a35;
+	--nd-blue: #1d5bb8;
+	--nd-red: #c3262f;
+	--nd-green-border: #93c2a0;
+	--nd-blue-border: #98b0da;
+	--nd-dashed: #b9c0cc;
+	--nd-track: #e6e8ef;
+	--nd-ram: #cfc0f6;
+	--nd-disk: #c2e3ec;
+	--nd-pill-ink: #1f2433;
+	--nd-ram-icon: #6b4fc8;
+	--nd-disk-icon: #0b7489;
+	--nd-load-icon: #4558d0;
+	margin: 0;
+	padding: 12px;
+	border-radius: .25rem;
+	background: var(--nd-box);
+	box-shadow: 0 0 1rem 0 rgba(136, 152, 170, .15);
+	color: var(--nd-ink);
+}
+html[data-darkmode="true"] .noob-dash {
+	--nd-box: #252526;
+	--nd-card: #161618;
+	--nd-border: #4a505c;
+	--nd-ink: #e4e4e4;
+	--nd-dim: #b4b8c0;
+	--nd-green: #6fd98a;
+	--nd-blue: #78acff;
+	--nd-red: #ff8a8a;
+	--nd-green-border: #4e7d5b;
+	--nd-blue-border: #4f6894;
+	--nd-dashed: #5d6470;
+	--nd-track: #3a3f4b;
+	--nd-ram: #5b4a9a;
+	--nd-disk: #2c5b69;
+	--nd-pill-ink: #f2f2f2;
+	--nd-ram-icon: #ab98f5;
+	--nd-disk-icon: #6fd0e4;
+	--nd-load-icon: #a49cf0;
+	box-shadow: 0 0 .5rem 0 rgba(0, 0, 0, .35);
+}
+
+.noob-dash .nd-row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 12px;
+}
+.noob-dash .nd-card {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex: 1 1 128px;
+	max-width: 172px;
+	min-width: 0;
+	min-height: 126px;
+	padding: 10px 12px;
+	border: 1.5px solid var(--nd-border);
+	border-radius: 12px;
+	background: var(--nd-card);
+	box-shadow: 0 2px 6px rgba(50, 50, 93, .06);
+	text-align: center;
+	line-height: 1.25;
+}
+.noob-dash .nd-sys,
+.noob-dash .nd-net,
+.noob-dash .nd-res {
+	flex-basis: 158px;
+	max-width: 200px;
+}
+.noob-dash .nd-sys,
+.noob-dash .nd-res {
+	align-items: stretch;
+	text-align: left;
+}
+
+.noob-dash .nd-num,
+.noob-dash .nd-val,
+.noob-dash .nd-ip,
+.noob-dash .nd-peak {
+	font-family: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+.noob-dash .nd-big { white-space: nowrap; }
+.noob-dash .nd-num { font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; }
+.noob-dash .nd-unit { font-size: .75rem; font-weight: 600; }
+.noob-dash .nd-label {
+	margin-top: 4px;
+	font-size: .72rem;
+	font-weight: 700;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+	color: var(--nd-ink);
+}
+.noob-dash .nd-cap {
+	font-size: .62rem;
+	font-weight: 600;
+	letter-spacing: .07em;
+	text-transform: uppercase;
+	color: var(--nd-dim);
+}
+.noob-dash .nd-peak { font-size: .68rem; color: var(--nd-dim); }
+.noob-dash .nd-via { display: block; margin-top: 1px; font-size: .6rem; font-weight: 600; letter-spacing: .07em; color: var(--nd-dim); }
+
+/* speed cards: sparkline, number, trend arrow */
+.noob-dash .nd-spark { display: block; width: 80%; height: 30px; margin: 0 auto 4px; overflow: visible; }
+.noob-dash .nd-spark polyline { fill: none; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.noob-dash .nd-dl .nd-num, .noob-dash .nd-down .nd-num { color: var(--nd-green); }
+.noob-dash .nd-ul .nd-num, .noob-dash .nd-up .nd-num { color: var(--nd-blue); }
+.noob-dash .nd-dl polyline { stroke: var(--nd-green); }
+.noob-dash .nd-ul polyline { stroke: var(--nd-blue); }
+.noob-dash .nd-trend { display: inline-block; min-width: .9em; margin-left: 3px; font-size: .7rem; }
+.noob-dash .nd-trend-up { color: var(--nd-green); }
+.noob-dash .nd-trend-down { color: var(--nd-red); }
+
+/* load / uptime and RAM / storage: two lines with an icon */
+.noob-dash .nd-line { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.noob-dash .nd-line-body { flex: 1 1 auto; min-width: 0; }
+.noob-dash .nd-icon {
+	flex: none; width: 18px; height: 18px;
+	fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.noob-dash .nd-sys .nd-line:first-child .nd-icon { color: var(--nd-load-icon); }
+.noob-dash .nd-sys .nd-line:last-child .nd-icon { color: var(--nd-dim); }
+.noob-dash .nd-res .nd-line:first-child .nd-icon { color: var(--nd-ram-icon); }
+.noob-dash .nd-res .nd-line:last-child .nd-icon { color: var(--nd-disk-icon); }
+.noob-dash .nd-val { font-size: 1.05rem; font-weight: 700; color: var(--nd-ink); }
+.noob-dash .nd-rule { height: 1px; margin: 9px 0; background: var(--nd-border); align-self: stretch; }
+
+/* internet */
+.noob-dash .nd-net { border-style: dashed; border-color: var(--nd-dashed); }
+.noob-dash .nd-state { margin: 2px 0 0; font-size: .95rem; font-weight: 700; color: var(--nd-ink); }
+.noob-dash .nd-net.nd-on .nd-state { color: var(--nd-green); }
+.noob-dash .nd-net.nd-off .nd-state { color: var(--nd-red); }
+.noob-dash .nd-ip { margin-top: 2px; font-size: .8rem; font-weight: 700; overflow-wrap: anywhere; }
+
+/* RAM / storage pills */
+.noob-dash .nd-pill {
+	position: relative;
+	height: 18px;
+	margin-top: 3px;
+	border-radius: 9px;
+	overflow: hidden;
+	background: var(--nd-track);
+}
+.noob-dash .nd-pill-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 9px; background: var(--nd-ram); transition: width .4s ease; }
+.noob-dash .nd-res .nd-line:last-child .nd-pill-fill { background: var(--nd-disk); }
+.noob-dash .nd-pill-text {
+	position: relative;
+	display: block;
+	padding: 0 6px;
+	font-size: .62rem;
+	font-weight: 700;
+	line-height: 18px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: var(--nd-pill-ink);
+}
+
+/* totals */
+.noob-dash .nd-down { border-color: var(--nd-green-border); }
+.noob-dash .nd-up { border-color: var(--nd-blue-border); }
+.noob-dash .nd-total .nd-num { font-size: 1.6rem; }
+
+/* phones and narrow windows: two cards per row (as NoobWRT's phone screenshot), the
+   internet card across the row */
+@media (max-width: 768px) {
+	.noob-dash { padding: 8px; }
+	.noob-dash .nd-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+	.noob-dash .nd-card { max-width: none; min-height: 0; padding: 10px 8px; }
+	.noob-dash .nd-dl { order: 1; }
+	.noob-dash .nd-ul { order: 2; }
+	.noob-dash .nd-net { order: 3; grid-column: 1 / -1; }
+	.noob-dash .nd-sys { order: 4; }
+	.noob-dash .nd-res { order: 5; }
+	.noob-dash .nd-down { order: 6; }
+	.noob-dash .nd-up { order: 7; }
+	.noob-dash .nd-sys, .noob-dash .nd-res { padding: 10px; }
+	.noob-dash .nd-line { gap: 7px; }
+	.noob-dash .nd-pill-text { padding: 0 4px; font-size: .58rem; }
+	.noob-dash .nd-num { font-size: 1.3rem; }
+	.noob-dash .nd-total .nd-num { font-size: 1.35rem; }
+}

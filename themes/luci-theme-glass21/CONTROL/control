@@ -1,5 +1,5 @@
 Package: luci-theme-glass21
-Version: 1.0.4-1
+Version: 1.0.5-1
 Depends: luci-base
 Source: https://github.com/vistrocity/openwrt-luci-themes
 License: Apache-2.0

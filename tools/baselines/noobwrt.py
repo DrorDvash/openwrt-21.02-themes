@@ -13,6 +13,10 @@ font ("All Rights Reserved"; Red Hat Display instead), Google Sans references
 (proprietary; Red Hat Display), Red Hat Display italic (synthesised), video backgrounds,
 the PWA manifest, the timed dark mode. Kept: Red Hat Display (SIL OFL 1.1, licence shipped
 next to it) and NoobWRT's icon font (Argon's, Apache-2.0).
+Added: the row of stat cards NoobWRT's screenshots show on top of Status > Overview (they
+come from NoobWRT's firmware, not the theme): noobwrt-template/dashboard.js + css/27, built
+from read-only ubus calls (system info, luci-rpc getNetworkDevices, LuCI's network.js);
+the CPU temperature card shows the load average (21.02 gives the browser no temperature).
 
 NoobWRT's colours are hard-coded throughout its CSS, so it is not a reskin baseline: the
 same sidebar layout with another theme's colours is --baseline argon.
@@ -97,6 +101,7 @@ def generate(t, out=None):
     write(f"{css}/dark.css", f"/* luci-theme-noobwrt {NW_VERSION} dark.css (nooblk-98, Apache-2.0) */\n"
           + read(f"{src}/css/dark.css"))
     write(f"{css}/25-noobwrt-toolbar.css", toolbar_css())
+    write(f"{css}/27-noobwrt-dashboard.css", read(f"{TPL}/27-noobwrt-dashboard.css"))
     write(f"{css}/30-noobwrt-port.css", read(f"{TPL}/30-noobwrt-port.css") + "\n" + read(COMMON))
     write(f"{css}/35-noobwrt-port.css", keep35 or "\n/* NoobWRT on 21.02: theme-specific fixes */\n")
 
@@ -127,6 +132,9 @@ def generate(t, out=None):
         for k, v in subs.items():
             s = s.replace(k, v)
         return s
+    # the Overview's stat cards (NoobWRT's firmware has them, the theme doesn't): footer.htm loads
+    # it on admin/status/overview only; read-only ubus calls, no ACL or view of our own
+    write(f"{st}/dashboard.js", fill(read(f"{TPL}/dashboard.js")))
     os.makedirs(f"{out}/htdocs/luci-static/resources")
     write(f"{out}/htdocs/luci-static/resources/menu-{tid}.js", menu_js())
     for n in ("header", "footer", "toolbar", "header_login", "footer_login", "out_header_login", "sysauth"):
@@ -157,6 +165,7 @@ def generate(t, out=None):
         f"by Red Hat Display; italic face, video backgrounds, PWA manifest and the timed dark mode\n"
         f"removed; toolbar shows a fixed set of 21.02 pages that exist on the router; dark.css\n"
         f"linked instead of inlined; images downscaled; reduced-motion support, 21.02 widget\n"
-        f"fixes, phone fix for \"-- custom --\" dropdown entries.\n"))
+        f"fixes, phone fix for \"-- custom --\" dropdown entries; a row of stat cards on\n"
+        f"Status > Overview drawn after NoobWRT's screenshots (written for the port).\n"))
     print(f"noobwrt: {os.path.relpath(out, ROOT)} (id {tid}, key NoobWRT21, light/dark)")
     return out

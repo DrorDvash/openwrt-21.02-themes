@@ -14,4 +14,5 @@ instead); TypoGraphica font (all rights reserved) and Google Sans references rep
 by Red Hat Display; italic face, video backgrounds, PWA manifest and the timed dark mode
 removed; toolbar shows a fixed set of 21.02 pages that exist on the router; dark.css
 linked instead of inlined; images downscaled; reduced-motion support, 21.02 widget
-fixes, phone fix for "-- custom --" dropdown entries.
+fixes, phone fix for "-- custom --" dropdown entries; a row of stat cards on
+Status > Overview drawn after NoobWRT's screenshots (written for the port).

@@ -85,6 +85,21 @@
 		return [0, { result: out }];
 	}
 
+	/* byte counters that grow with the clock, so live speeds (NoobWRT's Overview cards) move;
+	   a recording would show 0 */
+	var T0 = Date.now() / 1000 - 2.5 * 86400;   /* as if counting for 2.5 days */
+	function counters(res) {
+		var t = Date.now() / 1000, out = JSON.parse(JSON.stringify(res)), devs = out[1] || {};
+		var grow = function (r, a, b) { return Math.round(r * (t - T0 - .45 * a * Math.cos(t / a) - .25 * b * Math.cos(t / b))); };
+		Object.keys(devs).forEach(function (n, i) {
+			var st = devs[n] && devs[n].stats, s = 1 / (1 + i);
+			if (!st || !st.rx_bytes) return;
+			st.rx_bytes += grow(2.4e5 * s, 23, 7.3); st.tx_bytes += grow(6.1e4 * s, 31, 5.1);
+			if (st.rx_packets != null) { st.rx_packets += grow(180 * s, 23, 7.3); st.tx_packets += grow(60 * s, 31, 5.1); }
+		});
+		return out;
+	}
+
 	/* after Save & Apply: a newly chosen theme opens the same page in it */
 	function applied() {
 		var next = null;
@@ -141,6 +156,8 @@
 		}
 		if (obj == 'uci' && /^apply/.test(fn))
 			applied();
+		if (key == 'luci-rpc.getNetworkDevices({})' && RPC[key])
+			return { jsonrpc: '2.0', id: e.id, result: counters(RPC[key]) };
 		if (RPC.hasOwnProperty(key))
 			return { jsonrpc: '2.0', id: e.id, result: RPC[key] };
 		if (obj == 'session' && fn == 'access')

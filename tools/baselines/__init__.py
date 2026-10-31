@@ -18,7 +18,7 @@ TOOLS = os.path.join(ROOT, "tools")
 THEMES = os.path.join(ROOT, "src/themes/themes")
 PKGS = os.path.join(ROOT, "themes")                # the package sources, luci-theme-<id>/
 REF = os.path.join(PKGS, "luci-theme-rack21")      # hand-made reference port (shared 30 layer, menu JS)
-VERSION = "1.0.4-1"   # bump on every release: opkg skips a same-version reinstall and ?v= busts browser caches
+VERSION = "1.0.5-1"   # bump on every release: opkg skips a same-version reinstall and ?v= busts browser caches
 # the packages' Maintainer field (GitHub no-reply address: no personal mail in published files)
 MAINTAINER = "Dror Dvash <DrorDvash@users.noreply.github.com>"
 NAMES = ("bootstrap", "argon", "aurora", "alpha", "edge", "noobwrt", "uniwrt")
