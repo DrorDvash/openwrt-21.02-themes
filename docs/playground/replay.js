@@ -24,6 +24,11 @@
 			location.replace(login);
 			return;
 		}
+		/* as on a router: /cgi-bin/luci/ (the logo's link) opens the Overview when logged in */
+		if (PG.page == 'login' && sessionStorage.getItem('pg-auth')) {
+			location.replace(PG.base + '/' + PG.theme + '/cgi-bin/luci/admin/status/overview/');
+			return;
+		}
 	} catch (e) {}
 
 	/* any user name and password log in */

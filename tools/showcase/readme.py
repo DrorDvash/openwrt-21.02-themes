@@ -97,13 +97,13 @@ layout GL firmware uses) and [**Aurora**]({lay["Aurora"]}) (top bar with a large
 a picture to enlarge it, or "try it" to open it in the playground.
 
 <table>
-<tr><th></th><th>Bootstrap</th><th>Argon</th><th>Aurora</th></tr>""")
+<tr><th>Bootstrap</th><th>Argon</th><th>Aurora</th></tr>""")
     for name in sorted(skins):
         cells = "".join(
-            f'<td><a href="{img}/{t["id"]}-light.webp"><img src="{img}/{t["id"]}-light.webp" alt="{name} on {l}" width="260"></a>'
+            f'<td><a href="{img}/{t["id"]}-light.webp"><img src="{img}/{t["id"]}-light.webp" alt="{name} on {l}" width="300"></a>'
             f'<br><sub><a href="{pg}/{t["id"]}/cgi-bin/luci/">try it</a> · {ipk_kb(t["id"])}</sub></td>'
             if (t := skins[name].get(l)) else "<td></td>" for l in ("Bootstrap", "Argon", "Aurora"))
-        out.append(f"<tr><td><b>{name}</b></td>{cells}</tr>")
+        out.append(f'<tr><td colspan="3"><b>{name}</b></td></tr><tr>{cells}</tr>')   # the name on its own row: wider pictures
     out.append(f"""</table>
 
 ## Install
@@ -163,7 +163,7 @@ in [`themes/`](themes/).
 
 All credit for the designs goes to their authors: these are ports, and every package keeps its
 upstream licence and a NOTICE that says what was changed. Ported, tested and maintained for LuCI
-21.02 by **Dror Dvash** ([@DrorDvash](https://github.com/DrorDvash)).
+21.02 by [@DrorDvash](https://github.com/DrorDvash).
 
 | Theme | Author | Upstream |
 |---|---|---|""")
