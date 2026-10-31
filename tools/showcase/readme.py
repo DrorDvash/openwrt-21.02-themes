@@ -100,9 +100,9 @@ a picture to enlarge it, or "try it" to open it in the playground.
 <tr><th>Bootstrap</th><th>Argon</th><th>Aurora</th></tr>""")
     for name in sorted(skins):
         cells = "".join(
-            f'<td><a href="{img}/{t["id"]}-light.webp"><img src="{img}/{t["id"]}-light.webp" alt="{name} on {l}" width="300"></a>'
+            f'<td width="33%" valign="top"><a href="{img}/{t["id"]}-light.webp"><img src="{img}/{t["id"]}-light.webp" alt="{name} on {l}"></a>'
             f'<br><sub><a href="{pg}/{t["id"]}/cgi-bin/luci/">try it</a> · {ipk_kb(t["id"])}</sub></td>'
-            if (t := skins[name].get(l)) else "<td></td>" for l in ("Bootstrap", "Argon", "Aurora"))
+            if (t := skins[name].get(l)) else '<td width="33%"></td>' for l in ("Bootstrap", "Argon", "Aurora"))
         out.append(f'<tr><td colspan="3"><b>{name}</b></td></tr><tr>{cells}</tr>')   # the name on its own row: wider pictures
     out.append(f"""</table>
 
