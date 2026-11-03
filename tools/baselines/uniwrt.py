@@ -32,6 +32,25 @@ LIGHT = {"text-3": ("#808893", "#676f79"), "ok": ("#38cc65", "#207e3d"),
          "warn": ("#f5a623", "#9e6507"), "crit": ("#f0383b", "#d0292c")}
 
 
+NETDEVS_JS = """/* 21.02 port: LuCI 21.02 grants no network.device to the browser, so the counters come from
+   luci-rpc getNetworkDevices, reshaped like network.device status */
+var callLuciNetDevs = rpc.declare({ object: 'luci-rpc', method: 'getNetworkDevices', expect: { '': {} } });
+function netDevStatus() {
+	return L.resolveDefault(callLuciNetDevs(), {}).then(function(m) {
+		var out = {};
+		Object.keys(m || {}).forEach(function(n) {
+			var d = m[n] || {};
+			out[n] = { type: d.bridge ? 'bridge' : d.devtype, devtype: d.devtype, 'bridge-members': d.ports,
+			           statistics: d.stats, speed: (d.link && d.link.speed > 0) ? d.link.speed + 'F' : null };
+		});
+		return out;
+	});
+}
+function callDeviceStatus(name) {
+	return netDevStatus().then(function(all) { return all[name] || {}; });
+}"""
+
+
 def uw_version():
     return read(f"{UW}/ucode/template/themes/uniwrt/version").strip()
 
@@ -71,6 +90,9 @@ def overview_js():
     # a wireless network has no "up" of its own in 21.02's getWirelessDevices: up = its radio is up
     ov = sub(ov, "var up = !!i.up;", "var up = (i.up != null) ? !!i.up : !!(wifi[dev].up && i.ifname);",
              "overview.js wifi up")
+    # no network.device on 21.02 (ACL): the throughput card reads luci-rpc getNetworkDevices
+    ov = sub(ov, "var callNetDevs = rpc.declare({ object: 'network.device', method: 'status', expect: { '': {} } });",
+             "var callNetDevs = netDevStatus;", "overview.js network.device")
     ov = sub(ov, "return view.extend({", "return baseclass.extend({", "overview.js class")
     return "var Overview = (function() {\n" + ov.strip() + "\n})();\n"
 
@@ -100,6 +122,10 @@ def menu_js(tid):
 			try { sessionStorage.setItem('uniwrt-stat-cpu', s); } catch(e) {}
 			this.cpuEl.title = _('Load Average') + ': ' + (info.load.map(function(l) { return (l / 65536).toFixed(2); }).join(', '));
 			this.setLevel(this.cpuEl, 'ok');""", "status-uniwrt.js load")
+    # 21.02's ACLs do not grant network.device (later LuCI does): the throughput chip and the
+    # Overview's throughput card read luci-rpc getNetworkDevices, reshaped like network.device status
+    st = sub(st, "var callDeviceStatus = rpc.declare({ object: 'network.device', method: 'status', params: ['name'] });",
+             NETDEVS_JS, "status-uniwrt.js network.device")
     st = sub(st, "this.cpuEl = this.chip('cpu', 'CPU Load');", "this.cpuEl = this.chip('cpu', _('Load Average'));", "status chip")
     st = st.replace("'require baseclass';\n", "")
     st = sub(st, "return baseclass.extend({", "var Status = baseclass.extend({", "status-uniwrt.js class")

@@ -45,7 +45,7 @@ picture to enlarge it.
 <table>
 <tr>
 <td width="50%" valign="top"><b>Alpha</b> · 60 KB · <a href="https://drordvash.github.io/openwrt-21.02-themes/playground/alpha21/cgi-bin/luci/">try it</a><br><sub>Port of <a href="https://github.com/derisamedia/luci-theme-alpha">derisamedia/luci-theme-alpha</a> by derisamedia</sub><br><a href="docs/img/alpha21-light.webp"><img src="docs/img/alpha21-light.webp" alt="Alpha"></a></td>
-<td width="50%" valign="top"><b>Aurora</b> · 70 KB · <a href="https://drordvash.github.io/openwrt-21.02-themes/playground/aurora21/cgi-bin/luci/">try it</a><br><sub>Port of <a href="https://github.com/eamonxg/luci-theme-aurora">eamonxg/luci-theme-aurora</a> by eamonxg</sub><br><a href="docs/img/aurora21-split.webp"><img src="docs/img/aurora21-split.webp" alt="Aurora"></a></td>
+<td width="50%" valign="top"><b>Aurora</b> · 69 KB · <a href="https://drordvash.github.io/openwrt-21.02-themes/playground/aurora21/cgi-bin/luci/">try it</a><br><sub>Port of <a href="https://github.com/eamonxg/luci-theme-aurora">eamonxg/luci-theme-aurora</a> by eamonxg</sub><br><a href="docs/img/aurora21-split.webp"><img src="docs/img/aurora21-split.webp" alt="Aurora"></a></td>
 </tr>
 <tr>
 <td width="50%" valign="top"><b>Edge</b> · 163 KB · <a href="https://drordvash.github.io/openwrt-21.02-themes/playground/edge21/cgi-bin/luci/">try it</a><br><sub>Port of <a href="https://github.com/kiddin9/luci-theme-edge">kiddin9/luci-theme-edge</a> by kiddin9 and GaryPang. Dark mode added in this port.</sub><br><a href="docs/img/edge21-split.webp"><img src="docs/img/edge21-split.webp" alt="Edge"></a></td>

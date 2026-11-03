@@ -1,5 +1,5 @@
 Package: luci-theme-noobwrt21
-Version: 1.0.5-1
+Version: 1.0.6-1
 Depends: luci-base
 Source: https://github.com/nooblk-98/luci-theme-noobwrt
 License: Apache-2.0, OFL-1.1

@@ -8,7 +8,23 @@
 
 var callSystemInfo = rpc.declare({ object: 'system', method: 'info' });
 var callInterfaceDump = rpc.declare({ object: 'network.interface', method: 'dump', expect: { 'interface': [] } });
-var callDeviceStatus = rpc.declare({ object: 'network.device', method: 'status', params: ['name'] });
+/* 21.02 port: LuCI 21.02 grants no network.device to the browser, so the counters come from
+   luci-rpc getNetworkDevices, reshaped like network.device status */
+var callLuciNetDevs = rpc.declare({ object: 'luci-rpc', method: 'getNetworkDevices', expect: { '': {} } });
+function netDevStatus() {
+	return L.resolveDefault(callLuciNetDevs(), {}).then(function(m) {
+		var out = {};
+		Object.keys(m || {}).forEach(function(n) {
+			var d = m[n] || {};
+			out[n] = { type: d.bridge ? 'bridge' : d.devtype, devtype: d.devtype, 'bridge-members': d.ports,
+			           statistics: d.stats, speed: (d.link && d.link.speed > 0) ? d.link.speed + 'F' : null };
+		});
+		return out;
+	});
+}
+function callDeviceStatus(name) {
+	return netDevStatus().then(function(all) { return all[name] || {}; });
+}
 
 var Status = baseclass.extend({
 	prevStats: null, prevTime: null,
@@ -200,7 +216,7 @@ var callInfo  = rpc.declare({ object: 'system', method: 'info' });
 var callIfDump = rpc.declare({ object: 'network.interface', method: 'dump', expect: { 'interface': [] } });
 var callWifi  = rpc.declare({ object: 'luci-rpc', method: 'getWirelessDevices', expect: { '': {} } });
 var callHints = rpc.declare({ object: 'luci-rpc', method: 'getHostHints', expect: { '': {} } });
-var callNetDevs = rpc.declare({ object: 'network.device', method: 'status', expect: { '': {} } });
+var callNetDevs = netDevStatus;
 
 function svgNode(markup) {
 	if (markup.indexOf('xmlns') < 0)
