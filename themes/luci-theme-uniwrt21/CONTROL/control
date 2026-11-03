@@ -1,5 +1,5 @@
 Package: luci-theme-uniwrt21
-Version: 1.0.6-1
+Version: 1.0.7-1
 Depends: luci-base
 Source: https://github.com/ox1d3x3/uniwrt-luci
 License: Apache-2.0

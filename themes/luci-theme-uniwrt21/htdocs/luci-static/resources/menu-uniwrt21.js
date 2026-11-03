@@ -213,6 +213,7 @@ var Status = baseclass.extend({
 var Overview = (function() {
 var callBoard = rpc.declare({ object: 'system', method: 'board' });
 var callInfo  = rpc.declare({ object: 'system', method: 'info' });
+var callMounts = rpc.declare({ object: 'luci', method: 'getMountPoints', expect: { result: [] } });
 var callIfDump = rpc.declare({ object: 'network.interface', method: 'dump', expect: { 'interface': [] } });
 var callWifi  = rpc.declare({ object: 'luci-rpc', method: 'getWirelessDevices', expect: { '': {} } });
 var callHints = rpc.declare({ object: 'luci-rpc', method: 'getHostHints', expect: { '': {} } });
@@ -531,6 +532,7 @@ return baseclass.extend({
 
 	update: function(info) {
 		if (!info) return;
+		if (info.uptime) this._uptime = info.uptime;
 		var root = this.root;
 		var $ = function(id) { return root ? root.querySelector('#' + id) : document.getElementById(id); };
 		var cores = this.cores || 1;
@@ -559,6 +561,18 @@ return baseclass.extend({
 	updateStorage: function(info) {
 		var box = (this.root || document).querySelector('#u-ov-storage');
 		if (!box || !info) return;
+		var self = this;
+		if (!info.root && !this._mounts) {
+			this._mounts = [];
+			L.resolveDefault(callMounts(), []).then(function(m) { self._mounts = m || []; self.updateStorage(info); });
+		}
+		if (!info.root && this._mounts && this._mounts.length) {
+			var mnt = function(path) {
+				var m = self._mounts.filter(function(x) { return x.mount === path; })[0];
+				return m && m.size ? { total: m.size / 1024, free: m.free / 1024, used: (m.size - m.free) / 1024 } : null;
+			};
+			info = Object.assign({}, info, { root: mnt('/overlay') || mnt('/'), tmp: mnt('/tmp') });
+		}
 		function bar(label, used, total) {
 			if (!total) return null;
 			var pct = Math.round(used / total * 100);
@@ -634,9 +648,10 @@ return baseclass.extend({
 		}
 
 		/* 24h window: delta from the oldest snapshot within 24h (else oldest we have) */
-		var since = nowS - 86400, base = null;
+		var since = nowS - 86400, base = null, fromBoot = this._uptime > 0 && this._uptime <= 86400;
 		for (var i = 0; i < rec.s.length; i++) { if (rec.s[i][0] >= since) { base = rec.s[i]; break; } }
 		if (!base && rec.s.length) base = rec.s[0];
+		if (fromBoot) base = [nowS - this._uptime, 0, 0];
 		var winH = base ? Math.max(0, (nowS - base[0]) / 3600) : 0;
 		var d24rx = base ? Math.max(0, rx - base[1]) : 0;
 		var d24tx = base ? Math.max(0, tx - base[2]) : 0;
@@ -656,9 +671,9 @@ return baseclass.extend({
 		row24 = row24 && row24.parentNode;
 		if (row24) {
 			var lbl = row24.querySelector('.u-tp-label');
-			if (lbl) lbl.textContent = (winH >= 23.5) ? _('Last 24 h')
+			if (lbl) lbl.textContent = (winH >= 23.5 || fromBoot) ? _('Last 24 h')
 				: (winH >= 1) ? _('Last') + ' ' + Math.round(winH) + ' h'
-				: _('Last 24 h');
+				: _('Last') + ' ' + Math.max(1, Math.round(winH * 60)) + ' min';
 			row24.title = base ? _('Measured over the last') + ' ' + winH.toFixed(1) + ' h of history' : '';
 		}
 

@@ -87,6 +87,43 @@ def overview_js():
              "info.root.total - info.root.free) * 1024, info.root.total * 1024));", "overview.js root KB")
     ov = sub(ov, "info.tmp.total  - info.tmp.free),  info.tmp.total));",
              "info.tmp.total  - info.tmp.free) * 1024,  info.tmp.total * 1024));", "overview.js tmp KB")
+    # 21.02's system.info has no root/tmp (later procd adds them): read the mount points once
+    # (luci getMountPoints, bytes) and fill them in, /overlay being the disk a user fills
+    ov = sub(ov, "var callInfo  = rpc.declare({ object: 'system', method: 'info' });",
+             "var callInfo  = rpc.declare({ object: 'system', method: 'info' });\n"
+             "var callMounts = rpc.declare({ object: 'luci', method: 'getMountPoints', expect: { result: [] } });",
+             "overview.js mounts rpc")
+    ov = sub(ov, """	updateStorage: function(info) {
+		var box = (this.root || document).querySelector('#u-ov-storage');
+		if (!box || !info) return;""", """	updateStorage: function(info) {
+		var box = (this.root || document).querySelector('#u-ov-storage');
+		if (!box || !info) return;
+		var self = this;
+		if (!info.root && !this._mounts) {
+			this._mounts = [];
+			L.resolveDefault(callMounts(), []).then(function(m) { self._mounts = m || []; self.updateStorage(info); });
+		}
+		if (!info.root && this._mounts && this._mounts.length) {
+			var mnt = function(path) {
+				var m = self._mounts.filter(function(x) { return x.mount === path; })[0];
+				return m && m.size ? { total: m.size / 1024, free: m.free / 1024, used: (m.size - m.free) / 1024 } : null;
+			};
+			info = Object.assign({}, info, { root: mnt('/overlay') || mnt('/'), tmp: mnt('/tmp') });
+		}""", "overview.js storage")
+    # "Last 24 h" came from snapshots this page took while open: after a reboot it counted only
+    # since the page was first opened (and said "24 h" for any window under an hour). Up for less
+    # than a day, the counters cover the whole day; otherwise the label says the real window.
+    ov = sub(ov, """	update: function(info) {
+		if (!info) return;""", """	update: function(info) {
+		if (!info) return;
+		if (info.uptime) this._uptime = info.uptime;""", "overview.js uptime")
+    ov = sub(ov, "var since = nowS - 86400, base = null;",
+             "var since = nowS - 86400, base = null, fromBoot = this._uptime > 0 && this._uptime <= 86400;", "overview.js 24h boot")
+    ov = sub(ov, "		if (!base && rec.s.length) base = rec.s[0];",
+             "		if (!base && rec.s.length) base = rec.s[0];\n		if (fromBoot) base = [nowS - this._uptime, 0, 0];", "overview.js 24h base")
+    ov = sub(ov, """			if (lbl) lbl.textContent = (winH >= 23.5) ? _('Last 24 h')""",
+             """			if (lbl) lbl.textContent = (winH >= 23.5 || fromBoot) ? _('Last 24 h')""", "overview.js 24h label")
+    ov = sub(ov, """				: _('Last 24 h');""", """				: _('Last') + ' ' + Math.max(1, Math.round(winH * 60)) + ' min';""", "overview.js 24h minutes")
     # a wireless network has no "up" of its own in 21.02's getWirelessDevices: up = its radio is up
     ov = sub(ov, "var up = !!i.up;", "var up = (i.up != null) ? !!i.up : !!(wifi[dev].up && i.ifname);",
              "overview.js wifi up")
