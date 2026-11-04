@@ -60,3 +60,10 @@ html[data-scheme="auto"] .p21-scheme .i-auto, html[data-scheme="light"] .p21-sch
 html[data-scheme="dark"] .p21-scheme .i-dark { display: block; }
 html[data-darkmode="true"] .p21-scheme { background: #232936; border-color: rgba(255, 255, 255, .2); color: #e4e8ef; }
 .p21-scheme:focus-visible { outline: 2px solid #5a8dee; outline-offset: 2px; }
+
+/* 20-edge.css scrolls every .cbi-section > div sideways on phones (for wide tables); in a form
+   block that clip box cut open dropdown lists short (e.g. Hostnames > Add > IP address) */
+@media screen and (max-width: 768px) {
+	.modal .cbi-section > .cbi-section-node,
+	.cbi-section > .cbi-section-node:has(.cbi-dropdown[open]) { overflow: visible; }
+}

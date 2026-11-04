@@ -1,5 +1,5 @@
 Package: luci-theme-edge21
-Version: 1.0.7-1
+Version: 1.0.7-2
 Depends: luci-base
 Source: https://github.com/kiddin9/luci-theme-edge
 License: Apache-2.0

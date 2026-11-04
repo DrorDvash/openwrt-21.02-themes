@@ -11,14 +11,17 @@ A baseline is the page frame a theme's look is put on:
 A baseline that is a theme of its own (NATIVE, e.g. aurora) ports itself as <name>21.
 Each module provides generate(theme) -> package dir, SUFFIX and optionally NATIVE.
 """
-import os, re
+import glob, hashlib, json, os, re, time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TOOLS = os.path.join(ROOT, "tools")
 THEMES = os.path.join(ROOT, "src/themes/themes")
 PKGS = os.path.join(ROOT, "themes")                # the package sources, luci-theme-<id>/
 REF = os.path.join(PKGS, "luci-theme-rack21")      # hand-made reference port (shared 30 layer, menu JS)
-VERSION = "1.0.7-1"   # bump on every release: opkg skips a same-version reinstall and ?v= busts browser caches
+# Each package has its own version in tools/versions.json (see settle_version): a release only
+# bumps the packages whose files changed. VERSION is what a package not listed there starts at.
+VERSION = "1.0.7-1"
+VERSIONS = os.path.join(TOOLS, "versions.json")
 # the packages' Maintainer field (GitHub no-reply address: no personal mail in published files)
 MAINTAINER = "Dror Dvash <DrorDvash@users.noreply.github.com>"
 NAMES = ("bootstrap", "argon", "aurora", "alpha", "edge", "noobwrt", "uniwrt")
@@ -69,3 +72,56 @@ def native_baseline(theme):
 
 def package_dir(theme, baseline="bootstrap"):
     return os.path.join(PKGS, f"luci-theme-{theme_id(theme, baseline)}")
+
+
+def _versions():
+    return json.load(open(VERSIONS)) if os.path.exists(VERSIONS) else {}
+
+
+def package_version(tid):
+    """the version luci-theme-<tid> is built with"""
+    return _versions().get(tid, {}).get("version", VERSION)
+
+
+def fingerprint(pkgdir, ver):
+    """sha256 of a package dir's files, with its version string masked (so a bump alone keeps it)"""
+    h = hashlib.sha256()
+    for d, dirs, files in sorted(os.walk(pkgdir)):
+        dirs.sort()
+        for f in sorted(files):
+            p = os.path.join(d, f)
+            h.update(os.path.relpath(p, pkgdir).encode() + b"\0")
+            h.update(open(p, "rb").read().replace(ver.encode(), b"@VERSION@") + b"\0")
+    return h.hexdigest()
+
+
+def settle_version(tid, pkgdir):
+    """Call after (re)generating pkgdir at package_version(tid). If its files differ from what
+    tools/versions.json recorded and that version is already in a release (public/release-*/),
+    bump the release number (1.0.7-1 -> 1.0.7-2) and write the new version into the files: opkg
+    skips a same-version reinstall, and ?v= busts browser caches. An unreleased version just takes
+    the new files. A package seen for the first time is recorded as it is. Returns the version."""
+    vs = _versions()
+    rec = vs.get(tid, {})
+    ver = rec.get("version", VERSION)
+    fp = fingerprint(pkgdir, ver)
+    if rec.get("files") == fp:
+        return ver
+    if rec and glob.glob(os.path.join(ROOT, "public", "release-*", f"luci-theme-{tid}_{ver}_*.ipk")):
+        up, rel = ver.rsplit("-", 1)
+        new = f"{up}-{int(rel) + 1}"
+        for d, _, files in os.walk(pkgdir):
+            for f in files:
+                p = os.path.join(d, f)
+                b = open(p, "rb").read()
+                if ver.encode() in b:
+                    with open(p, "wb") as o:
+                        o.write(b.replace(ver.encode(), new.encode()))
+        print(f"{tid}: files changed, version {ver} -> {new}")
+        ver = new
+    # the date tools/build.py stamps on the files: it changes only with them
+    vs[tid] = {"version": ver, "files": fp, "date": int(time.time())}
+    with open(VERSIONS, "w", newline="\n") as o:
+        json.dump(dict(sorted(vs.items())), o, indent=1)
+        o.write("\n")
+    return ver

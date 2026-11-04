@@ -173,7 +173,12 @@ def main():
                         "https://github.com/vistrocity/openwrt-luci-themes.git", os.path.join(ROOT, "src/themes")], check=True)
     if not (hand_port or a.no_generate or a.quick or a.install) and (a.force or not os.path.isdir(pkgdir)):
         try:
-            baselines.get(base).generate(t)
+            mod = baselines.get(base)
+            # regenerate at the recorded version (see below), in every baseline module the port uses
+            for m in [m for n, m in sys.modules.items() if n.startswith("baselines.")]:
+                if hasattr(m, "VERSION"):
+                    m.VERSION = baselines.package_version(tid)
+            mod.generate(t)
         except PortError as e:
             print(f"{t}: NOT PORTED on {base}, manual review needed:")
             for p in e.args[0]:
@@ -181,6 +186,10 @@ def main():
             sys.exit(2)
     elif not os.path.isdir(pkgdir):
         sys.exit(f"{pkgdir} does not exist")
+
+    # its own version: bumped only when its files changed since tools/versions.json recorded them
+    if not (a.quick or a.install):
+        baselines.settle_version(tid, pkgdir)
 
     # 2. build, 3. conflict check
     ipk = build(pkgdir, out)

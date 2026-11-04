@@ -16,7 +16,7 @@ CSS layouts:
              (+ css/dark.css if present)
   other      (e.g. aurora: prebuilt frame CSS in htdocs) css/NN-*.css -> css/theme.css
 """
-import argparse, glob, gzip, hashlib, io, os, re, shutil, subprocess, sys, tarfile, time
+import argparse, glob, gzip, hashlib, io, json, os, re, shutil, subprocess, sys, tarfile, time
 import rcssmin, rjsmin
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -124,7 +124,9 @@ def build(src, dist=None, quiet=False):
         sys.exit(f"{src}/CONTROL/control: needs Package, Version, Architecture and a final newline")
     std = os.path.join(ROOT, "dist" if tid == "rack21" else f"dist/ports/{tid}")
     dist = os.path.abspath(dist or std)
-    mtime = source_date(ROOT)
+    # a listed package keeps its recorded date, so an unchanged package rebuilds to the same bytes
+    vs = os.path.join(ROOT, "tools/versions.json")
+    mtime = (json.load(open(vs)).get(tid, {}).get("date") if os.path.exists(vs) else None) or source_date(ROOT)
     data_gz = tar_gz(data, mtime)
     cb, mode = control["control"]
     cb = re.sub(rb"^Installed-Size: .*$", b"Installed-Size: %d" % len(data_gz), cb, flags=re.M)

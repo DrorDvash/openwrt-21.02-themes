@@ -63,7 +63,7 @@ input.u-login-btn:hover { background: var(--u-accent); filter: brightness(1.06);
 .cbi-dropdown > ul > li img { vertical-align: middle; margin-right: .25em; }
 .cbi-dropdown[open] > ul.dropdown {
 	display: block; position: absolute; z-index: 1100; max-width: none; min-width: 100%;
-	width: auto; overflow-y: auto; top: 100%; left: 0;
+	width: auto; overflow-y: auto; left: 0;
 }
 .cbi-dropdown > ul > li[display], .cbi-dropdown[open] > ul.preview,
 .cbi-dropdown[open] > ul.dropdown > li, .cbi-dropdown[multiple] > ul > li > label,
@@ -144,6 +144,12 @@ html[data-darkmode="true"] :is(.cbi-button-negative, .cbi-button-remove):hover {
 html:root[data-darkmode="true"] .zonebadge[style],
 html:root[data-darkmode="true"] .ifacebox-head[style] { color: #111; text-shadow: none; }
 html[data-darkmode="true"] :is(.cbi-button-action, .cbi-button-edit):not(:hover) { color: #63a6ff; }
+
+/* the dialog scrolls itself (max-height + overflow:auto); on phones LuCI stretches an open list
+   across the screen, which the dialog cut short and scrolled sideways: let it out while open */
+@media (max-width: 768px), (pointer: coarse) {
+	#modal_overlay > .modal:has(.cbi-dropdown[open]) { overflow: visible; }
+}
 
 /* ==========================================================================
  * Theme-independent 21.02 fixes (same as the bootstrap ports' shared layer)
